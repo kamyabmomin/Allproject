@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body{
+        background-color: rgb(127, 208, 255);
+      }
+    </style>
+
+    <title>Employe form 2</title>
+  </head>
+  <body>
+    <form
+      onsubmit="readfile()"
+      name="employform2"
+      action="/details"
+      method="post"
+      id="form"
+    >
+      <fieldset>
+        <legend>BASIC DETAILES</legend>
+
+        <label for="firstname">FIRST NAME :</label>
+        <input
+          type="text"
+          id="firstname"
+          style="margin-right: 70px"
+          name="firstname"
+          placeholder="ENTER YOUR FIRST NAME"
+        />
+
+        <label for="lastname">LAST NAME :</label>
+        <input
+          type="text"
+          id="lastname"
+          style="margin-right: 70px"
+          name="lastname"
+          placeholder="ENTER YOUR LAST NAME"
+        />
+
+        <br /><br />
+        <label for="addressline1">ADDRESSLINE1</label>
+        <input
+          type="text"
+          style="margin-right: 70px"
+          name="addressline1"
+          id="address1"
+          placeholder="ENTER YOUR ADDRESS"
+        />
+
+        <lable for="bob">age</lable>
+        <input type="number" id="bob" name="age" placeholder="ENTER YOUR age" />
+        <br />
+        <br />
+
+        <LABLE for="email">EMAILE</LABLE>
+        <input
+          type="text"
+          style="margin-right: 70px"
+          id="email"
+          name="email"
+          placeholder="ENTER YOUR EMAILE"
+        />
+
+        <LABLE FOR="number">MOBILE NO :</LABLE>
+        <INPUT
+          type="number"
+          style="margin-right: 70px"
+          name="number"
+          id="number"
+          placeholder="ENTER YOUR MOBILE NO"
+        />
+
+        <br />
+        <br />
+
+        <label for="gender">GENDER</label>
+        <input type="radio" id="male" name="gender" value="male" />
+        <label for="male">MALE</label>
+        <input type="radio" id="female" name="gender" value="female" />
+        <label style="margin-right: 70px" for="female">FEMALE</label>
+
+        <br />
+        <br />
+
+        <label for="statuse">select hobbi :</label><br />
+        <input type="checkbox" id="meride" name="hobbie" value="cricket" />
+        <label for="meride">criket</label><br />
+        <input type="checkbox" id="single" name="hobbie" value="chess" />
+        <label for="single">chess</label><br /><br />
+
+        <input type="submit" name="submit" id="submit" value="submit" />
+      </fieldset>
+    </form>
+  </body>
+  <script>
+    function readfile() {
+      // fetchJSONData();
+    }
+
+    function fetchJSONData() {
+      var age = document.getElementById("bob").value;
+      var mobilenumber = document.getElementById("number").value;
+      var phoneno = /^\d{10}$/;
+      var email = document.getElementById("email").value;
+      const re =
+        /^(([^<>()[].,;:\s@\"]+(.[^<>()[].,;:\s@\"]+)*)|(\".+\"))@(([^<>()[].,;:\s@\"]+.)+[^<>()[].,;:\s@\"]{2,})$/i;
+      if (isNaN(age) || age < 1 || age > 100) {
+        text = "Input not valid";
+      }
+
+      if (mobilenumber.match(phoneno) && email.match(re)) {
+        return true;
+      } else {
+        alert("enter true value");
+        return false;
+      }
+    }
+  </script>
+</html>

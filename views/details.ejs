@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      background-color: rgb(127, 208, 255);
+
+    }
+
+
+    table,
+    td,
+    th {
+      border: 1px solid black;
+    }
+
+    table {
+      margin-left: auto;
+      margin-right: auto;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th {
+      height: 40px;
+    }
+  </style>
+  <title>details</title>
+</head>
+
+<body>
+  <div>
+    <table>
+      <tr>
+        <th>firstname</th>
+        <th>lastname</th>
+        <th>email</th>
+      </tr>
+      <% for( let i = 0; i < data.length; i++ ) { %>
+      <form action="/more" method="post">
+        <div>
+          <tr>
+            <td><%= data[i].firstname %></td>
+            <td><%= data[i].lastname %></td>
+            <td><%= data[i].email %></td>
+            <td><input type="submit" id="delete" value="delete" name="<%= data[i].id %>">
+              <input type="submit" value="more" name="<%= data[i].id %>">
+
+              <input type="submit" value="update" name="<%= data[i].id %>">
+            </td>
+          </tr>
+
+
+          </tr>
+        </div>
+
+      </form>
+      <% } %>
+    </table>
+  </div>
+</body>
+
+<script>
+  function deletebtn() {
+    var deletbtnnameid = document.getElementById("delete").name;
+    console.log("kamyab")
+    console.log(deletbtnnameid)
+    const objWithIdIndex = alldata.findIndex((obj) => obj.id == deletbtnnameid);
+
+    if (objWithIdIndex > -1) {
+      alldata.splice(objWithIdIndex, 1);
+
+    }
+    console.log(alldata)
+    return alldata;
+
+
+  }
+</script>
+
+</html>
