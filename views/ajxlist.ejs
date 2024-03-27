@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+      background-color: rgb(127, 208, 255);
+
+    }
+    table, th, td {
+        border:1px solid black;
+
+        color: rgb(12, 14, 12);
+        margin-left: 150px;
+        align-items: center;
+        margin-left: auto;
+        margin-right: auto;
+        
+      }
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>id</th>
+            <th>name</th>
+            <th>last name</th>
+            <th>update</th>
+            <th>delete</th>
+        </tr>
+       
+            <% for( let i = 0; i < data.length; i++ ) { %>
+                <tr>
+                    <td><%=data[i].employe_id%></td>
+            <td><%=data[i].first_name %> </td>
+            <td><%=data[i].last_name %> </td>
+     <td> <a href="/update/id?id=<%=data[i].employe_id%>" >update</a></td>
+     <td> <a href="/delete/id?id=<%=data[i].employe_id%>" >delete</a></td>
+    </tr>
+            <% } %>
+     
+    </table>
+    <a href="http://localhost:6800/ajxform"> new register</a>
+</body>
+</html>
