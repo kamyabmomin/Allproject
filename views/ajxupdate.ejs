@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <style>
+
+    body {
+          background-color: rgb(127, 208, 255);
+    
+        }
+        span {
+          color: red;
+        }
+        /* .card{
+          background-color: rgb(105, 241, 196);
+        } */
+      </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>update</title>
+</head>
+
+<body>
+
+  <form name="myForm" id="employeform2" >
+    <div id="formthis" style="max-width: 1250px; border: 2px solid black; display: block">
+    <div class="card" id="card1">
+      <input type="hidden" name="id" value="<%= id %>">
+      <fieldset>
+        <legend>BASIC DETAILES</legend>
+
+        <label for="firstname">FIRST NAME :</label>
+        <input type="text" id="firstname" style="margin-right: 70px" name="firstname" value="<%=data[0].first_name%>" placeholder="ENTER YOUR FIRST NAME" class="required2" />
+        <span id="firstnameerror"></span>
+
+        <label for="lastname">LAST NAME :</label>
+        <input type="text" id="lastname" style="margin-right: 70px" name="lastname2" value="<%=data[0].last_name%>" placeholder="ENTER YOUR LAST NAME" />
+        <span id="lastname2error"></span>
+
+        <label for="designation">DESIGNATION :</label>
+        <input type="text" id="designation" name="designationfirst" value="<%=data[0].designation%>" placeholder="ENTER YOUR designation" />
+        <span id="designationerror"></span>
+        <br /><br />
+        <label for="addressline1">ADDRESSLINE1</label>
+        <input type="text" style="margin-right: 70px" name="addressline1" value="<%=data[0].address_line1%>" id="address1" placeholder="ENTER YOUR ADDRESS" /><span id="add1"></span>
+        <label for="addressline2">ADDRESSLINE1</label>
+        <input type="text" style="margin-right: 70px" name="addressline2" value="<%=data[0].adderess_line2%>" id="address2" placeholder="ENTER YOUR ADDRESS" />
+        <span id="add2"></span>
+        <lable for="bob">DOB</lable>
+        <input type="text" id="bob" name="bob" value='<%= data[0].bod %>' placeholder="ENTER YOUR BOB" />
+        <span id="boberror"></span>
+        <br />
+        <br />
+
+        <LABLE for="email">EMAILE</LABLE>
+        <input type="text" style="margin-right: 70px" id="email" name="email" value="<%=data[0].email%>" placeholder="ENTER YOUR EMAILE" />
+        <span id="emailerror"></span>
+
+        <LABLE FOR="number">MOBILE NO :</LABLE>
+        <INPUT type="text" style="margin-right: 70px" name="number" value="<%=data[0].mobile_no%>" id="number" placeholder="ENTER YOUR MOBILE NO" />
+        <span id="numbererror"></span>
+
+        <label for="state">STATE :</label>
+        <select style="margin-right: 140px" id="state" name="state" >
+          <option value="1" <% if (data[0].state == "gujrat") { %> selected <% } %>>GUJRAT</option>
+          <option value="2" <% if (data[0].state == "MP") { %> selected <% } %>>MP</option>
+          <option value="3" <% if (data[0].state == "UP") { %> selected <% } %>>UP</option>
+        </select>
+        <br />
+        <br />
+     <lable for="city">CITY :</lable>
+        <!-- <input style="margin-right: 70px" type="hidden" name="city1" value="gdygd" id="city" placeholder="ENTER YPUR CITY NAME" /> -->
+        <select style="margin-right: 140px" id="city" name="city1">
+        <span id="cityrerror"></span>
+        <br />
+        <br />
+
+
+
+        <label for="gender">GENDER</label>
+        <input type="radio" id="male" name="gender" value="male" <% if (data[0].gender == "male") { %> checked <% } %> />
+        <label for="male">MALE</label>
+        <input type="radio" id="female" name="gender" value="female" <% if (data[0].gender == "female") { %> checked <% } %> />
+        <label style="margin-right: 70px" for="female">FEMALE</label>
+        <span id="gendererror"></span>
+
+        <lable for="zip">zip code</lable>
+        <input type="text" id="zip" name="zip" value="<%=data[0].zip_code%>" />
+        <span id="ziperror"></span>
+        <br />
+        <br />
+
+        <label for="statuse">select statuse :</label><br />
+        <input type="radio" id="meride" name="statuse" value="merid" <% if (data[0].statues == "merid") { %> checked <% } %> />
+        <label for="meride">meride</label><br />
+        <input type="radio" id="single" name="statuse" value="single" <% if (data[0].statues == "single") { %> checked <% } %> />
+        <label for="single">single</label>
+        <span id="statuseerror"></span>
+
+        <br /><br />
+      </fieldset>
+    </div>
+   
+    <div class="card" id="card2">
+      <fieldset>
+        <div style="display: flex; justify-content: flex-end; gap: 30px;">
+          <input type="button" value="+" id="increse" onclick="incresseducation()">
+          <input type="button" value="-" id="decres" onclick="decresseducation()">
+        </div>
+        <div id="educations" style="display: flex; flex-direction: column; gap: 50px;">
+          <% if (data2[0]) { %>
+
+
+          <% for( let i= 0; i < data2.length; i++ ) { %>
+          <div id="ed1">
+            <label for="nameofboard">NAME OF BOARD</label>
+            <input Style="margin-right: 70px;" type="text" name="nameofboard1" value="<%=data2[i].education%>" id="nameofboard" placeholder=" PLEACE ENTER YOUR BORD NAME" />
+            <span id="nameofboard1error"></span>
+            <lable for="paSSINGYEAR">PASSING YEAR</lable>
+            <input Style="margin-right: 70px;" type="text" name="passingyear1" value="<%=data2[i]. passing_year%>" id="passingyear" placeholder="ENTER PASSING YEAR" />
+            <span id="passingyearsscerror"></span>
+
+            <label for="persentage">persentage</label>
+           
+            <input type="text" id="persentage" name="persentage1" value="<%=data2[i].persentage%>" placeholder="ENTER persentage" />
+            <input type="hidden" name="edemployeid" value="<%=data2[i].employe_id%>">
+            <input type="hidden" name="edhiddenid" value="<%=data2[i].educationid%>">
+            <span id="education"></span>
+
+
+          </div>
+
+          <% } %>
+          <% } else { %>
+
+
+
+          <div id="ed1">
+            <label for="nameofboard">NAME OF BOARD</label>
+            <input Style="margin-right: 70px;" type="text" name="nameofboard1" value="" id="nameofboard" placeholder=" PLEACE ENTER YOUR BORD NAME" />
+            <span id="nameofboard1error"></span>
+            <lable for="paSSINGYEAR">PASSING YEAR</lable>
+            <input Style="margin-right: 70px;" type="text" name="passingyear1" value="" id="passingyear" placeholder="ENTER PASSING YEAR" />
+            <span id="passingyearsscerror"></span>
+
+            <label for="persentage">persentage</label>
+            <input type="text" id="persentage" name="persentage1" value="" placeholder="ENTER persentage" />
+            <span id="persentagesscerror"></span>
+
+          </div>
+          <% }  %>
+
+        </div>
+
+
+
+      </fieldset>
+    </div>
+    
+    <div class="card" id="card3">
+      <fieldset>
+        <legend>Work Experience</legend>
+        <div style="display: flex; justify-content: flex-end; gap: 30px;">
+          <input type="button" value="+" id="increse" onclick="incresswork()">
+          <input type="button" value="-" id="decres" onclick="decresswork()">
+        </div>
+        <div id="workexperiance" style="display: flex; flex-direction: column; gap: 50px;">
+          <% if (data3[0]) { %>
+
+
+          <% for( let i = 0; i < data3.length; i++ ) { %>
+          <div id="copmny1">
+            <LABLE FOR="compnyname">COMPNY NAME</LABLE>
+            <input type="text" name="compnyname1" value="<%=data3[i].compny_name%>" id="compnyname1" placeholder="ENTER COMPNY NAME" />
+
+            <label for="designation">DESIGNATION</label>
+            <input type="text" id="designation1" name="designation1" value="<%=data3[i].designation%>" placeholder="DESIGNATION" />
+
+            <label for="fromdate">FROM</label>
+            <input type="text" ID="fromdate1" name="fromdate1" value="<%=data3[i].join_date%>" placeholder="DATE" />
+
+            <label for="todate">TO</label>
+            <input type="text" id="todate1" name="todate1" value="<%=data3[i].end_date%>" placeholder="DATE" />
+            
+            <span id="exp1"></span>
+            <input type="hidden" name="workid" value="<%= data3[i]. workexperiencid%>">
+          
+          </div>
+
+
+          <% } %>
+          <% }  else { %>
+
+
+          <div id="copmny1">
+            <LABLE FOR="compnyname">COMPNY NAME</LABLE>
+            <input type="text" name="compnyname1" value="" id="compnyname1" placeholder="ENTER COMPNY NAME" />
+
+            <label for="designation">DESIGNATION</label>
+            <input type="text" id="designation1" name="designation1" value="" placeholder="DESIGNATION" />
+
+            <label for="fromdate">FROM</label>
+            <input type="text" ID="fromdate1" name="fromdate1" value="" placeholder="DATE" />
+
+            <label for="todate">TO</label>
+            <input type="text" id="todate1" name="todate1" value="" placeholder="DATE" />
+            <span id="exp1"></span>
+            </br>
+          </div>
+          <% } %>
+        </div>
+
+
+
+
+      </fieldset>
+    </div>
+   
+   
+    <div class="card" id="card4">
+      <fieldset>
+        <legend>Language KNown</legend>
+
+
+
+
+        <input type="checkbox" id="Language1" name="Language1" <% data4.forEach(element => { %> <% if (element.languge=="hindi") { %> checked <% } %> <% }) %> value="hindi" />
+
+        <label for="Language1"> HINDI</label>
+
+
+        <input type="checkbox" id="speak1" name="speak1" <% data4.forEach(element => { %> <% if (element.languge =="hindi" && element.speak=="yes" ) { %> checked <% } %> <% }) %> value="yes" />
+
+
+        <label for="speak1"> speak</label>
+
+        <input type="checkbox" id="write1" name="write1" <% data4.forEach(element => { %> <% if (element.languge =="hindi" && element.writing=="yes") { %> checked <% } %> <% }) %> value="yes" />
+
+
+
+        <label for="write1"> write</label>
+
+        <input type="checkbox" id="read1" name="read1" <% data4.forEach(element => { %> <% if (element.languge =="hindi" && element.reading=="yes") { %> checked <% } %> <% }) %> value="yes" />
+
+
+        <label for="read1"> read</label>
+
+        <span id="Language1error"></span>
+        <BR />
+        <BR />
+
+
+
+
+        <input type="checkbox" id="Language2" name="Language2" <% data4.forEach(element => { %> <% if (element.languge=="english" ) { %> checked <% } %> <% }) %> value="english" />
+
+
+
+        <label for="Language2"> ENGLISH</label>
+
+        <input type="checkbox" id="speak2" name="speak2" <% data4.forEach(element => { %> <% if (element.languge =="english" && element.speak=="yes") { %> checked <% } %> <% }) %> value="yes" />
+
+        <label for="speak2"> speak</label>
+
+
+
+        <input type="checkbox" id="write2" name="write2" <% data4.forEach(element => { %> <% if (element.languge =="english" && element.writing=="yes") { %> checked <% } %> <% }) %> value="yes" />
+
+        <label for="write2"> write</label>
+
+
+
+        <input type="checkbox" id="read2" name="read2" <% data4.forEach(element => { %> <% if (element.languge =="english" && element.reading=="yes") { %> checked <% } %> <% }) %> value="yes" />
+
+        <label for="read2"> read</label>
+
+
+        <span id="Language2error"></span>
+        <BR />
+        <br />
+
+
+
+
+
+        <input type="checkbox" id="Language3" name="Language3" <% data4.forEach(element => { %> <% if (element.languge=="gujrati" ) { %> checked <% } %> <% }) %> value="gujrati" />
+
+
+        <label for="Language3"> GUJRATI</label>
+
+        <input type="checkbox" id="speak3" name="speak3" <% data4.forEach(element => { %> <% if (element.languge == "gujrati" && element.speak=="yes") { %> checked <% } %> <% }) %> value="yes" />
+
+        <label for="speak3"> speak</label>
+
+
+
+        <input type="checkbox" id="write3" name="write3" <% data4.forEach(element => { %> <% if (element.languge == "gujrati"  && element.writing=="yes") { %> checked <% } %> <% }) %> value="yes" />
+
+        <label for="write3"> write</label>
+
+
+        <input type="checkbox" id="read3" name="read3" <% data4.forEach(element => { %> <% if (element.languge == "gujrati" && element.reading=="yes") { %> checked <% } %> <% }) %> value="yes" />
+        <label for="read3"> read</label>
+        <span id="Language3error"></span>
+
+        <BR />
+        <BR />
+
+      </fieldset>
+    </div>
+
+    <div class="card" id="card5">
+      <fieldset>
+        <legend>Technologies you know</legend>
+
+
+        <input type="checkbox" id="technicalLanguage1" name="technicalLanguage1" <% data7.forEach(element => { %> <% if (element.thecnologylanguge =="php") { %> checked <% } %> <% }) %> value="php" />
+        <label for="technicalLanguage1"> PHP</label>
+        <input type="radio" id="Begine1" name="techlevel1" <% data7.forEach(element => { %> <% if (element.thecnologylanguge =="php" && element.levels=="Begine") { %> checked <% }%> <% }) %> value="Begine" />
+        <% data7.forEach(element => { %>
+        <% if (element.thecnologylanguge =="php" && element.levels=="Begine") { %>
+        <input type="hidden" name="hiddenid1" value="<%=element.technologyid%>">
+        <% }%>
+        <% }) %>
+
+        <label for="Begine1"> Begine</label>
+        <input type="radio" id="Mideator1" name="techlevel1" <% data7.forEach(element => { %> <% if (element.thecnologylanguge =="php" && element.levels=="Mideator") { %> checked <% }%> <% }) %> value="Mideator" />
+        <% data7.forEach(element => { %>
+        <% if (element.thecnologylanguge =="php" && element.levels=="Mideator") { %>
+        <input type="hidden" name="hiddenid1" value="<%=element.technologyid%>">
+        <% }%>
+        <% }) %>
+
+        <label for="Mideator1"> Mideator</label>
+        <input type="radio" id="Expert1" name="techlevel1" <% data7.forEach(element => { %> <% if (element.thecnologylanguge =="php" && element.levels=="Expert") { %> checked <% }%> <% }) %> value="Expert" />
+        <% data7.forEach(element => { %>
+        <% if (element.thecnologylanguge =="php" && element.levels=="Expert") { %>
+        <input type="hidden" name="hiddenid1" value="<%=element.technologyid%>">
+        <% }%>
+        <% }) %>
+
+        <label for="Expert1"> Expert</label>
+        <span id="techlen1"></span>
+        <BR />
+        <br />
+
+
+
+        <input type="checkbox" id="technicalLanguage2" name="technicalLanguage2" <% data7.forEach(element => { %> <% if (element.thecnologylanguge =="MYSQL") { %> checked <% } %> <% }) %> value="MYSQL" />
+
+        <label for="technicalLanguage2"> MY SQL</label>
+        <input type="radio" id="Begine2" name="techlevel2" <% data7.forEach(element => { %> <% if (element.thecnologylanguge =="MYSQL" && element.levels=="Begine") { %> checked <% }%> <% }) %> value="Begine" />
+
+        <% data7.forEach(element => { %>
+        <% if (element.thecnologylanguge =="MYSQL" && element.levels=="Begine") { %>
+        <input type="hidden" name="hiddenid2" value="<%=element.technologyid%>">
+        <% }%>
+        <% }) %>
+
+        <label for="Begine2"> Begine</label>
+        <input type="radio" id="Mideator2" name="techlevel2" <% data7.forEach(element => { %> <% if (element.thecnologylanguge =="MYSQL" && element.levels=="Mideator") { %> checked <% }%> <% }) %> value="Mideator" />
+
+        <% data7.forEach(element => { %>
+        <% if (element.thecnologylanguge =="MYSQL" && element.levels=="Mideator") { %>
+        <input type="hidden" name="hiddenid2" value="<%=element.technologyid%>">
+        <% }%>
+        <% }) %>
+
+        <label for="Mideator2"> Mideator</label>
+        <input type="radio" id="Expert2" name="techlevel2" <% data7.forEach(element => { %> <% if (element.thecnologylanguge =="MYSQL" && element.levels=="Expert") { %> checked <% }%> <% }) %> value="Expert" />
+
+        <% data7.forEach(element => { %>
+        <% if (element.thecnologylanguge =="MYSQL" && element.levels=="Expert") { %>
+        <input type="hidden" name="hiddenid2" value="<%=element.technologyid%>">
+        <% }%>
+        <% }) %>
+        <label for="Expert2"> Expert</label>
+
+        <span id="techlen2"></span>
+        <BR />
+        <br />
+
+
+
+        <input type="checkbox" id="technicalLanguage3" name="technicalLanguage3" <% data7.forEach(element => { %> <% if (element.thecnologylanguge =="larave") { %> checked <% } %> <% }) %> value="larave" />
+        <% data7.forEach(element => { %>
+        <% if (element.thecnologylanguge =="larave" && element.levels=="Begine") { %>
+        <input type="hidden" name="hiddenid3" value="<%=element.technologyid%>">
+        <% }%>
+        <% }) %>
+        <label for="technicalLanguage3"> LARAVE</label>
+        <input type="radio" id="Begine3" name="techlevel3" <% data7.forEach(element => { %> <% if (element.thecnologylanguge =="larave" && element.levels=="Begine") { %> checked <% }%> <% }) %> value="Begine" />
+        <% data7.forEach(element => { %>
+        <% if (element.thecnologylanguge =="larave" && element.levels=="Begine") { %>
+        <input type="hidden" name="hiddenid3" value="<%=element.technologyid%>">
+        <% }%>
+        <% }) %>
+        <label for="Begine3"> Begine</label>
+        <input type="radio" id="Mideator3" name="techlevel3" <% data7.forEach(element => { %> <% if (element.thecnologylanguge =="larave" && element.levels=="Mideator") { %> checked <% }%> <% }) %> value="Mideator" />
+        <% data7.forEach(element => { %>
+        <% if (element.thecnologylanguge =="larave" && element.levels=="Mideator") { %>
+        <input type="hidden" name="hiddenid3" value="<%=element.technologyid%>">
+        <% }%>
+        <% }) %>
+        <label for="Mideator3"> Mideator</label>
+        <input type="radio" id="Expert3" name="techlevel3" <% data7.forEach(element => { %> <% if (element.thecnologylanguge =="larave" && element.levels=="Expert" ) { %> checked <% }%> <% }) %> value="Expert" />
+        <% data7.forEach(element => { %>
+        <% if (element.thecnologylanguge =="larave" && element.levels=="Expert") { %>
+        <input type="hidden" name="hiddenid3" value="<%=element.technologyid%>">
+        <% }%>
+        <% }) %>
+        <label for="Expert3"> Expert</label>
+
+        <span id="techlen3"></span>
+        <BR />
+        <br />
+
+        <input type="checkbox" id="technicalLanguage4" name="technicalLanguage4" <% data7.forEach(element => { %> <% if (element.thecnologylanguge =="ORECAL") { %> checked <% } %> <% }) %> value="ORECAL" />
+        <label for="technicalLanguage4"> orecal</label>
+        <input type="radio" id="Begine4" name="techlevel4" <% data7.forEach(element => { %> <% if (element.thecnologylanguge =="ORECAL" && element.levels=="Begine") { %> checked <% }%> <% }) %> value="Begine" />
+        <% data7.forEach(element => { %>
+        <% if (element.thecnologylanguge =="ORECAL" && element.levels=="Begine") { %>
+        <input type="hidden" name="hiddenid4" value="<%=element.technologyid%>">
+        <% }%>
+        <% }) %>
+        <label for="Begine4"> Begine</label>
+        <input type="radio" id="Mideator4" name="techlevel4" <% data7.forEach(element => { %> <% if (element.thecnologylanguge =="ORECAL" && element.levels=="Mideator") { %> checked <% }%> <% }) %> value="Mideator" />
+        <% data7.forEach(element => { %>
+        <% if (element.thecnologylanguge =="ORECAL" && element.levels=="Mideator") { %>
+        <input type="hidden" name="hiddenid4" value="<%=element.technologyid%>">
+        <% }%>
+        <% }) %>
+        <label for="Mideator4"> Mideator</label>
+        <input type="radio" id="Expert4" name="techlevel4" <% data7.forEach(element => { %> <% if (element.thecnologylanguge =="ORECAL" && element.levels=="Expert" ) { %> checked <% }%> <% }) %> value="Expert" />
+        <% data7.forEach(element => { %>
+        <% if (element.thecnologylanguge =="ORECAL" && element.levels=="Expert") { %>
+        <input type="hidden" name="hiddenid4" value="<%=element.technologyid%>">
+        <% }%>
+        <% }) %>
+        <label for="Expert4"> Expert</label>
+
+        <span id="techlen4"></span>
+
+
+        <BR />
+        <br />
+      </fieldset>
+    </div>
+
+
+    <div class="card" id="card6">
+      <fieldset>
+        <legend>Referance Contact</legend>
+        <div style="display: flex; justify-content: flex-end; gap: 30px;">
+          <input type="button" value="+" id="increse" onclick="incress()">
+          <input type="button" value="-" id="decres" onclick="decress()">
+        </div>
+        <div id="main" style="display: flex; flex-direction: column; gap: 20px;">
+          <% if (data5[0]) { %>
+
+
+          <% for( let i = 0; i < data5.length; i++ ) { %>
+
+          <div> <span id="refrence"></span></div>
+
+
+          <div id="refreance">
+
+            <label for="name1">name:</label>
+            <input style="margin-right: 50px" type="text" id="name1" name='name1' value="<%=data5[i].reference_name %>" placeholder="ENTER NAME" />
+
+            <label for="contactnumber1">contactnumber :</label>
+            <input style="margin-right: 50px" type="text" name="contactnumber1" value="<%=data5[i].reference_mobile_no%>" placeholder="ENTER content number" id="contactnumber1" /><span id="numbererror1"></span>
+
+            <label for="relation1">relation:</label>
+            <input style="margin-right: 50px" name="relation1" value="<%=data5[i].relation%>" placeholder="ENTER relation" type="text" id="relation1" />
+            ><input type="hidden" value="<%=data5[i].refrenceid%>" name="refenceid">
+          </div>
+          <% }%>
+          <% } else { %>
+
+
+          <div id="refreance">
+            <label for="name1">name:</label>
+            <input style="margin-right: 50px" type="text" id="name1" name='name1' value="" placeholder="ENTER NAME" />
+            <label for="contactnumber1">contactnumber :</label>
+            <input style="margin-right: 50px" type="text" name="contactnumber1" value="" placeholder="ENTER content number" id="contactnumber1" /><span id="numbererror1"></span>
+
+            <label for="relation1">relation:</label>
+            <input style="margin-right: 50px" name="relation1" value="" placeholder="ENTER relation" type="text" id="relation1" />
+          </div>
+          <% }%>
+
+        </div>
+      </fieldset>
+    </div>
+
+   
+    <div class="card" id="card7">
+      <fieldset>
+        <legend>Preferances</legend>
+
+        <label for="Preferdlocation">Preferd location:</label>
+        <input type="textaria" name="Preferdlocation" value="<%=data6[0].prefered_location%>" placeholder="ENTER Preferances location" id="Preferdlocation" /><span id="Preferdlocationerror"></span>
+
+        <label for="Notice period">Notice period :</label>
+        <input style="margin-right: 50px" type="text" id="Notice period" name="Noticeperiod" value="<%=data6[0].Notice_period%>" />
+        <span id="Noticeperioderror"></span>
+        <label for="Department">Department :</label>
+        <select name="department" id="Department">
+          <option name="department" <% if (data6[0].department=="devlopment") { %> selected <% } %> value="devlopment">DEVLOPMENT</option>
+          <option name="department" <% if (data6[0].department=="design") { %> selected <% } %> value="design">DESIGN</option>
+          <option name="department" <% if (data6[0].department=="marketing") { %> selected <% } %> value="marketing">MARKETING</option>
+        </select>
+
+        <br />
+        <br />
+        <label style="margin-left: 330px" for="Expacted CTC">Expacted CTC</label>
+        <input type="text" placeholder="CTC" id="Expacted CTC" name="ectc" value="<%=data6[0].Expacted_CTC%>" /><span id="ectcerror"></span>
+        <br />
+        <br />
+        <label style="margin-left: 330px" for="Current CTC">CurrentCTC</label>
+        <input type="text" placeholder=" ENTER CTC " id="Current CTC" name="cctc" value="<%=data6[0].Current_CTc%>" /><span id="cctcerror"></span>
+        <br />
+        <br />
+      </fieldset>
+    
+      <input type="button" style="margin-left: 50%" id="employeform22" value="submit" />
+    </div>
+<br>
+
+<div style="display: flex; gap: 1100px;">
+
+  <div>
+    <input type="button" style="margin-left: 50%" value="pre" id="pre" onclick="prepage()" />
+  </div>
+<div>
+<input type="button" style="margin-left: 50%" value="next" id="next" onclick="nextpage()" />
+</div>
+
+</div>
+    </div>
+
+  </form>
+
+</body>
+<script>
+
+  var ed1 =  document.querySelectorAll("#ed1");
+  console.log(ed1);
+  var allcard = document.querySelectorAll(".card");
+  allcard.forEach(element => {
+    element.style.display = "none"
+  });
+  var count = 1
+
+  function nextpage() {
+
+    cardnone = `card${count}`
+    console.log(cardnone);
+    validate()
+    console.log(validate());
+ 
+    if (validate() == true) {
+      displaynone(cardnone)
+      count = count + 1;
+      card = `card${count}`;
+      next(card ,count)
+    }
+  }
+  function displaynone(i) {
+    console.log(i);
+    var card = document.getElementById(i).style.display = "none"
+
+  }
+  function validate() {
+    if (count == 1) {
+      return card1()
+
+    }
+    if (count == 2) {
+      return card2()
+    }
+    if (count == 3) {
+      return card3()
+    }
+    if (count == 4) {
+      return card4()
+    }
+    if (count == 5) {
+      return card5()
+    }
+    if (count == 6) {
+      return card6()
+    }
+    if (count == 7) {
+      return card7()
+    }
+  }
+
+  function prepage() {
+    cardnone = `card${count}`
+    displaynone(cardnone)
+    if (count > 0) {
+      count = count - 1;
+      card = `card${count}`;
+      next(card, count)
+    }
+  }
+  next("card1", count)
+
+  function next(i, count) {
+  
+
+    if (count == 7) {
+
+      document.getElementById("next").style.display = "none"
+    } else {
+      document.getElementById("next").style.display = "block"
+    }
+    if (count == 1) {
+
+      document.getElementById("pre").style.display = "none"
+    } else {
+      document.getElementById("pre").style.display = "block"
+    }
+
+    var card = document.getElementById(i).style.display = "inline"
+  }
+
+  function card1() {
+    var span = document.querySelectorAll("span")
+    span.forEach(element => {
+      element.innerHTML = ""
+    });
+
+    let firstname = document.forms["myForm"]["firstname"].value;
+    let lastname = document.forms["myForm"]["lastname2"].value;
+    let designation = document.forms["myForm"]["designationfirst"].value;
+    let addressline1 = document.forms["myForm"]["addressline1"].value;
+    let addressline2 = document.forms["myForm"]["addressline2"].value;
+    let dateReg = /([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/;
+    var bob = document.forms["myForm"]["bob"].value;
+    let email = document.forms["myForm"]["email"].value;
+    let number = document.forms["myForm"]["number"].value;
+    let zip = document.forms["myForm"]["zip"].value;
+    if (!namechaking("firstname")) {
+      return false;
+    }
+    if (!namechaking("lastname2")) {
+      return false;
+    }
+    console.log(designation);
+    if (designation == "") {
+      document.getElementById("designationerror").innerHTML =
+        "pleace enter valid designation";
+      return false;
+    }
+    if (addressline1 == "") {
+      document.getElementById("add1").innerHTML =
+        "pleace enter valid address";
+      return false;
+    }
+
+    if (addressline2 == "") {
+      document.getElementById("add2").innerHTML =
+        "pleace enter valid address";
+      return false;
+    }
+
+    if (bob == "") {
+      document.getElementById("boberror").innerHTML =
+        "pleace enter date";
+      return false;
+    }
+    if (dateReg.test(bob) == false) {
+      document.getElementById("boberror").innerHTML =
+        "pleace enter valid date(yy-mm-dd)";
+      return false;
+
+    }
+    //email
+
+    emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (emailPattern.test(email) == false || email == "") {
+      document.getElementById("emailerror").innerHTML =
+        "pleace enter valid email";
+
+      return false;
+    }
+    //number
+    let numberofmobile = /^\d{10}$/;
+    if (numberofmobile.test(number) == false) {
+      document.getElementById("numbererror").innerHTML =
+        "pleace enter valid phon number";
+      return false;
+    }
+
+
+
+    //city
+    if (city == "") {
+      document.getElementById("cityrerror").innerHTML =
+        "pleace enter valid city";
+      return false;
+    }
+
+    //zip
+    let zipnumber = /^\d{6}$/;
+    if (zipnumber.test(zip) == false) {
+      document.getElementById("ziperror").innerHTML =
+        "pleace enter valid zip";
+      return false;
+    }
+
+    //gebnder radio
+    if (!document.forms["myForm"]["gender"].value) {
+      return radiovalidation("gender");
+    }
+    //statuse radio
+    if (!document.forms["myForm"]["statuse"].value) {
+      return radiovalidation("statuse");
+    }
+    return true
+
+  }
+
+  function card2() {
+    var span = document.querySelectorAll("span")
+    span.forEach(element => {
+      element.innerHTML = ""
+    });
+    let bordname = document.querySelectorAll("#nameofboard");
+    let passingyear = document.querySelectorAll("#passingyear");
+    let persentagebord = document.querySelectorAll("#persentage");
+    let bordlength = bordname.length;
+    let passingyearlength = passingyear.length;
+    let persentagelength = persentagebord.length;
+
+    let maxlengthofeducation = Math.max(bordlength, passingyearlength, persentagelength)
+    for (let i = 0; i < maxlengthofeducation; i++) {
+      if (bordname[i].value || passingyear[i].value || persentagebord[i].value) {
+        if (!bordname[i].value || !passingyear[i].value || !persentagebord[i].value) {
+          document.getElementById("education").innerHTML = `pleace enter all fild in education${i} `;
+          return false;
+        }
+      }
+
+    }
+    let numberofyear = /^\d{4}$/;
+    let Percentage = /^\d{2}$/;
+    return true
+  }
+
+  function card3() {
+    var span = document.querySelectorAll("span")
+    span.forEach(element => {
+      element.innerHTML = ""
+    });
+    let dateReg = /([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/;
+    let compnyname1 = document.querySelectorAll("#compnyname1");
+    let designation1 = document.querySelectorAll("#designation1");
+    let formdate1 = document.querySelectorAll("#fromdate1")
+    let todate1 = document.querySelectorAll("#todate1")
+
+
+    let compnylength = compnyname1.length;
+    let designationlegth = designation1.length;
+    let fromdatelength = formdate1.length;
+    let todatelength = todate1.length;
+    let maxlengthofwork = Math.max(compnylength, designationlegth, fromdatelength, todatelength)
+
+
+    for (let i = 0; i < maxlengthofwork; i++) {
+      if (compnyname1[i].value || designation1[i].value || formdate1[i].value || todate1[i].value) {
+        if (!compnyname1[i].value || !designation1[i].value || !formdate1[i].value || !todate1[i].value) {
+          document.getElementById("exp1").innerHTML = `pleace enter all fild in work experiance${i} `;
+          return false;
+
+        }
+      }
+    }
+
+    for (let i = 0; i < fromdatelength; i++) {
+
+      if (formdate1[i].value) {
+
+        if (dateReg.test(formdate1[i].value) == false) {
+          document.getElementById("exp1").innerHTML = "pleace enter valid date ";
+          return false;
+        }
+      }
+    }
+    console.log(todatelength);
+    for (let i = 0; i < todatelength; i++) {
+      if (todate1[i].value) {
+        if (dateReg.test(todate1[i].value) == false) {
+          document.getElementById("exp1").innerHTML = "pleace enter valid date(yy-mm-dd)";
+          return false;
+        }
+      }
+    }
+    return true
+  }
+
+  function card4() {
+    var span = document.querySelectorAll("span")
+    span.forEach(element => {
+      element.innerHTML = ""
+    });
+
+    let Language2 = document.forms["myForm"]["Language2"];
+    let Language3 = document.forms["myForm"]["Language3"];
+    let Language1 = document.forms["myForm"]["Language1"];
+    let speak1 = document.getElementById("speak1");
+    let read1 = document.getElementById("read1");
+    let write1 = document.getElementById("write1");
+    let speak2 = document.getElementById("speak2");
+    let read2 = document.getElementById("read2");
+    let write2 = document.getElementById("write2");
+    let speak3 = document.getElementById("speak3");
+    let read3 = document.getElementById("read3");
+    let write3 = document.getElementById("write3");
+
+    if (Language1.checked) {
+      if (!speak1.checked && !write1.checked && !read1.checked) {
+        document.getElementById("Language1error").innerHTML =
+          "pleace select at least one option";
+
+        return false;
+      }
+    }
+    if (speak1.checked || write1.checked || read1.checked) {
+      if (!Language1.checked) {
+        document.getElementById("Language1error").innerHTML =
+          "pleace select  HINDI languge ";
+        return false;
+      }
+    }
+
+    //langugge2
+    if (Language2.checked) {
+      if (!speak2.checked && !write2.checked && !read2.checked) {
+        document.getElementById("Language2error").innerHTML =
+          "pleace select at least one option";
+
+        return false;
+      }
+    }
+    if (speak2.checked || write2.checked || read2.checked) {
+      if (!Language2.checked) {
+        document.getElementById("Language2error").innerHTML =
+          "pleace select  english languge ";
+        return false;
+      }
+    }
+
+    //langugge3
+    if (Language3.checked) {
+      if (!speak3.checked && !write3.checked && !read3.checked) {
+        document.getElementById("Language3error").innerHTML =
+          "pleace select at least one option";
+
+        return false;
+      }
+    }
+    if (speak3.checked || write3.checked || read3.checked) {
+      if (!Language3.checked) {
+        document.getElementById("Language3error").innerHTML =
+          "pleace select  GUJRATI languge ";
+        return false;
+      }
+    }
+    return true
+  }
+
+
+  function card5() {
+
+    var span = document.querySelectorAll("span")
+    span.forEach(element => {
+      element.innerHTML = ""
+    });
+    let TLanguage1 = document.forms["myForm"]["technicalLanguage1"];
+    let Begine1 = document.forms["myForm"]["Begine1"];
+    let Mideator1 = document.forms["myForm"]["Mideator1"];
+    let Expert1 = document.forms["myForm"]["Expert1"];
+
+    let TLanguage2 = document.forms["myForm"]["technicalLanguage2"];
+    let Begine2 = document.forms["myForm"]["Begine2"];
+    let Mideator2 = document.forms["myForm"]["Mideator2"];
+    let Expert2 = document.forms["myForm"]["Expert2"];
+
+    let TLanguage3 = document.forms["myForm"]["technicalLanguage3"];
+    let Begine3 = document.forms["myForm"]["Begine3"];
+    let Mideator3 = document.forms["myForm"]["Mideator3"];
+    let Expert3 = document.forms["myForm"]["Expert3"];
+    let TLanguage4 = document.forms["myForm"]["technicalLanguage4"];
+    let Begine4 = document.forms["myForm"]["Begine4"];
+    let Mideator4 = document.forms["myForm"]["Mideator4"];
+    let Expert4 = document.forms["myForm"]["Expert4"];
+
+    if (TLanguage1.checked) {
+      if (!Begine1.checked && !Mideator1.checked && !Expert1.checked) {
+        document.getElementById("techlen1").innerHTML =
+          "pleace select at least one option";
+
+        return false;
+      }
+    }
+
+    if (Begine1.checked || Mideator1.checked || Expert1.checked) {
+      if (!TLanguage1.checked) {
+        document.getElementById("techlen1").innerHTML =
+          "pleace select  php languge ";
+        return false;
+      }
+    }
+
+    //thechnical languge2
+    if (TLanguage2.checked) {
+      if (!Begine2.checked && !Mideator2.checked && !Expert2.checked) {
+        document.getElementById("techlen2").innerHTML =
+          "pleace select at least one option";
+
+        return false;
+      }
+    }
+
+    if (Begine2.checked || Mideator2.checked || Expert2.checked) {
+      if (!TLanguage2.checked) {
+        document.getElementById("techlen2").innerHTML =
+          "pleace select  my sql languge ";
+        return false;
+      }
+    }
+
+    //thechnical languge3
+    if (TLanguage3.checked) {
+      if (!Begine3.checked && !Mideator3.checked && !Expert3.checked) {
+        document.getElementById("techlen3").innerHTML =
+          "pleace select at least one option";
+
+        return false;
+      }
+    }
+
+    if (Begine3.checked || Mideator3.checked || Expert3.checked) {
+      if (!TLanguage3.checked) {
+        document.getElementById("techlen3").innerHTML =
+          "pleace select  larave languge ";
+        return false;
+      }
+    }
+
+    //thechnical languge4
+    if (TLanguage4.checked) {
+      if (!Begine4.checked && !Mideator4.checked && !Expert4.checked) {
+        document.getElementById("techlen4").innerHTML =
+          "pleace select at least one option";
+
+        return false;
+      }
+    }
+
+    if (Begine4.checked || Mideator4.checked || Expert4.checked) {
+      if (!TLanguage4.checked) {
+        document.getElementById("techlen4").innerHTML =
+          "pleace select  orecal languge ";
+        return false;
+      }
+    }
+    return true
+  }
+
+  function card6() {
+
+    var span = document.querySelectorAll("span")
+    span.forEach(element => {
+      element.innerHTML = ""
+    });
+
+    let refreancename1 = document.querySelectorAll("#name1")
+    let refreancecontactnumber1 = document.querySelectorAll("#contactnumber1")
+    let refreancerelation1 = document.querySelectorAll("#relation1")
+    a = refreancename1.length
+    b = refreancerelation1.length
+    c = refreancecontactnumber1.length
+    d = Math.max(a, b, c);
+
+
+    for (let i = 0; i < d; i++)
+      if (refreancename1[i].value || refreancecontactnumber1[i].value || refreancerelation1[i].value) {
+        if (!refreancename1[i].value || !refreancecontactnumber1[i].value || !refreancerelation1[i].value) {
+          document.getElementById("refrence").innerHTML =
+            `pleace fild all fild in refreance ${i} `;
+          return false;
+        }
+      }
+      let numberofmobile = /^\d{10}$/;
+    for (let i = 0; i < b; i++) {
+      if (refreancecontactnumber1[i].value) {
+        if (numberofmobile.test(refreancecontactnumber1[i].value) == false) {
+          document.getElementById("numbererror1").innerHTML =
+            `pleace enter valid phon number  at refrance ${i}`;
+          return false;
+        }
+      }
+    }
+    return true
+  }
+
+
+  function card7() {
+
+    var span = document.querySelectorAll("span")
+    span.forEach(element => {
+      element.innerHTML = ""
+    });
+
+    let Preferdlocation = document.forms["myForm"]["Preferdlocation"].value;
+    let Noticeperiod = document.forms["myForm"]["Noticeperiod"].value;
+    let ectc = document.forms["myForm"]["ectc"].value;
+    let cctc = document.forms["myForm"]["cctc"].value;
+    if (Preferdlocation == "") {
+      document.getElementById("Preferdlocationerror").innerHTML =
+        "pleace enter valid Preferdlocation";
+      return false;
+    }
+    if (Noticeperiod == "") {
+      document.getElementById("Noticeperioderror").innerHTML =
+        "pleace enter valid Noticeperiod";
+      return false;
+
+    }
+    if (cctc == "" || ectc == "") {
+      document.getElementById("ectcerror").innerHTML =
+        "pleace enter valid  ctc";
+      return false;
+    }
+
+    var ctc = /^\d{6}$/;
+    if (ctc.test(ectc) == false || ectc == "") {
+      document.getElementById("ectcerror").innerHTML =
+        "pleace enter valid expected ctc";
+      return false;
+    }
+    if (ctc.test(cctc) == false || cctc == "") {
+      document.getElementById("cctcerror").innerHTML =
+        "pleace enter valid current ctc";
+      return false;
+    }
+    return true
+  }
+
+  document.getElementById("employeform22").addEventListener("click", async (e) => {
+
+     var card77 = card7()
+     console.log(card77);
+     if(card77 == true){
+    var form = document.getElementById("employeform2");
+    let basic_detailss = new FormData(form);
+
+
+    const params = new URLSearchParams(basic_detailss);
+
+    const response = await new Response(params).text();
+    console.log(response);
+    console.log(typeof(response))
+    
+
+
+
+    let data = await fetch("http://localhost:6800/update/id", {
+      method: "post",
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      body: response
+
+
+    })
+
+    console.log(data)
+  }
+  })
+
+
+
+  function namechaking(name) {
+    var language = document.forms["myForm"][name].value;
+
+    var regName = /^[a-zA-Z\s]*$/;
+    if (regName.test(language) == false || language == "") {
+      document.getElementById(name + "error").innerHTML =
+        "please enter correct name";
+
+      return false;
+    }
+    return true;
+  }
+
+  function radiovalidation(radioname) {
+    var language = document.forms["myForm"][radioname].value;
+
+    console.log(language.length);
+    if (language.length == 0) {
+      document.getElementById(radioname + "error").innerHTML =
+        "pleace select radio button";
+      return false;
+    }
+    return true;
+  }
+
+
+
+  function incress() {
+    var divelement = document.getElementById("refreance")
+    var maindiv = document.getElementById("main");
+    let clondiv = divelement.cloneNode(true)
+    let divfinal =  clondiv.removeChild(clondiv.lastElementChild);
+    console.log(divfinal);
+    maindiv.appendChild(clondiv)
+  }
+
+  function decress() {
+    var maindiv = document.getElementById("main");
+    var a = maindiv.querySelectorAll("div").length;
+    if (a > 1) {
+      maindiv.removeChild(maindiv.lastElementChild)
+    }
+
+  }
+
+
+  function incresswork() {
+    var divelement = document.getElementById("copmny1")
+    var maindiv = document.getElementById("workexperiance");
+    
+    let clondiv = divelement.cloneNode(true)
+    let divfinal =  clondiv.removeChild(clondiv.lastElementChild)
+    console.log(divfinal);
+    maindiv.appendChild(clondiv)
+  }
+
+  function decresswork() {
+    var maindiv = document.getElementById("workexperiance");
+    var a = maindiv.querySelectorAll("div").length;
+    if (a > 2) {
+      maindiv.removeChild(maindiv.lastElementChild)
+    }
+
+  }
+
+ async function incresseducation() {
+    var divelement = document.getElementById("ed1")
+    var maindiv = document.getElementById("educations");
+    let clondiv = divelement.cloneNode(true)
+    let divfinal =  await clondiv.removeChild(clondiv.lastElementChild)
+    
+    console.log(divfinal);
+    console.log(clondiv);
+    maindiv.appendChild(clondiv)
+  }
+
+  function decresseducation() {
+    var maindiv = document.getElementById("educations");
+    var a = maindiv.querySelectorAll("div").length;
+    if (a > 2) {
+      maindiv.removeChild(maindiv.lastElementChild)
+    }
+
+  }
+ 
+  async function myFunction() {
+    console.log("scfms");
+  document.getElementById("city").innerHTML =""
+  var x = document.getElementById("state").value;
+  console.log(x);
+  
+  // x= {
+  //   city:"mp"
+  // }
+  var state =await  fetch("http://localhost:6800/city/city/city", {
+      method: "post",
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'},
+      body: JSON.stringify({id : x})
+    })
+    result = await state.json();
+
+    result.forEach(element => {
+      document.getElementById("city").innerHTML += ` <option >${element.city}</option>`
+      console.log(element);
+
+    });
+  }
+</script>
+
+</html>
