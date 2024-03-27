@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        background-color: rgb(127, 208, 255);
+      }
+
+      table,
+      td,
+      th {
+        border: 1px solid black;
+      }
+
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      th {
+        height: 70px;
+      }
+    </style>
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <table>
+        <tr>
+          <th>firstname</th>
+          <th>lastname</th>
+          <th>email</th>
+          <th>age</th>
+          <th>number</th>
+          <th>address</th>
+
+          <th>gender</th>
+          <th>hobby</th>
+        </tr>
+        <tr>
+          <td><%= data.firstname %></td>
+          <td><%= data.lastname %></td>
+          <td><%= data.email %></td>
+          <td><%= data.age %></td>
+          <td><%= data.number %></td>
+          <td><%= data.addressline1 %></td>
+          <td><%= data.gender %></td>
+          <td><%= data.hobbie %></td>
+          
+        </tr>
+      </table>
+    </div>
+  </body>
+</html>

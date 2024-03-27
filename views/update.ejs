@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <style>
+        body {
+            background-color: rgb(127, 208, 255);
+        }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <form name="employform2" action="/details" method="post" id="form">
+            <fieldset>
+                <legend>BASIC DETAILES update</legend> <label
+                    for="firstname">FIRST NAME :</label> <input type="text"
+                    id="firstname" style="margin-right: 70px" name="firstname"
+                    value="<%= data.firstname %>"
+                    placeholder="ENTER YOUR FIRST NAME" /> <label
+                    for="lastname">LAST NAME :</label> <input type="text"
+                    id="lastname" style="margin-right: 70px" name="lastname"
+                    value="<%= data.lastname %>"
+                    placeholder="ENTER YOUR LAST NAME" /> <br /><br /> <label
+                    for="addressline1">ADDRESSLINE1</label> <input type="text"
+                    style="margin-right: 70px" name="addressline1" id="address1"
+                    value="<%= data.addressline1 %>"
+                    placeholder="ENTER YOUR ADDRESS" />
+                <lable for="bob">age</lable> <input type="number" id="bob"
+                    name="age" value="<%= data.age %>"
+                    placeholder="ENTER YOUR age" /> <br /> <br />
+                <LABLE for="email">EMAILE</LABLE> <input type="text"
+                    style="margin-right: 70px" id="email" name="email"
+                    value="<%= data.email %>"
+                    placeholder="ENTER YOUR EMAILE" />
+                <LABLE FOR="number">MOBILE NO :</LABLE> <INPUT type="number"
+                    style="margin-right: 70px" name="number" id="number"
+                    value="<%= data.number %>"
+                    placeholder="ENTER YOUR MOBILE NO" /> <br /> <br /> <label
+                    for="gender">GENDER</label> <input type="radio" id="male"
+                    name="gender" value="<%= data.gender %>"
+                    <% if (data.gender) { %>
+                 checked 
+                <% } %>/> <label for="male">MALE</label> <input
+                    type="radio" id="female" name="gender"
+                    value="<%= data.gender %>" <% if
+                (data.gender) { %>
+                 checked 
+                <% } %>/> <label style="margin-right: 70px"
+                    for="female">FEMALE</label> <br /> <br /> <label
+                    for="statuse">select hobbi :</label><br /> <input
+                    type="checkbox" id="meride" name="hobbie" value="cricket"
+                    <% if (data.hobbie) { %>
+                 checked 
+                <% } %>/> 
+                
+                <label  for="meride">criket</label><br/> 
+                <input type="checkbox"  id="single" name="hobbie" <% if (data.hobbie) {
+                %> checked 
+                <% } %>value="chess" /> 
+                <label for="single">chess</label><br /><br />
+                
+                <input type="submit" name="submit" id="submit" value="submit" />
+            </fieldset>
+        </form>
+    </div>
+</body>
+</html>
