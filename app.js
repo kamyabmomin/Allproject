@@ -305,6 +305,10 @@ app.get("/tablecell", (req, res) => {
     res.render("tablecells")
 })
 
+//sorting
+app.get("/sorting", (req, res) => {
+    res.render("sorting")
+})
 
 app.listen(port, (error) => {
     if (!error) {
