@@ -946,6 +946,16 @@ app.post("/city/city/city", async (req, res) => {
 
 
 
+app.get("/tablefetchapi", (req, res) => {
+
+    res.render('tablefetchapi')
+})
+
+app.get("/details", (req, res) => {
+
+    res.render('detailstablefetchapi')
+})
+
 
 
 
