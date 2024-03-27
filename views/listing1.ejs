@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      table,
+      th,
+      td {
+        border: 1px solid;
+        text-align: center;
+      }
+      table {
+        background-color: rgb(90, 221, 129);
+      }
+      table {
+        margin-left: 30px;
+        margin-right: 30px;
+      }
+      th {
+        background-color: aquamarine;
+      }
+      tr:hover {
+        background-color: rgb(6, 68, 24);
+        color: white;
+      }
+    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <CENTER style="margin-top: 30px; margin-bottom: 30px">DATA SHEET</CENTER>
+    <table>
+      <tr>
+        <th>id</th>
+        <th>years</th>
+        <th>last name</th>
+        <th>first name</th>
+        <th>city</th>
+        <th>mobile number</th>
+        <th>date of birth</th>
+        <th>gender</th>
+        <th>country</th>
+        <th>created time</th>
+      </tr>
+
+      <% for( let i = 0; i < data.length; i++ ) { %>
+      <tr>
+        <td><%= data[i].id %></td>
+        <td><%= data[i].years %></td>
+        <td><%= data[i].last_name %></td>
+        <td><%= data[i].first_name %></td>
+        <td><%= data[i].city %></td>
+        <td><%= data[i].phon_no %></td>
+        <td><%= data[i].dob %></td>
+        <td><%= data[i].gender %></td>
+        <td><%= data[i].country %></td>
+        <td><%= data[i].CREATE_AT %></td>
+      </tr>
+      <% } %>
+    </table>
+  </body>
+</html>

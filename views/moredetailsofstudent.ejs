@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      table,
+      th,
+      td {
+        border: 1px solid;
+        text-align: center;
+      }
+      table {
+        background-color: rgb(90, 221, 129);
+        margin-top: 30px;
+        margin-left: 345px;
+        margin-right: 30px;
+      }
+      tr:hover {
+        background-color: rgb(6, 68, 24);
+        color: white;
+      }
+      th {
+        background-color: aquamarine;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="background-color: rgb(90, 221, 129); border: 1px solid black">
+      <center><h2>welcome to the <%= data[0].name %></h2></center>
+    </div>
+    <table>
+      <tr>
+        <th>exametype</th>
+        <th>subject name</th>
+        <th>theory marks</th>
+        <th>prectical marks</th>
+        <th>total marks</th>
+      </tr>
+
+      <% for( let i = 0; i < data.length; i++ ) { %>
+      <tr>
+        <td><%= data[i].typ %></td>
+        <td><%= data[i].sub %></td>
+
+        <td><%= data[i].theory %></td>
+
+        <td><%= data[i].prectical %></td>
+        <td><%= data[i].theory + data[i].prectical %></td>
+      </tr>
+      <% } %>
+    </table>
+    <div style="display: grid; grid-template-columns: 400px 500px">
+      <div>
+        <table>
+          <tr>
+            <th>attendance</th>
+            <th>total day</th>
+          </tr>
+          <tr>
+            <td><%= resultdata[0].count %></td>
+            <td><%= allday[0].alldaycount %></td>
+          </tr>
+        </table>
+      </div>
+      <div>
+        <table>
+          <tr>
+            <th>total theory marks</th>
+            <th>total prectical marks</th>
+          </tr>
+
+          <tr>
+            <td><%= totaltheory %></td>
+            <td><%= totalpractical %></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+   
+  </body>
+</html>

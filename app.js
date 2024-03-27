@@ -959,6 +959,129 @@ app.get("/details", (req, res) => {
 
 
 
+app.get("/listing", async (req, res) => {
+    res.status(200);
+    console.log("SVFS");
+
+    // con.connect(function (err) {
+    //     if (err) {
+    //         console.log("eror")
+    //     };
+    //     console.log("Connected!");
+
+
+
+    var sql = "select * from student  LIMIT  50000 ";
+    var [result] = await con.query(sql)
+    // con.query(sql, function (error, result) {
+    //     if (error) throw error;
+
+
+
+    alldata = JSON.parse(JSON.stringify(result));
+
+    res.render('listing1', { data: alldata })
+
+    //         });
+    //     })
+
+})
+
+const resultsPerPage = 30;
+app.get('/pagindindex', async (req, res) => {
+    var data = req.body;
+    console.log(Object.keys(data))
+    let sql = 'SELECT * FROM student';
+    // con.query(sql, (err, result) => {
+    var [result] = await con.query(sql)
+    // console.log(result)
+    // if (err) throw err;
+    const numOfResults = result.length;
+    const numberOfPages = Math.ceil(numOfResults / resultsPerPage);
+    let page = req.query.page ? Number(req.query.page) : 1;
+    if (page > numberOfPages) {
+        res.redirect('/?page=' + encodeURIComponent(numberOfPages));
+    } else if (page < 1) {
+        res.redirect('/?page=' + encodeURIComponent('1'));
+    }
+
+
+
+    const startingLimit = (page - 1) * resultsPerPage;
+
+    // var pagenumber = req.query.page
+    // console.log(pagenumber)
+    sql = `SELECT * FROM student LIMIT ${startingLimit},${resultsPerPage}`;
+    // con.query(sql, (err, result) => {
+    [result] = await con.query(sql)
+    // console.log(result)
+    // if (err) throw err;
+    res.render('index1', { data: result, page, numberOfPages });
+    // });
+    // });
+});
+
+app.post("/pagindindex", async (req, res) => {
+    var data = req.body;
+    // console.log(data)
+    var key = Object.values(data)
+    // console.log(key[1])
+    JSON.stringify(key);
+    console.log(key)
+    const order = key[0];
+    var colamname = key[1];
+    console.log(colamname);
+    // var allcolumanname = ""
+    // for(let i = 0  ; i < colamname.length ; i ++){
+    // allcolumanname= allcolumanname+colamname[i]
+    // // for(let j =0 ;j<colamname.length-1 ;j++){
+    //   if(i< (colamname.length- 1)){
+    // allcolumanname = allcolumanname + ","}
+
+    // }
+    var key1 = key[2];
+    // console.log(allcolumanname);
+
+    // console.log(typeof a[1]);
+    // var colamname = key[1].toString();
+    // var key1 = key[2];
+    // console.log(JSON.parse(JSON.stringify(key[2])))
+    // var key1 = key[2].toString();
+    // console.log(key1 , order ,colamname)
+    // console.log(key)
+    if (key1 == "submit") {
+        // console.log("submit")
+        let sql = `SELECT * FROM student ORDER BY ${colamname} ${order}`;
+        // con.query(sql, (err, result) => {
+        // console.log(result)
+        // if (err) throw err;
+        var [result] = await con.query(sql)
+        const numOfResults = result.length;
+        const numberOfPages = Math.ceil(numOfResults / resultsPerPage);
+        let page = req.query.page ? Number(req.query.page) : 1;
+        if (page > numberOfPages) {
+            res.redirect('/?page=' + encodeURIComponent(numberOfPages));
+        } else if (page < 1) {
+            res.redirect('/?page=' + encodeURIComponent('1'));
+        }
+
+
+
+        const startingLimit = (page - 1) * resultsPerPage;
+
+        // var pagenumber = req.query.page
+        // console.log(pagenumber)
+        sql = `SELECT * FROM student ORDER BY ${colamname}  ${order} LIMIT ${startingLimit},${resultsPerPage}`;
+        // con.query(sql, (err, result) => {
+        var [result] = await con.query(sql)
+        // if (err) throw err;
+        res.render('index1', { data: result, page, numberOfPages });
+        // });
+        // });
+
+    }
+})
+
 
 
 app.listen(port, (error) => {

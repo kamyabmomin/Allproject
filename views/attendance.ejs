@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      table,
+      th,
+      td {
+        border: 1px solid;
+        text-align: center;
+      }
+      table {
+        background-color: rgb(90, 221, 129);
+      }
+      table {
+        margin-top: 30px;
+        margin-left: 30px;
+        margin-right: 30px;
+      }
+      th {
+        background-color: aquamarine;
+      }
+      tr:hover {
+        background-color: rgb(6, 68, 24);
+        color: white;
+      }
+      body{
+        display: flex;
+        flex-direction: column;
+      }
+    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+
+    <center style="margin-top: 30PX; margin-bottom: 30PX;">KAMYAB HUSAIN</center>
+    <form method="get" action="/">
+      <label for="cars" class="anchor">Choose a month:</label>
+      <select name="month" id="cars" required>
+        <ul class="items">
+          <li>
+            <option name="col" value="12" <% if (month==12) { %>
+              selected
+            <% } %>>dec 2023</option>
+          </li>
+          <li>
+            <option name="col" value="1" <% if (month==1) { %>
+                selected
+              <% } %>>jan 2024</option>
+          </li>
+          <li>
+            <option name="col" value="2" <% if (month==2) { %>
+                selected
+              <% } %>>feb 2024</option>
+          </li>
+          <li></li>
+        </ul>
+      </select>
+
+      <label for="cars" class="anchor">Choose a year:</label>
+      <select name="year" id="cars" required>
+        <ul class="items">
+          <li>
+            <option name="col" value="2023" <% if (month==12) { %>
+              selected
+            <% } %>>2023</option>
+          </li>
+          <li>
+            <option name="col" value="2024" <% if (month==1) { %>
+                selected
+              <% } %>>2024</option>
+          </li>
+          <li>
+            <option name="col" value="2024" <% if (month==2) { %>
+                selected
+              <% } %>>2024</option>
+          </li>
+          <li></li>
+        </ul>
+      </select>
+
+      
+      <input type="submit" value="go" />
+    </form>
+    <table>
+      <tr>
+        
+        <th>    id</th>
+        <th>student</th>
+
+        <th>total present day</th>
+        <th>percentage of present day</th>
+      </tr>
+
+      <% for( let i = 0; i < data.length; i++ ) { %>
+      <tr>
+        <td><%= data[i].student_id %></td>
+        <td><%= data[i].student_name %></td>
+
+        <td><%= data[i].count %></td>
+
+        <td><%= data[i].persentage %>%</td>
+      </tr>
+      <% } %>
+
+      <div>
+        <a href="/?page=<%=1%>&cars=<%=month%>&year=<%=year %>">first</a>
+
+    <% if (page > 1) { %>
+    <a href="/?page=<%=page - 1%>&month=<%=month %>&year=<%=year %>">previous</a>
+    <% } %>
+
+    <lable><%=page%></lable>
+
+    <% if (page < numberOfPages) { %>
+    <a href="/?page=<%= page + 1%>&month=<%=month%>&year=<%=year %>">next</a>
+    <% } %>
+
+    <a href="/?page=<%=numberOfPages%>&month=<%=month %>&year=<%=year %>">last</a>
+      </div>
+    </table>
+  </body>
+</html>

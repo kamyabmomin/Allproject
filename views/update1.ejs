@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form method="get" action="/update/updatecomplate">
+      <input type="text" value="<%=data%>" name="updatedname" />
+      <input type="hidden" name="id" value="<%=id%>" />
+      <input type="submit" onsubmit="onredirectt()" value="update" />
+    </form>
+  </body>
+
+  <script>
+    function onredirectt() {
+      alert("sihf");
+      location.href = "http://localhost:6800/";
+    }
+  </script>
+</html>

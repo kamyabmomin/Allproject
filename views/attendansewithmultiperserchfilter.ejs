@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      #myDIV {
+  width: 100%;
+  padding: 50px 0;
+  text-align: center;
+  background-color: rgb(221, 231, 235);
+  margin-top: 20px;
+}
+      table,
+      th,
+      td {
+        border: 1px solid;
+        text-align: center;
+      }
+      table {
+        background-color: rgb(90, 221, 129);
+      }
+      table {
+        margin-top: 30px;
+        margin-left: 30px;
+        margin-right: 30px;
+      }
+      th {
+        background-color: aquamarine;
+      }
+      tr:hover {
+        background-color: rgb(6, 68, 24);
+        color: white;
+      }
+      body{
+        display: flex;
+        flex-direction: column;
+      }
+    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+
+    <center style="margin-top: 30PX; margin-bottom: 30PX;">KAMYAB HUSAIN</center>
+    <form method="get" action="/mainpageinsorting">
+      <fieldset>
+      <label for="cars" class="anchor">Choose a month:</label>
+      <select name="month" id="cars" required>
+        <ul class="items">
+          <li>
+            <option name="col" value="12" <% if (month==12) { %>
+              selected
+            <% } %>>dec 2023</option>
+          </li>
+          <li>
+            <option name="col" value="1" <% if (month==1) { %>
+                selected
+              <% } %>>jan 2024</option>
+          </li>
+          <li>
+            <option name="col" value="2" <% if (month==2) { %>
+                selected
+              <% } %>>feb 2024</option>
+          </li>
+          <li></li>
+        </ul>
+      </select>
+
+      <label for="cars" class="anchor">Choose a year:</label>
+      <select name="year" id="cars" required>
+        <ul class="items">
+          <li>
+            <option name="col" value="2023" <% if (month==12) { %>
+              selected
+            <% } %>>2023</option>
+          </li>
+          <li>
+            <option name="col" value="2024" <% if (month==1) { %>
+                selected
+              <% } %>>2024</option>
+          </li>
+          <li>
+            <option name="col" value="2024" <% if (month==2) { %>
+                selected
+              <% } %>>2024</option>
+          </li>
+          <li></li>
+        </ul>
+      </select>
+
+      
+      <input type="submit" value="go" />
+    </fieldset>
+    </form>
+
+<div style="display: flex; justify-content: center;">
+    <form method="get" action="/mainpageinsorting">
+      <fieldset>
+        <input type="text" name="id" placeholder="enter id to serch user" tabindex="1" >
+        <input type="submit" tabindex="2" value="go" >
+      </fieldset>
+    </form>
+    <button  onclick="myFunction()">Show more filters</button>
+   </div>
+    <div id="myDIV" >
+
+      <form style="margin-left: 146px;" method="get" action="/mainpageinsorting">
+        <div style="display: flex; gap: 30px;">
+        <label for="cars" class="anchor">sort by first name:</label>
+        <input  type="text" tabindex="3" placeholder="enter first name to sarch" name="firstname">
+
+
+        <label for="cars" class="anchor">Choose a query for persentage:</label>
+        <select  tabindex="4" name="abovebelove" id="cars" required>
+          <ul class="items">
+          
+            <li>
+              <option name="abovebelove" value="<">
+                belove 
+              </option>
+            </li>
+            <li>
+              <option name="abovebelove" value=">"
+                  >above</option>
+            </li>
+            <li> <option name="abovebelove" value="="
+              >equal</option></li>
+          </ul>
+        </select>
+        <input type="number" placeholder="enter persentage" tabindex="5" name="percentage">
+        </div>
+<br>
+<div style="display: flex; gap: 30px;">
+        <label for="cars" class="anchor">Choose a query for persentday:</label>
+        <select tabindex="6" name="abovebelovedays" id="cars" required>
+          <ul class="items">
+          
+            <li>
+              <option name="abovebelovedays" value="<">
+                belove 
+              </option>
+            </li>
+            <li>
+              <option name="abovebelovedays" value=">"
+                  >above</option>
+            </li>
+            <li> <option name="abovebelovedays" value="="
+              >equal</option></li>
+          </ul>
+        </select>
+        <input type="number" tabindex="7" placeholder="enter days"  name="days">
+
+
+        
+        <label for="cars" class="anchor">Choose a query selectore:</label>
+        <select name="andor" tabindex="8 " id="cars" >
+          <ul class="items">
+          
+            <li>
+              <option name="andor" value="OR" >or</option>
+            </li>
+            <li>
+              <option name="andor" value="AND"
+                  >and</option>
+            </li>
+          </ul>
+        </select>
+
+        <input tabindex="9" type="submit" value="go"  >
+      </div>
+      </form>
+    </div>
+
+    <table>
+      <tr>
+        
+        <th>  id </th>
+        <th>student</th>
+
+        <th>total present day</th>
+        <th>percentage of present day</th>
+        <th>update</th>
+      </tr>
+
+      <% for( let i = 0; i < data.length; i++ ) { %>
+      <tr>
+        <td><%= data[i].student_id %></td>
+        <td><%= data[i].student_name %></td>
+
+        <td><%= data[i].count %></td>
+
+        <td><%= data[i].persentage %>%</td>
+        <td><a href="/update?id=<%=data[i].student_id%>&student_name=<%= data[i].student_name %>">update</a></td>
+      </tr>
+      <% } %>
+    </table>
+      <div style="margin-top: 30px;">
+        <a href="/mainpageinsorting?page=<%=1%>&cars=<%=month%>&year=<%=year %>&firstname=<%=firstname1%>&percentage=<%=persentage%>&abovebelove=<%=abovebelove%>&id=<%=id%>&abovebelovedays=<%=abovebelovedays%>&days=<%=day%>&andor<%=andor%>">first</a>
+
+    <% if (page > 1) { %>
+    <a href="/mainpageinsorting?page=<%=page - 1%>&month=<%=month %>&year=<%=year %>&firstname=<%=firstname1%>&percentage=<%=persentage%>&abovebelove=<%=abovebelove%>&id=<%=id%>&abovebelovedays=<%=abovebelovedays%>&days=<%=day%>&andor<%=andor%>">previous</a>
+    <% } %>
+
+    <lable><%=page%></lable>
+
+    <% if (page < numberOfPages) { %>
+    <a href="/mainpageinsorting?page=<%= page + 1%>&month=<%=month%>&year=<%=year %>&firstname=<%=firstname1%>&percentage=<%=persentage%>&abovebelove=<%=abovebelove%>&id=<%=id%>&abovebelovedays=<%=abovebelovedays%>&days=<%=day%>&andor<%=andor%>">next</a>
+    <% } %>
+
+    <a href="/mainpageinsorting?page=<%=numberOfPages%>&month=<%=month %>&year=<%=year %>&firstname=<%=firstname1%>&percentage=<%=persentage%>&abovebelove=<%=abovebelove%>&id=<%=id%>&abovebelovedays=<%=abovebelovedays%>&andor<%=andor%>&days=<%=day%>">last</a>
+      </div>
+   
+  </body>
+  <script>
+
+  function myFunction() {
+  var x = document.getElementById("myDIV");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+
+
+    
+  </script>
+ 
+  
+</html>

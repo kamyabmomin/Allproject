@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pagination component</title>
+  </head>
+  <body>
+    <div style="display: flex; gap: 30px">
+      <!-- <l class="pagination" id="pagination-demo"></li> -->
+
+      <input type="button" value="first" onclick="gofirstpage()" />
+      <input
+        type="button"
+        id="Previous"
+        value="Previous"
+        onclick="gopriviuspage()"
+      />
+      <lable>{{page<label id="pagenumber"></label> }}</lable>
+      <input type="button" value="next" id="next" onclick="gonextpage()" />
+      <input type="button" value="last" id="last" onclick="golastpage()" />
+
+      <!-- <label class="first"><a href="javascript:;">First</a></label>
+      <label class="prev"><a href="javascript:;">Previous</a></label>
+      <label class="page">
+        <a href="javascript:;">{{ page }}</a></label
+      >
+      <label class="next"><a href="javascript:;">Next</a></label>
+      <label class="last"><a href="javascript:;">Last</a></label> -->
+    </div>
+  </body>
+
+  <script>
+    var pagenumber = 1;
+
+    const params = new URLSearchParams(window.location.search);
+    var pagenumber = params.get("page");
+    console.log(pagenumber);
+    document.getElementById("pagenumber").innerText = pagenumber;
+
+    function gofirstpage() {
+      pagenumber = 1;
+      //   params.set("page"=pagenumber)
+      document.getElementById("Previous").disabled = true;
+      document.getElementById("pagenumber").innerText = pagenumber;
+    }
+
+    function golastpage() {
+      inabledisable();
+      pagenumber = 250;
+      document.getElementById("next").disabled = true;
+      document.getElementById("pagenumber").innerText = pagenumber;
+      const params = new URLSearchParams(window.location.search);
+    //   params.set("page", pagenumber);
+      var newquerystring = "page" = pagenumber
+      window.history.replaceState({} ,'' ,'?'+newquerystring.toString());
+    }
+    function gopriviuspage() {
+      document.getElementById("next").disabled = false;
+
+      pagenumber = pagenumber - 1;
+
+      document.getElementById("pagenumber").innerText = pagenumber;
+      const params = new URLSearchParams(window.location.search);
+      params.set("page", pagenumber);
+      return pagenumber;
+    }
+    function gonextpage() {
+      document.getElementById("Previous").disabled = false;
+      //   if (pagenumber == 250) {
+      //     console.log("last page");
+      //     document.getElementById("next").disabled = true;
+      //   } else {
+      //     document.getElementById("next").disabled = false;
+      inabledisable();
+      pagenumber = pagenumber + 1;
+      console.log(pagenumber);
+      const params = new URLSearchParams(window.location.search);
+      params.set("page", pagenumber);
+      document.getElementById("pagenumber").innerText = pagenumber;
+      return pagenumber;
+    }
+
+    function inabledisable() {
+      if (pagenumber !== 250) {
+        console.log("last page");
+        document.getElementById("next").disabled = false;
+      } else document.getElementById("next").disabled = true;
+    }
+  </script>
+</html>
