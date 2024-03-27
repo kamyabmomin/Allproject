@@ -293,6 +293,12 @@ app.get("/tictacto", (req, res) => {
     res.render("tictacto")
 })
 
+
+//event table 
+app.get("/eventtable", (req, res) => {
+    res.render("event")
+})
+
 app.listen(port, (error) => {
     if (!error) {
         console.log("server is running")
