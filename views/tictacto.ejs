@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+
+    <title>TIC TAC TOC</title>
+
+    <style>
+      table {
+        border-collapse: collapse;
+        margin-left: 40%;
+        color: rgb(79, 12, 235);
+        background-color: rgb(14, 202, 124);
+      }
+
+      td,
+      th {
+        border: 1px solid black;
+        padding: 10px;
+        cursor: pointer;
+        height: 50px;
+        width: 50px;
+        font-size: 30px;
+      }
+    </style>
+  </head>
+
+  <body style="background-color: rgb(127, 208, 255);">
+   
+<h3 style="text-align: center;margin-top: 50px; color: blueviolet;"> KAMYAB</h3>
+    <h1 style="text-align: center;margin-top: 50px; color: blueviolet;">TIC TAC TOE</h1>
+    <!-- <input type="reset" id="reset" value="reset" onclick="reset()" /> -->
+    <script>
+      function createTable(rows, cols) {
+        const table = document.createElement("table");
+        let count = 0;
+
+        for (let i = 0; i < rows; i++) {
+          const row = table.insertRow();
+          for (let j = 0; j < cols; j++) {
+            const cell = row.insertCell();
+            cell.textContent = null;
+
+            cell.addEventListener("click", function () {
+              var innertext = this.innerText;
+              console.log("inner text is");
+              console.log(innertext);
+              // count++;
+              // console.log(count);
+              if (count % 2 == 0 && !innertext) {
+                count++;
+                this.innerText = "1";
+                this.style.opacity = "50%";
+                console.log("printing 1");
+                showwinner();
+              } else if (count % 2 != 0 && !innertext) {
+                count++;
+
+                this.textContent = "0";
+
+                console.log("writing 0");
+                this.style.opacity = "50%";
+                showwinner();
+              } else if (count >= 8) {
+                showwinner1();
+              } else {
+                console.log("sjs");
+              }
+            });
+          }
+        }
+        document.body.appendChild(table);
+        return table;
+      }
+
+      function showwinner() {
+        var allcell = document.querySelectorAll("td");
+
+        console.log(allcell);
+        const td0 = allcell[0].innerText;
+        const td1 = allcell[1].innerText;
+        const td2 = allcell[2].innerText;
+        const td3 = allcell[3].innerText;
+        const td4 = allcell[4].innerText;
+        const td5 = allcell[5].innerText;
+        const td6 = allcell[6].innerText;
+        const td7 = allcell[7].innerText;
+        const td8 = allcell[8].innerText;
+        console.log(td0);
+        console.log(td1);
+        console.log(td2);
+        console.log(td3);
+        console.log(td4);
+        console.log(td5);
+        console.log(td6);
+        console.log(td7);
+        console.log(td8);
+
+        if (td1 == "1" && td0 == "1" && td2 == "1") {
+          allcell[0].style.backgroundColor = "white";
+          console.log("writing 1 is win");
+
+          alert("1 is win");
+
+          window.location.reload();
+        } else if (td1 == "0" && td0 == "0" && td2 == "0") {
+          console.log("writing  0 is win");
+          allcell[0].style.color = "red";
+          alert("0 is win");
+          window.location.reload();
+        } else if (td3 == "1" && td0 == "1" && td6 == "1") {
+          console.log("writing 1 is win");
+
+          //console.log("writing 1 is win");
+          alert("1  is win");
+          window.location.reload();
+        } else if (td3 == "0" && td0 == "0" && td6 == "0") {
+          console.log("writing  0 is win");
+          //console.log("writing 1 is win");
+          alert("0  is win");
+
+          window.location.reload();
+        } else if (td1 == "0" && td0 == "0" && td2 == "0") {
+          console.log("writing  0 is win");
+          alert("0 is win");
+          window.location.reload();
+        } else if (td1 == "1" && td4 == "1" && td7 == "1") {
+          console.log("writing 1 is win");
+          alert("1  is win");
+
+          window.location.reload();
+        } else if (td1 === "0" && td4 == "0" && td7 == "0") {
+          console.log("writing 0 is win");
+
+          alert("0 is win");
+
+          window.location.reload();
+        } else if (td2 == "1" && td5 == "1" && td8 == "1") {
+          //
+          console.log("writing 1 is win");
+
+          console.log("writing 1 is win");
+
+          alert("1  is win");
+
+          window.location.reload();
+        } else if (td2 == "0" && td5 == "0" && td8 == "0") {
+          console.log("writing 0 is win");
+
+          alert("0 is win");
+
+          window.location.reload();
+        } else if (td3 == "1" && td4 == "1" && td5 == "1") {
+          console.log("writing 1 is win");
+
+          alert("1  is win");
+
+          window.location.reload();
+        } else if (td3 == "0" && td5 == "0" && td4 == "0") {
+          console.log("writing 0 is win");
+          alert("0 is win");
+
+          window.location.reload();
+        } else if (td6 == "1" && td7 === "1" && td8 === "1") {
+          console.log("writing  1 is win");
+
+          alert("1 is win");
+
+          window.location.reload();
+        } else if (td6 == "0" && td7 == "0" && td8 == "0") {
+          console.log("writin 0 is win");
+
+          alert("0 is win");
+
+          window.location.reload();
+        } else if (td0 == "1" && td4 == "1" && td8 == "1") {
+          console.log("writing 1 is win");
+          alert("1  is win");
+          window.location.reload();
+        } else if (td0 == "0" && td4 == "0" && td8 == "0") {
+          console.log("writing 0 is win");
+          alert("0 is win");
+          window.location.reload();
+        } else if (td2 == "1" && td4 == "1" && td6 == "1") {
+          console.log("writing 1 is win");
+          alert("1 is win");
+          window.location.reload();
+        } else if (td2 == "0" && td4 == "0" && td6 == "0") {
+          console.log("writing 0 is win");
+          alert("0 is win");
+          window.location.reload();
+        } else if (
+          (td2 == "1" || td2 == "0") &&
+          (td3 == "1" || td3 == "0") &&
+          (td4 == "1" || td4 == "0") &&
+          (td5 == "1" || td5 == "0") &&
+          (td6 == "1" || td6 == "0") &&
+          (td7 == "1" || td7 == "0") &&
+          (td8 == "1" || td8 == "0") &&
+          (td0 == "1" || td2 == "0") &&
+          (td1 == "1" || td1 == "0")
+        ) {
+          alert("no one is win try again!!");
+          window.location.reload();
+        } else {
+          console.log("continue playing");
+        }
+      }
+
+      function showwinner1() {
+        alert("no one is win try again!!");
+        window.location.reload();
+      }
+
+      function reset() {
+        window.location.reload();
+      }
+
+      const myTable = createTable(3, 3);
+    </script>
+  </body>
+</html>

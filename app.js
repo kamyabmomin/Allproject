@@ -118,7 +118,7 @@ app.post("/login", async (req, res) => {
             // authentication()
             console.log(token);
             res.cookie("token", token).status(200).json({ token: token })
-            
+
 
         } else {
             console.log("password not match");
@@ -144,7 +144,7 @@ app.post("/login", async (req, res) => {
 // }
 
 
-app.get("/forgetpassword", validation1, async (req, res) => {
+app.get("/forgetpassword", async (req, res) => {
     try {
         res.render("forget")
 
@@ -282,7 +282,16 @@ app.post("/registerusingemail", async (req, res) => {
 
 })
 
+//dashbord
+app.get("/dashbord", validation1, (req, res) => {
+    res.render("dashbord")
+})
 
+
+//tic tak to 
+app.get("/tictacto", (req, res) => {
+    res.render("tictacto")
+})
 
 app.listen(port, (error) => {
     if (!error) {
