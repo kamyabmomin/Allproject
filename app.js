@@ -299,6 +299,13 @@ app.get("/eventtable", (req, res) => {
     res.render("event")
 })
 
+
+//table cells 
+app.get("/tablecell", (req, res) => {
+    res.render("tablecells")
+})
+
+
 app.listen(port, (error) => {
     if (!error) {
         console.log("server is running")
