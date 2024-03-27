@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .main1 {
+      margin-left: auto;
+      margin-right: auto;
+      background-color: aquamarine;
+      max-width: 500px;
+      margin-top: 30px;
+      margin-bottom: auto;
+      border: 3px solid rgb(252, 252, 202);
+      border-radius: 100px;
+
+
+    }
+
+    .btn {
+      margin-left: 63px;
+      margin-top: -16px;
+      background-color: rgb(8, 87, 87);
+      width: 154px;
+      height: 30PX;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <form name="registerform" id="registerform">
+
+    <div class="main1">
+      <div style="text-align: center;">
+        <% if (registerkey == 0) { %>
+        <h2> plase register again key is expires !!</h2>
+        <% } %>
+      </div>
+
+      <div id="msg" style="justify-content: center; margin-left: auto; margin-right: auto;text-align: center;"></div>
+
+      <div style="text-align: center;">
+        <h3>register pag</h3>
+      </div>
+      <div style=" padding-left: 80px; padding-right: 80px;">
+
+        <div>
+          <lable for="firstname">firstname</lable>
+          <input type="text" id="firstname" name="firstname">&nbsp;<br>
+          <span id="firstnameerror"></span>
+        </div>
+        <br>
+        <br>
+
+        <div>
+          <lable for="lastname">
+            lastname</lable>
+          <input type="text" id="lastname" name="lastname">
+          <span id="lastnameerror"></span>
+        </div>
+        <br>
+        <br>
+
+        <div>
+          <label for="email">email</label>
+          <input type="text" id="email" name="email">
+          <span id="emailerror"></span>
+        </div>
+        <br>
+        <br>
+
+        <div>
+          <label for="mobilrno">monile no</label>
+          <input type="text" name="mobilenumber" id="mobilenumber">
+          <span id="numbererror"></span>
+        </div>
+        <br>
+        <br>
+
+        <div>
+          <label for="userid"> user id</label>
+          <input type="text" name="userid" id="userid">
+          <span id="useriderror"></span>
+        </div>
+        <br>
+        <br>
+
+        <div>
+          <label for="paswword">password</label>
+          <input type="password" id="passwords" name="passwords">
+          <span id="passwordserror"></span>
+        </div>
+        <br>
+        <br>
+
+        <div>
+          <label for="conformpassword">conform password</label>
+          <input type="password" name="conformpassword" id="conformpassword">
+          <span id="conformpasswordserror"></span>
+        </div>
+        <br>
+        <br>
+
+        <div style="margin-left: auto; margin-right: auto; margin-top: 30px;">
+          <input type="button" class="btn" value="register" id="register">
+        </div>
+
+      </div>
+
+      <div id="ancher">
+      </div>
+    </div>
+  </form>
+</body>
+<script>
+  document.getElementById("register").addEventListener("click", async () => {
+    var span = document.querySelectorAll("span")
+    console.log(span);
+    span.forEach(element => {
+      element.innerHTML = ""
+    });
+
+    function valid() {
+      var firstname = document.getElementById("firstname")
+        .value;
+      var lastname = document.getElementById("lastname")
+        .value;
+      var email = document.getElementById("email").value;
+      var mobilenumber = document.getElementById(
+        "mobilenumber").value;
+      var userid = document.getElementById("userid").value;
+      var passwords = document.getElementById("passwords")
+        .value;
+      var conformpassword = document.getElementById(
+        "conformpassword").value;
+      console.log(firstname, lastname, email, mobilenumber,
+        userid, passwords, conformpassword);
+      if (firstname == "") {
+        document.getElementById("firstnameerror")
+          .innerHTML =
+          "pleace enter valid firstname";
+        return false;
+      }
+      if (lastname == "") {
+        document.getElementById("lastnameerror").innerHTML =
+          "pleace enter valid lastname";
+        return false;
+      }
+      emailPattern =
+        /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      if (emailPattern.test(email) == false || email == "") {
+        document.getElementById("emailerror").innerHTML =
+          "pleace enter valid email";
+        return false;
+      }
+      let numberofmobile = /^\d{10}$/;
+      if (numberofmobile.test(mobilenumber) == false ||
+        mobilenumber == "") {
+        document.getElementById("numbererror").innerHTML =
+          "pleace enter valid phon number";
+        // var elem = document.getElementById("mo")
+        return false;
+      }
+      if (userid == "") {
+        document.getElementById("useriderror").innerHTML =
+          "pleace enter valid user id ";
+        return false;
+      }
+      const passwordreg =
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{5,30}$/
+      if (passwords == "" || passwordreg.test(passwords) ==
+        false) {
+        document.getElementById("passwordserror")
+          .innerHTML =
+          "pleace enter VALID password";
+        return false;
+      }
+      if (conformpassword == "" || passwordreg.test(
+          conformpassword) == false) {
+        document.getElementById("conformpasswordserror")
+          .innerHTML =
+          "pleace enter valid conformpassword";
+        return false;
+      }
+      if (conformpassword != passwords) {
+        document.getElementById("conformpasswordserror")
+          .innerHTML =
+          "pleace enter same password";
+        return false;
+      }
+      return true
+    }
+    let validation = valid()
+    if (validation == true) {
+      var form = document.getElementById("registerform")
+      let basic_detailss = new FormData(form);
+      const params = new URLSearchParams(basic_detailss);
+      const response = await new Response(params).text();
+      console.log(response);
+      console.log(typeof(response))
+      let data = await fetch("http://localhost:6800/registerusingemail", {
+        method: "post",
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: response
+      })
+
+      if (data.status == 200) {
+        let data1 = await data.json();
+        statuse = data.status;
+        console.log(statuse);
+        var key = data1
+        var passwordkey = key.key
+        console.log(passwordkey);
+        const node = document.createElement("a");
+        if (statuse == 200) {
+          document.getElementById("msg").innerHTML =
+            `<h2>data recive !!!`
+        }
+
+        Swal.fire({
+
+          title: "Good job!",
+          text: "copy this url and active registration ",
+          text: `http://localhost:6800/keycompare?key=${passwordkey}`,
+
+          showConfirmButton: false,
+
+          icon: "success"
+        });
+
+
+      } else {
+        console.log("email exist");
+        document.getElementById("emailerror").innerHTML =
+          "email is exist enter new email !! "
+
+      }
+
+
+    }
+  })
+</script>
+
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  
+  </script>
+  <title>-login</title>
+</head>
+
+<body>
+
+  <form name="registerform" id="registerform">
+    <div style="margin-left: auto; margin-right: auto; background-color: aquamarine; max-width: 500px; margin-top: 158PX;border-radius: 50px;">
+      <div style="text-align: center;"> <% if (registerkey == 1) { %>
+        <h3>register successfully</h3>
+    
+        <% } %>
+      </div>
+      <div style="text-align: center; padding-top: 60px; ">
+        <h3>login pag</h3>
+      </div>
+      <div style="padding-left:150px ;padding-right: 150px;">
+        <div>
+          <label for="email">email</label>
+          <input id="email" type="text" name="email">
+          <label id="emailerror"></label>
+        </div>
+        <br>
+        <br>
+        <div>
+          <label for="passwords">password</label>
+          <input id="passwords" type="password" name="passwords">
+          <label id="passwordserror"></label>
+        </div>
+        <br>
+        <br>
+        <div style="margin-left: -55px; padding-bottom: 10px;">
+          <input type="button" value="login" id="login" style="margin-left: 63px;
+                margin-top: -16px;  background-color: rgb(8, 87, 87); width: 154px; height: 30PX; ">
+        </div>
+
+
+       
+      </div>
+
+
+      <div class="forget" style="margin-left: 30px; margin-bottom: 30px;">
+        <a href="http://localhost:6800/forgetpassword" > FORGET PASSWORD?</a>
+     </div>
+     
+
+
+    </div>
+
+  </form>
+</body>
+
+<script>
+  document.getElementById("login").addEventListener("click", async () => {
+    var validations = validation()
+    console.log(validations);
+    if (validations == true) {
+
+      var form = document.getElementById("registerform")
+      let basic_detailss = new FormData(form);
+      const params = new URLSearchParams(basic_detailss);
+      const response = await new Response(params).text();
+      console.log(response);
+      console.log(typeof(response))
+      let data = await fetch("http://localhost:6800/login", {
+        method: "post",
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: response
+      })
+
+      if (data.status == 200) {
+        Swal.fire({
+          title: "Good job!",
+          text: "loggin successful!",
+          width: '60 px',
+          icon: "success"
+        });
+      }
+      else{
+        Swal.fire({
+  icon: "error",
+  title: "Oops...",
+  text: "Something went wrong! password note match",
+ 
+});
+      }
+    }
+
+
+  })
+
+  function validation() {
+
+    var email = document.getElementById("email").value;
+    var passwords = document.getElementById("passwords")
+      .value;
+    emailPattern =
+      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (emailPattern.test(email) == false || email == "") {
+      document.getElementById("emailerror").innerHTML =
+        "pleace enter valid email";
+      return false;
+    }
+
+
+    const passwordreg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{5,30}$/
+    if (passwords == "" || passwordreg.test(passwords) ==
+      false) {
+      document.getElementById("passwordserror")
+        .innerHTML =
+        "pleace enter VALID password";
+      return false;
+    }
+
+    return true;
+  }
+</script>
+
+</html>
