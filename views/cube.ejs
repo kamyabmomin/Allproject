@@ -1,156 +1,146 @@
-<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
 
-    <style>
-      th,
-      td,
-      table {
-        border: 1px solid black;
-        margin-left: 10%;
-      }
-
-      td {
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise-2</title>
+</head>
+<style>
+    td {
+        border: 1px solid #000;
         height: 50px;
         width: 50px;
-      }
-      body {
-          background-color: rgb(127, 208, 255);
-        }
-    </style>
+    }
 
-    <meta
-      name="viewport"
-      content="width=device-width,
- initial-scale=1.0"
-    />
+    body {
+      background-color: rgb(127, 208, 255);
 
-    <title>Document</title>
-  </head>
+    }
 
-  <body>
-    <h1>kamyab</h1>
-    <span id="score">Your Score is </span>
-    <br />
-    <spane id="score1"></spane>
-    <h5 id="ti"></h5>
+    button {
+        height: 50px;
+        width: 200px;
+        margin-left: 30%;
+    }
 
-    <table id="tbl">
-      <tr id="myRow">
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td></td>
-      </tr>
-      <!-- <tr>
-        <td id="finalscore"></td>
-      </tr> -->
-    </table>
-    <h3 id="finalscore"></h3>
+    #game-table {
 
-    <input type="button" id="start" value="start" onclick="startgame()" />
+        border: 1px solid;
+    }
+
+    #table-container {
+        max-height: 500px;
+    }
+</style>
+
+<body>
+    
+    <hr>
+    <div id="score">Score: <span id="score-value">0</span></div>
+    <hr>
+    <div id="timeout">Time <span id="time">10</span></div>
+    <hr>
+    <div id="table-container">
+        <table id="game-table"></table>
+    </div>
+
+    <button onclick="startmain()">Start Game</button>
+    <p id="endgame"></p>
 
     <script>
-      let score = 0;
+        var gameTable = document.getElementById("game-table");
+        var cells = [];
+        var counter = 2;
+        var score = 0;
 
-      let sc1 = document.querySelector("#score");
 
-      let trs = document.querySelector("#tbl");
 
-      trs.addEventListener("click", function (e) {
-        let dp = e.target.style.opacity;
+        function startmain() {
 
-        if (dp == 0.5) {
-          add1();
+            var timeout = 10;
+            startGame();
 
-          score++;
+            var timer = setInterval(() => {
 
-          sc1.innerText = `score ${score}`;
 
-          addcoluman();
+                console.log(timeout);
+                if (timeout <= 0) {
+                    clearInterval(timer)
+                    // alert(`times up  `);
+                    document.getElementById("time").textContent = 'Try Again';
+                    Finishgame(score);
 
-          randomecolure();
-        } else {
-          score--;
+                }
+                else {
+                    document.getElementById("time").textContent = timeout;
+                }
+                timeout--;
 
-          sc1.innerText = `score
-${score}`;
-
-          // alert("Try Again");
+            }, 1000);
         }
-      });
 
-      function startgame() {
-        let time = 5;
 
-        const set = setInterval(() => {
-          if (time > 0) {
-            let ti = document.getElementById("score1");
+        function startGame() {
 
-            ti.innerText = time;
+            gameTable.innerHTML = "";
+            cells = [];
 
-            time--;
-          } else {
-            // alert("Your Time is Over");    
-            document.getElementById("finalscore").innerText = `your final score is ${score}` 
-            // location.href("http://localhost:6800/kucube")
-            // window.location.relode();
-            // return true;
-          }
-        }, 1000);
-      }
-      // add columan
-      function addcoluman() {
-        const nodeList = document.querySelectorAll("tr");
-        for (let j = 0; j < nodeList.length; j++) {
-          var x = nodeList[j].insertCell();
-          x.setAttribute("class", "myRow1");
+            var letters = "0123456789ABCDEF";
+            var color = "#";
+
+            for (i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+
+
+            for (i = 0; i < counter; i++) {
+                var row = gameTable.insertRow()
+                for (j = 0; j < counter; j++) {
+                    var cell = row.insertCell();
+                    cell.addEventListener("click", cellclickeventHandler);
+                    cells.push(cell);
+                    cell.style.backgroundColor = color;
+
+                }
+
+            }
+
+            var colnumber = document.querySelectorAll("td");
+            var index = Math.floor(Math.random() * colnumber.length);
+            colnumber[index].style.opacity = 0.7;
+            colnumber[index].isDifferent = true;
+
         }
-      }
-      //add row
-      function add1() {
-        var count = document.getElementById("myRow").cells.length;
-        var table = document.getElementById("tbl");
-        var row = table.insertRow();
-        row.setAttribute("id", "myRow");
-        for (i = 0; i < count; i++) {
-          row.insertCell().innerHTML = "";
+
+        function cellclickeventHandler() {
+            if (this.isDifferent) {
+                counter++;
+                score++;
+                updateScore(score);
+                startGame();
+
+            }
+       
         }
-      }
 
-      function randomecolure() {
-        let r = Math.floor(Math.random() * 256); // Random between 0-255
-        let g = Math.floor(Math.random() * 256); // Random between 0-255
-        let b = Math.floor(Math.random() * 256); // Random between 0-255
-
-        const randomColor = Math.floor(Math.random() * 16777215).toString(16);
-
-        var allcell = document.querySelectorAll("td");
-
-        for (i = 0; i < allcell.length; i++) {
-          allcell[i].style.backgroundColor = "#" + randomColor;
-          //
-          var colure = (allcell[i].style.color =
-            "rgb(" + r + "," + g + "," + b + ")");
-          //
-          console.log(colure);
-
-          allcell[i].style.opacity = 1;
+        function updateScore(newscore) {
+            score = newscore;
+            document.getElementById("score-value").textContent = score;
         }
-        onedifferentcell();
-      }
 
-      randomecolure();
-      function onedifferentcell() {
-        let trs = document.querySelectorAll("td");
+        function Finishgame(score) {
+            updateScore(0);
+            counter = 2;
+            gameTable.innerHTML = "";
 
-        let s = Math.floor(Math.random() * trs.length);
+            var para = document.getElementById("endgame");
+            para.innerText = "your score is : " + score;
+            // clearInterval(timer);
+        }
 
-        trs[s].style.opacity = "50%";
-      }
     </script>
-  </body>
+
+
+</body>
+
 </html>
