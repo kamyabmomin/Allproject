@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+          background-color: rgb(127, 208, 255);
+        }
+</style>  
+    <title>Document</title>
+</head>
+<body onload="load()">
+
+    <div style="margin-left: auto; margin-right: auto; text-align: center;">
+    <h3>TIME CONVERTOR</h3>
+    </div>
+    
+
+    <table style="margin-left: auto; margin-right: auto; text-align: center; border: 2px solid rgb(56, 110, 43);width: 492px;margin-top: 82px;">
+ <tr>
+    
+    <td>
+        <!-- <select name="time1">
+            <option name="time1" value="america">america</option>
+            <option name="time1" value="america">america</option>
+        </select> -->
+    </td>
+    <td><input type="text" id="timetext1" name="timetext1" value="<%=date1%>"></td>
+   
+    <td>
+        <select id="op2" name="time2">
+         
+        </select>
+    </td> 
+    
+    <td><input type="text" name="timetext2" id="timetext2"></td>
+ </tr>
+
+ <tr>
+    <td ><input type="button" id="convert" value="go"> </td>
+</tr>
+    </table>
+</body>
+
+<script>
+    document.getElementById("convert").addEventListener("click" ,()=>{
+        var date =  new Date();
+      var option2 =  document.getElementById("op2").value 
+      console.log(option2);
+       let output = date.toLocaleString("en-US" ,{timeZone:option2})
+       
+     
+        console.log(output);
+        document.getElementById("timetext2").value = output
+    })
+    const load=async()=>{
+        const response = await fetch("./city.json");
+      const movies = await response.json();
+        console.log(movies)
+        let obj=Object.keys(movies)
+        obj.map((e)=>{
+
+            document.getElementById("op2").innerHTML+=`  <option value="${e}">${e}</option>`;  
+        }
+        )
+    }
+</script>
+</html>

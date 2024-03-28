@@ -1093,7 +1093,7 @@ app.get("/mainpageinsorting", async (req, res) => {
         var abovebelove = req.query.abovebelove;
         var abovebelovedays = req.query.abovebelovedays;
         var day = req.query.days;
-     
+
         if (req.query.id) {
             ids = ` where attendancemonth.id  in(${id})`
         }
@@ -1219,7 +1219,7 @@ app.get("/update/updatecomplate", async (req, res) => {
         var sql = `UPDATE studentmaster SET student_name = '${updatename}' WHERE student_id= ${id}`;
 
         var [result] = await con.query(sql)
-       
+
         console.log(result.affectedRows + " record(s) updated");
 
         var affectedrows = result.affectedRows;
@@ -1296,7 +1296,13 @@ app.get("/more", async (req, res) => {
 })
 
 
+app.get("/timeconvertor", async (req, res) => {
 
+    let date = new Date();
+    var date1 = date.toLocaleTimeString();
+    console.log(date1);
+    res.render('homepagetimeconvertor', { date1 })
+})
 
 
 
