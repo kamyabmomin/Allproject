@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <style>
+      th,
+      td,
+      table {
+        border: 1px solid black;
+        margin-left: 10%;
+      }
+
+      td {
+        height: 50px;
+        width: 50px;
+      }
+    </style>
+
+    <meta
+      name="viewport"
+      content="width=device-width,
+ initial-scale=1.0"
+    />
+
+    <title>Document</title>
+  </head>
+
+  <body>
+    <h1>kamyab</h1>
+    <span id="score">Your Score is </span>
+    <br />
+    <spane id="score1"></spane>
+    <h5 id="ti"></h5>
+
+    <table id="tbl">
+      <tr id="myRow">
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+      </tr>
+      <!-- <tr>
+        <td id="finalscore"></td>
+      </tr> -->
+    </table>
+    <h3 id="finalscore"></h3>
+
+    <input type="button" id="start" value="start" onclick="startgame()" />
+
+    <script>
+      let score = 0;
+
+      let sc1 = document.querySelector("#score");
+
+      let trs = document.querySelector("#tbl");
+
+      trs.addEventListener("click", function (e) {
+        let dp = e.target.style.opacity;
+
+        if (dp == 0.5) {
+          add1();
+
+          score++;
+
+          sc1.innerText = `score ${score}`;
+
+          addcoluman();
+
+          randomecolure();
+        } else {
+          score--;
+
+          sc1.innerText = `score
+${score}`;
+
+          // alert("Try Again");
+        }
+      });
+
+      function startgame() {
+        let time = 5;
+
+        const set = setInterval(() => {
+          if (time > 0) {
+            let ti = document.getElementById("score1");
+
+            ti.innerText = time;
+
+            time--;
+          } else {
+            // alert("Your Time is Over");    
+            document.getElementById("finalscore").innerText = `your final score is ${score}` 
+            // location.href("http://localhost:6800/kucube")
+            // window.location.relode();
+            // return true;
+          }
+        }, 1000);
+      }
+      // add columan
+      function addcoluman() {
+        const nodeList = document.querySelectorAll("tr");
+        for (let j = 0; j < nodeList.length; j++) {
+          var x = nodeList[j].insertCell();
+          x.setAttribute("class", "myRow1");
+        }
+      }
+      //add row
+      function add1() {
+        var count = document.getElementById("myRow").cells.length;
+        var table = document.getElementById("tbl");
+        var row = table.insertRow();
+        row.setAttribute("id", "myRow");
+        for (i = 0; i < count; i++) {
+          row.insertCell().innerHTML = "";
+        }
+      }
+
+      function randomecolure() {
+        let r = Math.floor(Math.random() * 256); // Random between 0-255
+        let g = Math.floor(Math.random() * 256); // Random between 0-255
+        let b = Math.floor(Math.random() * 256); // Random between 0-255
+
+        const randomColor = Math.floor(Math.random() * 16777215).toString(16);
+
+        var allcell = document.querySelectorAll("td");
+
+        for (i = 0; i < allcell.length; i++) {
+          allcell[i].style.backgroundColor = "#" + randomColor;
+          //
+          var colure = (allcell[i].style.color =
+            "rgb(" + r + "," + g + "," + b + ")");
+          //
+          console.log(colure);
+
+          allcell[i].style.opacity = 1;
+        }
+        onedifferentcell();
+      }
+
+      randomecolure();
+      function onedifferentcell() {
+        let trs = document.querySelectorAll("td");
+
+        let s = Math.floor(Math.random() * trs.length);
+
+        trs[s].style.opacity = "50%";
+      }
+    </script>
+  </body>
+</html>

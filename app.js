@@ -1475,7 +1475,9 @@ app.get("/delimiterserch", async (req, res) => {
     // }
 })
 
-
+app.get("/kucube", (req, res) => {
+    res.render("cube")
+})
 
 
 app.listen(port, (error) => {
