@@ -140,10 +140,7 @@ app.post("/login", async (req, res) => {
 
 })
 
-// function authentication(req, res, next) {
-//     const authHeader = req.headers.authorization;
-//     // console.log(authHeader);
-// }
+
 
 
 app.get("/forgetpassword", async (req, res) => {
@@ -1081,6 +1078,225 @@ app.post("/pagindindex", async (req, res) => {
 
     }
 })
+
+// const resultsPerPage = 10;
+
+app.get("/mainpageinsorting", async (req, res) => {
+
+    try {
+        var colname = req.query.colname || "studentmaster.student_id";
+        var id = req.query.id;
+        console.log(id);
+        var firstname1 = req.query.firstname
+        var andor = req.query.andor;
+        var persentage = req.query.percentage;
+        var abovebelove = req.query.abovebelove;
+        var abovebelovedays = req.query.abovebelovedays;
+        var day = req.query.days;
+     
+        if (req.query.id) {
+            ids = ` where attendancemonth.id  in(${id})`
+        }
+        else {
+            ids = " "
+        }
+
+
+        if (!req.query.firstname) {
+            firstname = " "
+        }
+        else {
+            firstname = `where studentmaster.student_name like '${firstname1}%'`
+        }
+
+        if (req.query.abovebelove && req.query.percentage && req.query.abovebelovedays && req.query.days && req.query.andor) {
+            var persentage1 = ` HAVING count(attendancemonth.attendance) * 100 / ( 30) ${req.query.abovebelove} ${persentage} ${andor} count(attendancemonth.attendance) ${abovebelovedays} ${day}`;
+        }
+        else if (req.query.abovebelovedays && req.query.days) {
+            persentage1 = ` HAVING count(attendancemonth.attendance) ${abovebelovedays} ${day}`;
+        }
+        else if (req.query.abovebelove && req.query.percentage) {
+            persentage1 = `HAVING count(attendancemonth.attendance) * 100 / ( 30) ${req.query.abovebelove} ${persentage} `;
+        }
+        else {
+            persentage1 = " "
+        }
+
+
+        var datas = req.query.month;
+        let month = datas || 12;
+        // console.log(month)
+        let year = req.query.year || 2023;
+        // console.log(year);
+        let days = 30
+        // console.log("connected")
+        let sql = `select studentmaster.student_id ,studentmaster.student_name   , count(attendancemonth.attendance) as count ,count(attendancemonth.attendance) * 100 / ( 30) as persentage from studentmaster  join attendancemonth  on attendancemonth.id = studentmaster.student_id and attendancemonth.attendance = 'yes' AND month(attendancemonth.dates)= '${month}' and year(attendancemonth.dates)='${year}'   ${ids} ${firstname}    group by studentmaster.student_id ${persentage1};`
+        console.log(sql)
+
+        //  con.query(sql, (err, result) => {
+        var [result] = await con.query(sql)
+        // console.log(result)
+        if (result.length == 0) {
+            res.send('invalid data')
+        }
+        else {
+
+
+            const numOfResults = result.length;
+            console.log("this is length " + numOfResults)
+            const numberOfPages = Math.ceil(numOfResults / resultsPerPage);
+            let page = req.query.page ? Number(req.query.page) : 1;
+            if (page > numberOfPages) {
+                res.redirect('/mainpageinsorting?page=' + encodeURIComponent(numberOfPages));
+            } else if (page < 1) {
+                res.redirect('/mainpageinsorting?page=' + encodeURIComponent('1'));
+            }
+
+            if (numOfResults == 0) {
+
+
+                res.redirect("error")
+
+            }
+            else {
+
+                const startingLimit = (page - 1) * resultsPerPage;
+                //  con.connect(function(err) {
+                //    console.log("Connected!");
+
+
+
+                var sql2 = `select studentmaster.student_id ,studentmaster.student_name   , count(attendancemonth.attendance) as count ,count(attendancemonth.attendance) * 100 / ( 30) as persentage from studentmaster  join attendancemonth  on attendancemonth.id = studentmaster.student_id and attendancemonth.attendance = 'yes' AND month(attendancemonth.dates)= '${month}' and year(attendancemonth.dates)='${year}'  ${ids} ${firstname}   group by studentmaster.student_id   ${persentage1} LIMIT ${startingLimit},${resultsPerPage}`;
+
+                // con.query(sql, function (error, result) {
+                var [result] = await con.query(sql2)
+                console.log(result);
+                if (result.length == 0) {
+                    res.send('invalid data')
+                }
+                else {
+                    alldata = JSON.parse(JSON.stringify(result));
+                    // console.log(alldata)
+                    res.render('attendansewithmultiperserchfilter', { data: alldata, datas, month, year, page, numberOfPages, firstname1, abovebelove, persentage, id, abovebelovedays, day, andor })
+
+                }
+
+                // });
+                //  })
+            }
+        }
+        // });
+    }
+    catch {
+        res.send("invalid")
+    }
+
+})
+
+
+app.get("/update", (req, res) => {
+    res.status(200)
+    try {
+        var id = req.query.id;
+        var name = req.query.student_name
+        console.log(name)
+        console.log(id)
+
+
+        res.render("update1", { data: name, id })
+    }
+    catch (e) {
+        res.send(e)
+    }
+})
+
+
+app.get("/update/updatecomplate", async (req, res) => {
+    try {
+        var updatename = req.query.updatedname;
+        var id = req.query.id;
+        console.log(id, updatename);
+        var sql = `UPDATE studentmaster SET student_name = '${updatename}' WHERE student_id= ${id}`;
+
+        var [result] = await con.query(sql)
+       
+        console.log(result.affectedRows + " record(s) updated");
+
+        var affectedrows = result.affectedRows;
+        console.log(affectedrows)
+
+        res.render("UPDATECOMPLATE1")
+
+    }
+    catch (e) {
+        res.send(e)
+    }
+})
+
+
+
+app.get("/result", async (req, res) => {
+    res.status(200);
+
+
+
+    var sql = "SELECT  exameresult.student_id ,studentmaster.student_name, (select sum(obtain_theory_marks )   from  exameresult where exame_type = 2 and  exameresult.student_id = studentmaster.student_id  group by student_id) as totaltheory2 ,(select sum(obtain_theory_marks )   from  exameresult where exame_type = 1 and exameresult.student_id = studentmaster.student_id   group by student_id) as totaltheory1 , (select sum(obtain_practical_marks)    from  exameresult where exame_type = 2 and  exameresult.student_id = studentmaster.student_id  group by student_id)  as totalpractical2 ,(select sum(obtain_practical_marks)   from  exameresult where exame_type = 1 and exameresult.student_id = studentmaster.student_id   group by student_id) as totalpractical1 , (select sum(obtain_practical_marks)  from  exameresult where exame_type = 3  and exameresult.student_id = studentmaster.student_id  group by student_id) as totalpractical3,(select sum(obtain_theory_marks ) from  exameresult where exame_type = 3  and exameresult.student_id = studentmaster.student_id  group by student_id)  as totaltheory3  FROM  studentmaster JOIN exameresult  on studentmaster.student_id  = exameresult.student_id group by studentmaster.student_id  ;"
+
+    var [result] = await con.query(sql)
+
+    const numOfResults = result.length;
+    const numberOfPages = Math.ceil(numOfResults / resultsPerPage);
+    let page = req.query.page ? Number(req.query.page) : 1;
+    if (page > numberOfPages) {
+        res.redirect('/?page=' + encodeURIComponent(numberOfPages));
+    } else if (page < 1) {
+        res.redirect('/?page=' + encodeURIComponent('1'));
+    }
+
+    const startingLimit = (page - 1) * resultsPerPage;
+
+    var sql = `SELECT  exameresult.student_id ,studentmaster.student_name, (select sum(obtain_theory_marks )   from  exameresult where exame_type = 2 and  exameresult.student_id = studentmaster.student_id  group by student_id) as totaltheory2 ,(select sum(obtain_theory_marks )   from  exameresult where exame_type = 1 and exameresult.student_id = studentmaster.student_id   group by student_id) as totaltheory1 , (select sum(obtain_practical_marks)    from  exameresult where exame_type = 2 and  exameresult.student_id = studentmaster.student_id  group by student_id)  as totalpractical2 ,(select sum(obtain_practical_marks)   from  exameresult where exame_type = 1 and exameresult.student_id = studentmaster.student_id   group by student_id) as totalpractical1 , (select sum(obtain_practical_marks)  from  exameresult where exame_type = 3  and exameresult.student_id = studentmaster.student_id  group by student_id) as totalpractical3,(select sum(obtain_theory_marks ) from  exameresult where exame_type = 3  and exameresult.student_id = studentmaster.student_id  group by student_id)  as totaltheory3  FROM  studentmaster JOIN exameresult  on studentmaster.student_id  = exameresult.student_id group by studentmaster.student_id   LIMIT ${startingLimit},${resultsPerPage}`;
+
+
+    var [result] = await con.query(sql)
+    alldata = JSON.parse(JSON.stringify(result));
+    res.render('result1', { data: alldata, page, numberOfPages })
+
+})
+
+
+
+
+app.get("/more", async (req, res) => {
+    var id = req.query.id;
+    var totalpractical = req.query.totalpractical
+    var totaltheory = req.query.totaltheory;
+    console.log(totaltheory)
+    console.log(id)
+    var sql = ` select studentmaster.student_name as name , exameresult.exame_type as typ ,subjectmaster.sub_name as sub  , exameresult.obtain_theory_marks as theory ,exameresult.obtain_practical_marks as prectical 
+    from exameresult join studentmaster on studentmaster.student_id  = exameresult.student_id join subjectmaster on 
+    subjectmaster.sub_id = exameresult.sub_id  where exameresult.student_id = '${id}'; `
+
+
+    var [result] = await con.query(sql)
+    alldata = JSON.parse(JSON.stringify(result));
+    console.log(alldata)
+
+    var sql = `select studentmaster.student_id ,studentmaster.student_name   , count(attendancemonth.attendance) as count   from   studentmaster join attendancemonth  on attendancemonth.id = studentmaster.student_id and  attendancemonth.attendance = 'yes' and attendancemonth.id = '${id}' group by studentmaster.student_id  ;`
+
+
+    var [result] = await con.query(sql)
+    resultdata = JSON.parse(JSON.stringify(result));
+
+    var sql = `select count(attendancemonth.id) alldaycount from attendancemonth where attendancemonth.id='${id}'`
+    var [result] = await con.query(sql)
+    allday = JSON.parse(JSON.stringify(result));
+    res.render('moredetailsofstudent', { data: alldata, resultdata, allday, totalpractical, totaltheory })
+
+})
+
+
+
 
 
 
