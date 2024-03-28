@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+           body {
+      background-color: rgb(127, 208, 255);
+      margin-left: auto;
+      margin-right: auto;
+
+    }
+    form , .center{
+      margin-top: 50px;
+      display:flex;
+  justify-content: center;
+    }
+    </style>
+    <title>Document</title>
+  </head>
+  <body>
+    <center>kamyab husain</center>
+   
+      <form method="get" action="/component">
+        <div>
+        <input type="text" placeholder="enter commbo name " name="name" />
+        <input type="submit" value="go" />
+      </div>
+    </form>
+
+    <br>
+    <br>
+    <div class="center">
+
+
+      <% if (alldata1 != 0 && alldata.length > 0) { %>
+      <% if (alldata[0].inputtype == "radio") { %>
+       <% for( let i = 0; i<alldata.length; i++ ) { %>
+      <input
+        type="radio"
+        name="<%= alldata[i].select_name %>"
+        value="<%=alldata[i].option_value%>" 
+        <% if (alldata[i].selectedoption == "selected") { %>
+            checked
+          <% } %>
+      />
+      <%= alldata[i].option_value%> <% } %> 
+<% } %>
+      <% } %>
+
+
+
+
+      <% if (alldata1 != 0  && alldata.length > 0) { %>
+        <% if (alldata[0].inputtype == "checkbox") { %>
+         <% for( let i = 0; i<alldata.length; i++ ) { %>
+        <input
+          type="checkbox"
+          name="<%= alldata[i].select_name %>"
+          value="<%=alldata[i].option_value%>"
+          <% if (alldata[i].selectedoption == "selected") { %>
+            checked
+          <% } %>
+        />
+        <%= alldata[i].option_value%> <% } %> 
+  <% } %>
+        <% } %>
+
+
+
+        <% if (alldata1 != 0  && alldata.length > 0) { %>
+            <% if (alldata[0].inputtype == "select") { %>
+                <select name="<%= alldata[0].select_name%>">
+             <% for( let i = 0; i<alldata.length; i++ ) { %>
+
+                
+                    <option value="<%=alldata[i].option_name%>" 
+                        
+                        <% if (alldata[i].selectedoption == "selected") { %>
+                            selected
+                          <% } %>
+                        ><%=alldata[i].option_name%></option>
+                
+
+            <% } %>   </select>
+      <% } %>
+            <% } %>
+    </div>
+ 
+  </body>
+</html>
