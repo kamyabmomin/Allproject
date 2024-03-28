@@ -288,36 +288,36 @@ app.get("/dashbord", validation1, (req, res) => {
 
 
 //tic tak to 
-app.get("/tictacto", (req, res) => {
+app.get("/tictacto", validation1, (req, res) => {
     res.render("tictacto")
 })
 
 
 //event table 
-app.get("/eventtable", (req, res) => {
+app.get("/eventtable", validation1, (req, res) => {
     res.render("event")
 })
 
 
 //table cells 
-app.get("/tablecell", (req, res) => {
+app.get("/tablecell", validation1, (req, res) => {
     res.render("tablecells")
 })
 
 //sorting
-app.get("/sorting", (req, res) => {
+app.get("/sorting", validation1, (req, res) => {
     res.render("sorting")
 })
 // crud in file 
 
-app.get("/crudinfile", (req, res) => {
+app.get("/crudinfile", validation1, (req, res) => {
     res.status(200);
     res.render("form")
 
 
 })
 
-app.post("/details", (req, res) => {
+app.post("/details", validation1, (req, res) => {
     res.status(200);
 
     var oneuserdata = req.body;
@@ -341,7 +341,7 @@ app.post("/details", (req, res) => {
 
 })
 
-app.post("/more", (req, res) => {
+app.post("/more", validation1, (req, res) => {
     res.status(200);
 
 
@@ -410,7 +410,7 @@ app.post("/more", (req, res) => {
 })
 
 
-app.get("/employeformvalidation", (req, res) => {
+app.get("/employeformvalidation", validation1, (req, res) => {
     res.status(200);
     res.render("form")
 
@@ -419,14 +419,14 @@ app.get("/employeformvalidation", (req, res) => {
 
 
 
-app.get("/ajxform", (req, res) => {
+app.get("/ajxform", validation1, (req, res) => {
     let educationvalid = true;
     let valid = true;
     var data = ""
     res.render('ajxform', { valid, educationvalid, data })
 })
 
-app.post("/save", async (req, res) => {
+app.post("/save", validation1, async (req, res) => {
     console.log(req.body);
     var data = req.body;
 
@@ -571,7 +571,7 @@ app.post("/save", async (req, res) => {
 
 })
 
-app.get("/alllist", async (req, res) => {
+app.get("/alllist", validation1, async (req, res) => {
     var sql = `select * from basic_details`
     var [data] = await con.query(sql)
     console.log(data);
@@ -579,7 +579,7 @@ app.get("/alllist", async (req, res) => {
 
 })
 
-app.get("/delete/id", async (req, res) => {
+app.get("/delete/id", validation1, async (req, res) => {
     var id = req.query.id
 
     var sql = `delete from basic_details where employe_id = ${id}`
@@ -588,7 +588,7 @@ app.get("/delete/id", async (req, res) => {
     res.redirect("/alllist")
 })
 
-app.get("/update/id", async (req, res) => {
+app.get("/update/id", validation1, async (req, res) => {
 
     let id = req.query.id;
     console.log(id);
@@ -634,7 +634,7 @@ app.get("/update/id", async (req, res) => {
 
 })
 
-app.post("/update/id", async (req, res) => {
+app.post("/update/id", validation1, async (req, res) => {
     var data = req.body;
     console.log(data);
     var id = req.body.id
@@ -932,7 +932,7 @@ app.post("/update/id", async (req, res) => {
 })
 
 
-app.post("/city/city/city", async (req, res) => {
+app.post("/city/city/city", validation1, async (req, res) => {
     var data = req.body.id;
     console.log(data);
     console.log(res);
@@ -943,12 +943,12 @@ app.post("/city/city/city", async (req, res) => {
 
 
 
-app.get("/tablefetchapi", (req, res) => {
+app.get("/tablefetchapi", validation1, (req, res) => {
 
     res.render('tablefetchapi')
 })
 
-app.get("/details", (req, res) => {
+app.get("/details", validation1, (req, res) => {
 
     res.render('detailstablefetchapi')
 })
