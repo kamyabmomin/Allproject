@@ -11,6 +11,8 @@ exports.validation1 = async (req, res, next) => {
 
             if (err) {
                 console.log("token not match ");
+                var registerkey = 0
+                res.render("login", { registerkey })
             }
             else {
                 console.log("cookies found");
@@ -22,7 +24,8 @@ exports.validation1 = async (req, res, next) => {
 
     }
     else {
-        console.log("cookies not found ")
+        var registerkey = 0
+        res.render("login", { registerkey })
     }
 
 }
