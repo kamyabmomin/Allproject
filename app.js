@@ -1260,6 +1260,7 @@ app.get("/result", async (req, res) => {
 
     var [result] = await con.query(sql)
     alldata = JSON.parse(JSON.stringify(result));
+    console.log(Number(alldata[1].totalpractical1) + Number(alldata[1].totalpractical1));
     res.render('result1', { data: alldata, page, numberOfPages })
 
 })
@@ -1331,12 +1332,149 @@ app.get("/component", async (req, res) => {
             console.log(result)
             res.render("component", { alldata: result, alldata1, comboname });
         }
-    
+
     }
     catch (e) {
         console.log("error in syntex")
     }
 })
+
+
+app.get("/delimiterserch", async (req, res) => {
+    res.status(200)
+
+    var symbolestring = "_ ^ $ } { :"
+    var sreching = req.query.serch || " "
+    console.log(sreching)
+    var a = sreching.split(/[_^$}{:}]/);
+    console.log(a);
+    var firstnamearray = [];
+    var lastnamearray = [];
+    var emailarray = [];
+    var mobilenumber = [];
+    var city = [];
+    var age = []
+
+    for (let i = 1; i < a.length; i++) {
+        var index = sreching.indexOf(a[i])
+        var findingsymbolrindex = index - 1
+        var symbole = sreching.charAt(findingsymbolrindex)
+
+        if (symbole == "_") {
+
+            firstnamearray.push(`first_name like '${a[i]}%' `)
+            // console.log(firstnamearray)
+
+        }
+
+
+
+        else if (symbole == "^") {
+
+            lastnamearray.push(`last_name like '${a[i]}%'`)
+            // console.log(lastnamearray)
+        }
+        else if (symbole == "$") {
+
+            emailarray.push(`country like "${a[i]}%"`);
+            //  console.log(emailarray);
+        }
+        else if (symbole == "}") {
+
+            age.push(` years =  ${a[i]} `)
+        }
+        else if (symbole == "{") {
+
+            mobilenumber.push(` phon_no  like '${a[i]}%' `)
+        }
+        else if (symbole == ":") {
+
+            city.push(` city like "${a[i]}%" `)
+        }
+        else {
+            console.log("no serch");
+        }
+
+    }
+    var temp = []
+    if (firstnamearray.length > 0) {
+        var firstname = firstnamearray.join(" or ");
+        console.log(firstname);
+        temp.push(firstname);
+    }
+    if (lastnamearray.length > 0) {
+        var lastname = lastnamearray.join(" or ");
+        console.log(lastname);
+        temp.push(lastname);
+    }
+    if (emailarray.length > 0) {
+        var cuntry = emailarray.join(" or ");
+        console.log(cuntry);
+        temp.push(cuntry);
+    }
+
+    if (mobilenumber.length > 0) {
+        var mobilenumbers = mobilenumber.join(" or ");
+        console.log(mobilenumbers);
+        temp.push(mobilenumbers);
+    }
+
+
+    if (city.length > 0) {
+        var citys = city.join(" or ");
+        console.log(citys);
+        temp.push(citys);
+    }
+
+    if (age.length > 0) {
+        var ages = age.join(" or ");
+        console.log(ages);
+        temp.push(ages);
+    }
+    if (temp.length > 0) {
+        var query = " where " + temp.join(" and ")
+    }
+
+
+
+    // con.connect(function (err) {
+    // if (err) {
+    //     console.log("eror")
+    // };
+    // console.log("Connected!");
+    if (!req.query.serch) {
+        var sql = `select * from student  limit 200 `
+    }
+    else if (temp.length != 0) {
+        sql = `select * from student ${query} limit 100 `
+    } else {
+        var nodisplay = 0
+        // sql = `select * from student ${query} limit 0 `
+    }
+
+    console.log(sql)
+    // con.query(sql, (err, result) => {
+    var [result] = await con.query(sql)
+
+    // if(err) throw err;
+    // alldata =JSON.parse( JSON.stringify(result));
+    console.log(result)
+    res.render('delimiterserch', { alldata: result, sreching, nodisplay })
+    // })
+
+
+
+
+
+
+    // })
+
+    // }
+    // catch(e){
+    //     res.send(e)
+    // }
+})
+
 
 
 

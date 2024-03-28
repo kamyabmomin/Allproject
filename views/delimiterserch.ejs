@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      table,
+      th,
+      td {
+        border: 1px solid;
+        text-align: center;
+      }
+      .center {
+        background-color: rgb(90, 221, 129);
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 30px;
+      }
+
+      th {
+        background-color: aquamarine;
+      }
+      tr:hover {
+        background-color: rgb(6, 68, 24);
+        color: white;
+      }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <center><h3>kamyab husain</h3></center>
+    <div style="display: flex; justify-content: center; gap: 30px">
+      <table>
+        <tr>
+          <th>firstname</th>
+          <td>_</td>
+        </tr>
+        <tr>
+          <th>lastname</th>
+          <td>^</td>
+        </tr>
+        <tr>
+          <th>cuntry</th>
+          <td>$</td>
+        </tr>
+        <tr>
+          <th>age</th>
+          <td>}</td>
+        </tr>
+        <tr>
+          <th>mobile no</th>
+          <td>{</td>
+        </tr>
+        <tr>
+          <th>city</th>
+          <td>:</td>
+        </tr>
+      </table>
+      <div style="margin-top: 30px">
+        <form method="get" action="/delimiterserch">
+          <input
+            type="text"
+            placeholder="serch"
+            name="serch"
+            value="<%=sreching%>"
+          />
+          <input type="submit" value="submit" />
+        </form>
+      </div>
+    </div>
+
+    <div>
+      <table class="center">
+        <tr>
+          <th>id</th>
+          <th>firstname</th>
+          <th>lastname</th>
+          <th>country</th>
+          <th>age</th>
+          <th>mobileno</th>
+          <th>city</th>
+        </tr>
+        <% if (nodisplay !=0) { %> <% for( let i = 0; i < alldata.length; i++ )
+        { %>
+        <tr>
+          <td><%= alldata[i].id %></td>
+          <td><%= alldata[i].first_name%></td>
+          <td><%= alldata[i].last_name %></td>
+          <td><%= alldata[i].country %></td>
+          <td><%= alldata[i].years %></td>
+          <td><%= alldata[i].phon_no %></td>
+          <td><%= alldata[i].city%></td>
+        </tr>
+        <% } %> <% } %>
+      </table>
+    </div>
+  </body>
+</html>
