@@ -997,9 +997,9 @@ app.get('/pagindindex', async (req, res) => {
     const numberOfPages = Math.ceil(numOfResults / resultsPerPage);
     let page = req.query.page ? Number(req.query.page) : 1;
     if (page > numberOfPages) {
-        res.redirect('/?page=' + encodeURIComponent(numberOfPages));
+        res.redirect('/pagindindex?page=' + encodeURIComponent(numberOfPages));
     } else if (page < 1) {
-        res.redirect('/?page=' + encodeURIComponent('1'));
+        res.redirect('/pagindindex?page=' + encodeURIComponent('1'));
     }
 
 
