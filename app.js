@@ -772,7 +772,7 @@ app.post("/update/id", validation1, async (req, res) => {
         var speak = data.speak1 || "no";
         var write = data.write1 || "no"
         var sql7 = `UPDATE  languageknown SET languge="${data.Language1}",speak="${speak}",reading="${read}",writing="${write}" WHERE employe_id = ${id}`;
-        // console.log(sql7);
+        console.log(sql7);
         await con.query(sql7)
     }
     console.log(data.Language2);
@@ -783,7 +783,7 @@ app.post("/update/id", validation1, async (req, res) => {
         var speak = data.speak2 || "no";
         var write = data.write2 || "no"
         var sql8 = `UPDATE  languageknown SET languge="${data.Language2}",speak="${speak}",reading="${read}",writing="${write}" WHERE employe_id = ${id}`;
-        // console.log(sql8);
+        console.log(sql8);
         await con.query(sql8)
     }
 
@@ -792,7 +792,7 @@ app.post("/update/id", validation1, async (req, res) => {
         var speak = data.speak3 || "no";
         var write = data.write3 || "no"
         var sql9 = `UPDATE  languageknown SET languge="${data.Language3}",speak="${speak}",reading="${read}",writing="${write}" WHERE employe_id = ${id}`;
-        // console.log(sql9);
+        console.log(sql9);
         await con.query(sql9)
     }
 
