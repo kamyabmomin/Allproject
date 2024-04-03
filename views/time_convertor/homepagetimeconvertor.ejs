@@ -57,7 +57,6 @@
     const load=async()=>{
         const response = await fetch("./city.json");
       const movies = await response.json();
-        console.log(movies)
         let obj=Object.keys(movies)
         obj.map((e)=>{
 

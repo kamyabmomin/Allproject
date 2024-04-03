@@ -79,19 +79,19 @@
 
 <script>
   var array1 = [1, 29, 46, 2, 22, 556, 9, 0];
-  console.log(array1);
+  // console.log(array1);
   document.getElementById("array").innerHTML = array1;
 
   function sortarray() {
     sortarray1(array1);
-    console.log(array1);
+    // console.log(array1);
     document.getElementById("result").innerHTML = array1;
   }
 
   function sortarray1(array1) {
    
     for (let i = 0; i < array1.length; i++) {
-      console.log("1");
+      // console.log("1");
       for (let j = 0; j <= array1.length - 1; j++) {
         if (array1[j] > array1[j + 1]) {
           let temp = array1[j];
@@ -106,7 +106,7 @@
   function sortoption() {
     var array1 = [];
     var option = document.querySelectorAll("option");
-    console.log(option);
+    // console.log(option);
     for (let i = 0; i < option.length; i++) {
       var optionname = option[i].value;
       array1.push(optionname);
@@ -116,7 +116,7 @@
 
     function sortarray1(array1) {
       for (let i = 0; i < array1.length; i++) {
-        console.log("1");
+        // console.log("1");
         for (let j = 0; j <= array1.length - 1; j++) {
           if (array1[j] > array1[j + 1]) {
             let temp = array1[j];
