@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const port = 6800;
-const fs = require('fs');
+// const fs = require('fs');
 // const jwt = require("jsonwebtoken")
 const cookieParser = require('cookie-parser')
 const route = require("./router")
@@ -301,114 +301,114 @@ app.use(route)
 
 
 //table cells 
-app.get("/tablecell", validation1, (req, res) => {
-    res.render("tablecells")
-})
+// app.get("/tablecell", validation1, (req, res) => {
+//     res.render("tablecells")
+// })
 
 //sorting
-app.get("/sorting", validation1, (req, res) => {
-    res.render("sorting")
-})
+// app.get("/sorting", validation1, (req, res) => {
+//     res.render("sorting")
+// })
 // crud in file 
 
-app.get("/crudinfile", validation1, (req, res) => {
-    res.status(200);
-    res.render("form")
+// app.get("/crudinfile", validation1, (req, res) => {
+//     res.status(200);
+//     res.render("form")
 
 
-})
+// })
 
-app.post("/details", validation1, (req, res) => {
-    res.status(200);
+// app.post("/details", validation1, (req, res) => {
+//     res.status(200);
 
-    var oneuserdata = req.body;
-    oneuserdata.id = crypto.randomUUID();
-
-
-    var data = fs.readFileSync('database.json', "utf-8")
-    var parsdata = JSON.parse(data)
+//     var oneuserdata = req.body;
+//     oneuserdata.id = crypto.randomUUID();
 
 
-    parsdata.push(oneuserdata)
+//     var data = fs.readFileSync('database.json', "utf-8")
+//     var parsdata = JSON.parse(data)
 
 
-    fs.writeFileSync('database.json', JSON.stringify(parsdata), function (err) {
-        if (err) throw err;
-        console.log('Saved!');
-    });
+//     parsdata.push(oneuserdata)
 
 
-    res.render("details", { data: parsdata })
-
-})
-
-app.post("/more", validation1, (req, res) => {
-    res.status(200);
+//     fs.writeFileSync('database.json', JSON.stringify(parsdata), function (err) {
+//         if (err) throw err;
+//         console.log('Saved!');
+//     });
 
 
-    var fatchingdata = req.body;
-    //  console.log(JSON.stringify(req.body))
-    var val = Object.keys(fatchingdata).toString();
-    //  console.log(val)
-    var OBJECT = Object.values(fatchingdata).toString();
-    // console.log(OBJECT);
-    var data = fs.readFileSync('database.json', "utf-8");
-    var data1 = JSON.parse(data)
-    var pass
+//     res.render("details", { data: parsdata })
+
+// })
+
+// app.post("/more", validation1, (req, res) => {
+//     res.status(200);
 
 
-    if (OBJECT == "update") {
-        data1.forEach(element => {
-            if (element.id == val) {
-                pass = element
-            }
-            else
-                console.log("no match ")
-
-        });
-
-        res.render("update", { data: pass });
-    }
-    if (OBJECT == "more") {
-        data1.forEach(element => {
-            if (element.id == val) {
-                pass = element
-            }
-            else
-                console.log("no match ")
-
-        });
-
-        res.render("more", { data: pass });
-    }
-    //   console.log(pass)
+//     var fatchingdata = req.body;
+//     //  console.log(JSON.stringify(req.body))
+//     var val = Object.keys(fatchingdata).toString();
+//     //  console.log(val)
+//     var OBJECT = Object.values(fatchingdata).toString();
+//     // console.log(OBJECT);
+//     var data = fs.readFileSync('database.json', "utf-8");
+//     var data1 = JSON.parse(data)
+//     var pass
 
 
+//     if (OBJECT == "update") {
+//         data1.forEach(element => {
+//             if (element.id == val) {
+//                 pass = element
+//             }
+//             else
+//                 console.log("no match ")
 
+//         });
 
-    if (OBJECT == "delete") {
-        // console.log("delete");
-        const objWithIdIndex = data1.findIndex((obj) => obj.id == val);
-        // console.log(objWithIdIndex);
+//         res.render("update", { data: pass });
+//     }
+//     if (OBJECT == "more") {
+//         data1.forEach(element => {
+//             if (element.id == val) {
+//                 pass = element
+//             }
+//             else
+//                 console.log("no match ")
 
-        if (objWithIdIndex > -1) {
-            // console.log("object index")
-            data1.splice(objWithIdIndex, 1);
-        }
-        console.log(data1)
-        fs.writeFileSync('database.json', JSON.stringify(data1), function (err) {
-            if (err) throw err; {
-                console.log('Saved!');
-            }
+//         });
 
-            console.log("save")
-        });
-        res.render("details", { data: data1 });
-    }
+//         res.render("more", { data: pass });
+//     }
+//     //   console.log(pass)
 
 
 
-})
+
+//     if (OBJECT == "delete") {
+//         // console.log("delete");
+//         const objWithIdIndex = data1.findIndex((obj) => obj.id == val);
+//         // console.log(objWithIdIndex);
+
+//         if (objWithIdIndex > -1) {
+//             // console.log("object index")
+//             data1.splice(objWithIdIndex, 1);
+//         }
+//         console.log(data1)
+//         fs.writeFileSync('database.json', JSON.stringify(data1), function (err) {
+//             if (err) throw err; {
+//                 console.log('Saved!');
+//             }
+
+//             console.log("save")
+//         });
+//         res.render("details", { data: data1 });
+//     }
+
+
+
+// })
 
 
 app.get("/employeformvalidation", validation1, (req, res) => {

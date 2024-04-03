@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken")
 exports.homePage = async (req, res) => {
     id2 = ""
     registerkey = 1
-    res.render('homepage', { id2, registerkey })
+    res.render('register_login_dashbord/homepage', { id2, registerkey })
 }
 exports.registerData = async (req, res) => {
     var data = req.body
@@ -41,8 +41,6 @@ exports.registerData = async (req, res) => {
         return result;
     }
 
-
-
 }
 exports.keyCompare = async (req, res) => {
     var key = req.query.key;
@@ -53,19 +51,19 @@ exports.keyCompare = async (req, res) => {
     if (data[0].user_keys == key && timediffrent < 40000) {
 
         var registerkey = 1
-        res.render("login", { registerkey })
+        res.render("register_login_dashbord/login", { registerkey })
     }
     else {
         var sql = `delete from users where user_keys="${key}"`
         var data = con.query(sql)
         var registerkey = 0
-        res.render("homepage", { registerkey })
+        res.render("register_login_dashbord/homepage", { registerkey })
     }
 
 }
 exports.login = (req, res) => {
     var registerkey = 0
-    res.render("login", { registerkey })
+    res.render("register_login_dashbord/login", { registerkey })
 }
 exports.loginData = async (req, res) => {
 
@@ -111,7 +109,7 @@ exports.loginData = async (req, res) => {
 }
 exports.forgetPassword = async (req, res) => {
     try {
-        res.render("forget")
+        res.render("register_login_dashbord/forget")
 
     }
     catch (err) {
