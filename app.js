@@ -295,9 +295,9 @@ app.use(route)
 
 
 //event table 
-app.get("/eventtable", validation1, (req, res) => {
-    res.render("event")
-})
+// app.get("/eventtable", validation1, (req, res) => {
+//     res.render("event")
+// })
 
 
 //table cells 
