@@ -982,502 +982,502 @@ app.use(route)
 // })
 
 const resultsPerPage = 30;
-app.get('/pagindindex', async (req, res) => {
-    var data = req.body;
-    console.log(Object.keys(data))
-    let sql = 'SELECT * FROM student';
-    // con.query(sql, (err, result) => {
-    var [result] = await con.query(sql)
-    // console.log(result)
-    // if (err) throw err;
-    const numOfResults = result.length;
-    const numberOfPages = Math.ceil(numOfResults / resultsPerPage);
-    let page = req.query.page ? Number(req.query.page) : 1;
-    if (page > numberOfPages) {
-        res.redirect('/pagindindex?page=' + encodeURIComponent(numberOfPages));
-    } else if (page < 1) {
-        res.redirect('/pagindindex?page=' + encodeURIComponent('1'));
-    }
+// app.get('/pagindindex', async (req, res) => {
+//     var data = req.body;
+//     console.log(Object.keys(data))
+//     let sql = 'SELECT * FROM student';
+//     // con.query(sql, (err, result) => {
+//     var [result] = await con.query(sql)
+//     // console.log(result)
+//     // if (err) throw err;
+//     const numOfResults = result.length;
+//     const numberOfPages = Math.ceil(numOfResults / resultsPerPage);
+//     let page = req.query.page ? Number(req.query.page) : 1;
+//     if (page > numberOfPages) {
+//         res.redirect('/pagindindex?page=' + encodeURIComponent(numberOfPages));
+//     } else if (page < 1) {
+//         res.redirect('/pagindindex?page=' + encodeURIComponent('1'));
+//     }
 
 
 
-    const startingLimit = (page - 1) * resultsPerPage;
+//     const startingLimit = (page - 1) * resultsPerPage;
 
-    // var pagenumber = req.query.page
-    // console.log(pagenumber)
-    sql = `SELECT * FROM student LIMIT ${startingLimit},${resultsPerPage}`;
-    // con.query(sql, (err, result) => {
-    [result] = await con.query(sql)
-    // console.log(result)
-    // if (err) throw err;
-    res.render('index1', { data: result, page, numberOfPages });
-    // });
-    // });
-});
+//     // var pagenumber = req.query.page
+//     // console.log(pagenumber)
+//     sql = `SELECT * FROM student LIMIT ${startingLimit},${resultsPerPage}`;
+//     // con.query(sql, (err, result) => {
+//     [result] = await con.query(sql)
+//     // console.log(result)
+//     // if (err) throw err;
+//     res.render('index1', { data: result, page, numberOfPages });
+//     // });
+//     // });
+// });
 
-app.post("/pagindindex", async (req, res) => {
-    var data = req.body;
-    // console.log(data)
-    var key = Object.values(data)
-    // console.log(key[1])
-    JSON.stringify(key);
-    console.log(key)
-    const order = key[0];
-    var colamname = key[1];
-    console.log(colamname);
-    // var allcolumanname = ""
-    // for(let i = 0  ; i < colamname.length ; i ++){
-    // allcolumanname= allcolumanname+colamname[i]
-    // // for(let j =0 ;j<colamname.length-1 ;j++){
-    //   if(i< (colamname.length- 1)){
-    // allcolumanname = allcolumanname + ","}
+// app.post("/pagindindex", async (req, res) => {
+//     var data = req.body;
+//     // console.log(data)
+//     var key = Object.values(data)
+//     // console.log(key[1])
+//     JSON.stringify(key);
+//     console.log(key)
+//     const order = key[0];
+//     var colamname = key[1];
+//     console.log(colamname);
+//     // var allcolumanname = ""
+//     // for(let i = 0  ; i < colamname.length ; i ++){
+//     // allcolumanname= allcolumanname+colamname[i]
+//     // // for(let j =0 ;j<colamname.length-1 ;j++){
+//     //   if(i< (colamname.length- 1)){
+//     // allcolumanname = allcolumanname + ","}
 
-    // }
-    var key1 = key[2];
-    // console.log(allcolumanname);
+//     // }
+//     var key1 = key[2];
+//     // console.log(allcolumanname);
 
-    // console.log(typeof a[1]);
-    // var colamname = key[1].toString();
-    // var key1 = key[2];
-    // console.log(JSON.parse(JSON.stringify(key[2])))
-    // var key1 = key[2].toString();
-    // console.log(key1 , order ,colamname)
-    // console.log(key)
-    if (key1 == "submit") {
-        // console.log("submit")
-        let sql = `SELECT * FROM student ORDER BY ${colamname} ${order}`;
-        // con.query(sql, (err, result) => {
-        // console.log(result)
-        // if (err) throw err;
-        var [result] = await con.query(sql)
-        const numOfResults = result.length;
-        const numberOfPages = Math.ceil(numOfResults / resultsPerPage);
-        let page = req.query.page ? Number(req.query.page) : 1;
-        if (page > numberOfPages) {
-            res.redirect('/?page=' + encodeURIComponent(numberOfPages));
-        } else if (page < 1) {
-            res.redirect('/?page=' + encodeURIComponent('1'));
-        }
+//     // console.log(typeof a[1]);
+//     // var colamname = key[1].toString();
+//     // var key1 = key[2];
+//     // console.log(JSON.parse(JSON.stringify(key[2])))
+//     // var key1 = key[2].toString();
+//     // console.log(key1 , order ,colamname)
+//     // console.log(key)
+//     if (key1 == "submit") {
+//         // console.log("submit")
+//         let sql = `SELECT * FROM student ORDER BY ${colamname} ${order}`;
+//         // con.query(sql, (err, result) => {
+//         // console.log(result)
+//         // if (err) throw err;
+//         var [result] = await con.query(sql)
+//         const numOfResults = result.length;
+//         const numberOfPages = Math.ceil(numOfResults / resultsPerPage);
+//         let page = req.query.page ? Number(req.query.page) : 1;
+//         if (page > numberOfPages) {
+//             res.redirect('/?page=' + encodeURIComponent(numberOfPages));
+//         } else if (page < 1) {
+//             res.redirect('/?page=' + encodeURIComponent('1'));
+//         }
 
 
 
-        const startingLimit = (page - 1) * resultsPerPage;
+//         const startingLimit = (page - 1) * resultsPerPage;
 
-        // var pagenumber = req.query.page
-        // console.log(pagenumber)
-        sql = `SELECT * FROM student ORDER BY ${colamname}  ${order} LIMIT ${startingLimit},${resultsPerPage}`;
-        // con.query(sql, (err, result) => {
-        var [result] = await con.query(sql)
-        // if (err) throw err;
-        res.render('index1', { data: result, page, numberOfPages });
-        // });
-        // });
+//         // var pagenumber = req.query.page
+//         // console.log(pagenumber)
+//         sql = `SELECT * FROM student ORDER BY ${colamname}  ${order} LIMIT ${startingLimit},${resultsPerPage}`;
+//         // con.query(sql, (err, result) => {
+//         var [result] = await con.query(sql)
+//         // if (err) throw err;
+//         res.render('index1', { data: result, page, numberOfPages });
+//         // });
+//         // });
 
-    }
-})
+//     }
+// })
 
 // const resultsPerPage = 10;
 
-app.get("/mainpageinsorting", async (req, res) => {
-
-    try {
-        var colname = req.query.colname || "studentmaster.student_id";
-        var id = req.query.id;
-        console.log(id);
-        var firstname1 = req.query.firstname
-        var andor = req.query.andor;
-        var persentage = req.query.percentage;
-        var abovebelove = req.query.abovebelove;
-        var abovebelovedays = req.query.abovebelovedays;
-        var day = req.query.days;
-
-        if (req.query.id) {
-            ids = ` where attendancemonth.id  in(${id})`
-        }
-        else {
-            ids = " "
-        }
-
-
-        if (!req.query.firstname) {
-            firstname = " "
-        }
-        else {
-            firstname = `where studentmaster.student_name like '${firstname1}%'`
-        }
-
-        if (req.query.abovebelove && req.query.percentage && req.query.abovebelovedays && req.query.days && req.query.andor) {
-            var persentage1 = ` HAVING count(attendancemonth.attendance) * 100 / ( 30) ${req.query.abovebelove} ${persentage} ${andor} count(attendancemonth.attendance) ${abovebelovedays} ${day}`;
-        }
-        else if (req.query.abovebelovedays && req.query.days) {
-            persentage1 = ` HAVING count(attendancemonth.attendance) ${abovebelovedays} ${day}`;
-        }
-        else if (req.query.abovebelove && req.query.percentage) {
-            persentage1 = `HAVING count(attendancemonth.attendance) * 100 / ( 30) ${req.query.abovebelove} ${persentage} `;
-        }
-        else {
-            persentage1 = " "
-        }
-
-
-        var datas = req.query.month;
-        let month = datas || 12;
-        // console.log(month)
-        let year = req.query.year || 2023;
-        // console.log(year);
-        let days = 30
-        // console.log("connected")
-        let sql = `select studentmaster.student_id ,studentmaster.student_name   , count(attendancemonth.attendance) as count ,count(attendancemonth.attendance) * 100 / ( 30) as persentage from studentmaster  join attendancemonth  on attendancemonth.id = studentmaster.student_id and attendancemonth.attendance = 'yes' AND month(attendancemonth.dates)= '${month}' and year(attendancemonth.dates)='${year}'   ${ids} ${firstname}    group by studentmaster.student_id ${persentage1};`
-        console.log(sql)
-
-        //  con.query(sql, (err, result) => {
-        var [result] = await con.query(sql)
-        // console.log(result)
-        if (result.length == 0) {
-            res.send('invalid data')
-        }
-        else {
-
-
-            const numOfResults = result.length;
-            console.log("this is length " + numOfResults)
-            const numberOfPages = Math.ceil(numOfResults / resultsPerPage);
-            let page = req.query.page ? Number(req.query.page) : 1;
-            if (page > numberOfPages) {
-                res.redirect('/mainpageinsorting?page=' + encodeURIComponent(numberOfPages));
-            } else if (page < 1) {
-                res.redirect('/mainpageinsorting?page=' + encodeURIComponent('1'));
-            }
-
-            if (numOfResults == 0) {
-
-
-                res.redirect("error")
-
-            }
-            else {
-
-                const startingLimit = (page - 1) * resultsPerPage;
-                //  con.connect(function(err) {
-                //    console.log("Connected!");
-
+// app.get("/mainpageinsorting", async (req, res) => {
+
+//     try {
+//         var colname = req.query.colname || "studentmaster.student_id";
+//         var id = req.query.id;
+//         console.log(id);
+//         var firstname1 = req.query.firstname
+//         var andor = req.query.andor;
+//         var persentage = req.query.percentage;
+//         var abovebelove = req.query.abovebelove;
+//         var abovebelovedays = req.query.abovebelovedays;
+//         var day = req.query.days;
+
+//         if (req.query.id) {
+//             ids = ` where attendancemonth.id  in(${id})`
+//         }
+//         else {
+//             ids = " "
+//         }
+
+
+//         if (!req.query.firstname) {
+//             firstname = " "
+//         }
+//         else {
+//             firstname = `where studentmaster.student_name like '${firstname1}%'`
+//         }
+
+//         if (req.query.abovebelove && req.query.percentage && req.query.abovebelovedays && req.query.days && req.query.andor) {
+//             var persentage1 = ` HAVING count(attendancemonth.attendance) * 100 / ( 30) ${req.query.abovebelove} ${persentage} ${andor} count(attendancemonth.attendance) ${abovebelovedays} ${day}`;
+//         }
+//         else if (req.query.abovebelovedays && req.query.days) {
+//             persentage1 = ` HAVING count(attendancemonth.attendance) ${abovebelovedays} ${day}`;
+//         }
+//         else if (req.query.abovebelove && req.query.percentage) {
+//             persentage1 = `HAVING count(attendancemonth.attendance) * 100 / ( 30) ${req.query.abovebelove} ${persentage} `;
+//         }
+//         else {
+//             persentage1 = " "
+//         }
+
+
+//         var datas = req.query.month;
+//         let month = datas || 12;
+//         // console.log(month)
+//         let year = req.query.year || 2023;
+//         // console.log(year);
+//         let days = 30
+//         // console.log("connected")
+//         let sql = `select studentmaster.student_id ,studentmaster.student_name   , count(attendancemonth.attendance) as count ,count(attendancemonth.attendance) * 100 / ( 30) as persentage from studentmaster  join attendancemonth  on attendancemonth.id = studentmaster.student_id and attendancemonth.attendance = 'yes' AND month(attendancemonth.dates)= '${month}' and year(attendancemonth.dates)='${year}'   ${ids} ${firstname}    group by studentmaster.student_id ${persentage1};`
+//         console.log(sql)
+
+//         //  con.query(sql, (err, result) => {
+//         var [result] = await con.query(sql)
+//         // console.log(result)
+//         if (result.length == 0) {
+//             res.send('invalid data')
+//         }
+//         else {
+
+
+//             const numOfResults = result.length;
+//             console.log("this is length " + numOfResults)
+//             const numberOfPages = Math.ceil(numOfResults / resultsPerPage);
+//             let page = req.query.page ? Number(req.query.page) : 1;
+//             if (page > numberOfPages) {
+//                 res.redirect('/mainpageinsorting?page=' + encodeURIComponent(numberOfPages));
+//             } else if (page < 1) {
+//                 res.redirect('/mainpageinsorting?page=' + encodeURIComponent('1'));
+//             }
+
+//             if (numOfResults == 0) {
+
+
+//                 res.redirect("error")
+
+//             }
+//             else {
+
+//                 const startingLimit = (page - 1) * resultsPerPage;
+//                 //  con.connect(function(err) {
+//                 //    console.log("Connected!");
+
 
 
-                var sql2 = `select studentmaster.student_id ,studentmaster.student_name   , count(attendancemonth.attendance) as count ,count(attendancemonth.attendance) * 100 / ( 30) as persentage from studentmaster  join attendancemonth  on attendancemonth.id = studentmaster.student_id and attendancemonth.attendance = 'yes' AND month(attendancemonth.dates)= '${month}' and year(attendancemonth.dates)='${year}'  ${ids} ${firstname}   group by studentmaster.student_id   ${persentage1} LIMIT ${startingLimit},${resultsPerPage}`;
+//                 var sql2 = `select studentmaster.student_id ,studentmaster.student_name   , count(attendancemonth.attendance) as count ,count(attendancemonth.attendance) * 100 / ( 30) as persentage from studentmaster  join attendancemonth  on attendancemonth.id = studentmaster.student_id and attendancemonth.attendance = 'yes' AND month(attendancemonth.dates)= '${month}' and year(attendancemonth.dates)='${year}'  ${ids} ${firstname}   group by studentmaster.student_id   ${persentage1} LIMIT ${startingLimit},${resultsPerPage}`;
 
-                // con.query(sql, function (error, result) {
-                var [result] = await con.query(sql2)
-                console.log(result);
-                if (result.length == 0) {
-                    res.send('invalid data')
-                }
-                else {
-                    alldata = JSON.parse(JSON.stringify(result));
-                    // console.log(alldata)
-                    res.render('attendansewithmultiperserchfilter', { data: alldata, datas, month, year, page, numberOfPages, firstname1, abovebelove, persentage, id, abovebelovedays, day, andor })
+//                 // con.query(sql, function (error, result) {
+//                 var [result] = await con.query(sql2)
+//                 console.log(result);
+//                 if (result.length == 0) {
+//                     res.send('invalid data')
+//                 }
+//                 else {
+//                     alldata = JSON.parse(JSON.stringify(result));
+//                     // console.log(alldata)
+//                     res.render('attendansewithmultiperserchfilter', { data: alldata, datas, month, year, page, numberOfPages, firstname1, abovebelove, persentage, id, abovebelovedays, day, andor })
 
-                }
+//                 }
 
-                // });
-                //  })
-            }
-        }
-        // });
-    }
-    catch {
-        res.send("invalid")
-    }
+//                 // });
+//                 //  })
+//             }
+//         }
+//         // });
+//     }
+//     catch {
+//         res.send("invalid")
+//     }
 
-})
+// })
 
 
-app.get("/update", (req, res) => {
-    res.status(200)
-    try {
-        var id = req.query.id;
-        var name = req.query.student_name
-        console.log(name)
-        console.log(id)
+// app.get("/update", (req, res) => {
+//     res.status(200)
+//     try {
+//         var id = req.query.id;
+//         var name = req.query.student_name
+//         console.log(name)
+//         console.log(id)
 
 
-        res.render("update1", { data: name, id })
-    }
-    catch (e) {
-        res.send(e)
-    }
-})
+//         res.render("update1", { data: name, id })
+//     }
+//     catch (e) {
+//         res.send(e)
+//     }
+// })
 
 
-app.get("/update/updatecomplate", async (req, res) => {
-    try {
-        var updatename = req.query.updatedname;
-        var id = req.query.id;
-        console.log(id, updatename);
-        var sql = `UPDATE studentmaster SET student_name = '${updatename}' WHERE student_id= ${id}`;
+// app.get("/update/updatecomplate", async (req, res) => {
+//     try {
+//         var updatename = req.query.updatedname;
+//         var id = req.query.id;
+//         console.log(id, updatename);
+//         var sql = `UPDATE studentmaster SET student_name = '${updatename}' WHERE student_id= ${id}`;
 
-        var [result] = await con.query(sql)
+//         var [result] = await con.query(sql)
 
-        console.log(result.affectedRows + " record(s) updated");
+//         console.log(result.affectedRows + " record(s) updated");
 
-        var affectedrows = result.affectedRows;
-        console.log(affectedrows)
+//         var affectedrows = result.affectedRows;
+//         console.log(affectedrows)
 
-        res.render("UPDATECOMPLATE1")
+//         res.render("UPDATECOMPLATE1")
 
-    }
-    catch (e) {
-        res.send(e)
-    }
-})
+//     }
+//     catch (e) {
+//         res.send(e)
+//     }
+// })
 
 
 
-app.get("/result", async (req, res) => {
-    res.status(200);
+// app.get("/result", async (req, res) => {
+//     res.status(200);
 
 
 
-    var sql = "SELECT  exameresult.student_id ,studentmaster.student_name, (select sum(obtain_theory_marks )   from  exameresult where exame_type = 2 and  exameresult.student_id = studentmaster.student_id  group by student_id) as totaltheory2 ,(select sum(obtain_theory_marks )   from  exameresult where exame_type = 1 and exameresult.student_id = studentmaster.student_id   group by student_id) as totaltheory1 , (select sum(obtain_practical_marks)    from  exameresult where exame_type = 2 and  exameresult.student_id = studentmaster.student_id  group by student_id)  as totalpractical2 ,(select sum(obtain_practical_marks)   from  exameresult where exame_type = 1 and exameresult.student_id = studentmaster.student_id   group by student_id) as totalpractical1 , (select sum(obtain_practical_marks)  from  exameresult where exame_type = 3  and exameresult.student_id = studentmaster.student_id  group by student_id) as totalpractical3,(select sum(obtain_theory_marks ) from  exameresult where exame_type = 3  and exameresult.student_id = studentmaster.student_id  group by student_id)  as totaltheory3  FROM  studentmaster JOIN exameresult  on studentmaster.student_id  = exameresult.student_id group by studentmaster.student_id  ;"
+//     var sql = "SELECT  exameresult.student_id ,studentmaster.student_name, (select sum(obtain_theory_marks )   from  exameresult where exame_type = 2 and  exameresult.student_id = studentmaster.student_id  group by student_id) as totaltheory2 ,(select sum(obtain_theory_marks )   from  exameresult where exame_type = 1 and exameresult.student_id = studentmaster.student_id   group by student_id) as totaltheory1 , (select sum(obtain_practical_marks)    from  exameresult where exame_type = 2 and  exameresult.student_id = studentmaster.student_id  group by student_id)  as totalpractical2 ,(select sum(obtain_practical_marks)   from  exameresult where exame_type = 1 and exameresult.student_id = studentmaster.student_id   group by student_id) as totalpractical1 , (select sum(obtain_practical_marks)  from  exameresult where exame_type = 3  and exameresult.student_id = studentmaster.student_id  group by student_id) as totalpractical3,(select sum(obtain_theory_marks ) from  exameresult where exame_type = 3  and exameresult.student_id = studentmaster.student_id  group by student_id)  as totaltheory3  FROM  studentmaster JOIN exameresult  on studentmaster.student_id  = exameresult.student_id group by studentmaster.student_id  ;"
 
-    var [result] = await con.query(sql)
+//     var [result] = await con.query(sql)
 
-    const numOfResults = result.length;
-    const numberOfPages = Math.ceil(numOfResults / resultsPerPage);
-    let page = req.query.page ? Number(req.query.page) : 1;
-    console.log(page + "page numbner");
-    if (page > numberOfPages) {
-        res.redirect('/result/?page=' + encodeURIComponent(numberOfPages));
-    } else if (page < 1) {
+//     const numOfResults = result.length;
+//     const numberOfPages = Math.ceil(numOfResults / resultsPerPage);
+//     let page = req.query.page ? Number(req.query.page) : 1;
+//     console.log(page + "page numbner");
+//     if (page > numberOfPages) {
+//         res.redirect('/result/?page=' + encodeURIComponent(numberOfPages));
+//     } else if (page < 1) {
 
-        res.redirect('/result/?page=' + encodeURIComponent('1'));
-    }
+//         res.redirect('/result/?page=' + encodeURIComponent('1'));
+//     }
 
-    const startingLimit = (page - 1) * resultsPerPage;
-    console.log(startingLimit);
+//     const startingLimit = (page - 1) * resultsPerPage;
+//     console.log(startingLimit);
 
-    var sql = `SELECT  exameresult.student_id ,studentmaster.student_name, (select sum(obtain_theory_marks )   from  exameresult where exame_type = 2 and  exameresult.student_id = studentmaster.student_id  group by student_id) as totaltheory2 ,(select sum(obtain_theory_marks )   from  exameresult where exame_type = 1 and exameresult.student_id = studentmaster.student_id   group by student_id) as totaltheory1 , (select sum(obtain_practical_marks)    from  exameresult where exame_type = 2 and  exameresult.student_id = studentmaster.student_id  group by student_id)  as totalpractical2 ,(select sum(obtain_practical_marks)   from  exameresult where exame_type = 1 and exameresult.student_id = studentmaster.student_id   group by student_id) as totalpractical1 , (select sum(obtain_practical_marks)  from  exameresult where exame_type = 3  and exameresult.student_id = studentmaster.student_id  group by student_id) as totalpractical3,(select sum(obtain_theory_marks ) from  exameresult where exame_type = 3  and exameresult.student_id = studentmaster.student_id  group by student_id)  as totaltheory3  FROM  studentmaster JOIN exameresult  on studentmaster.student_id  = exameresult.student_id group by studentmaster.student_id   LIMIT ${startingLimit},${resultsPerPage}`;
-    console.log(sql);
+//     var sql = `SELECT  exameresult.student_id ,studentmaster.student_name, (select sum(obtain_theory_marks )   from  exameresult where exame_type = 2 and  exameresult.student_id = studentmaster.student_id  group by student_id) as totaltheory2 ,(select sum(obtain_theory_marks )   from  exameresult where exame_type = 1 and exameresult.student_id = studentmaster.student_id   group by student_id) as totaltheory1 , (select sum(obtain_practical_marks)    from  exameresult where exame_type = 2 and  exameresult.student_id = studentmaster.student_id  group by student_id)  as totalpractical2 ,(select sum(obtain_practical_marks)   from  exameresult where exame_type = 1 and exameresult.student_id = studentmaster.student_id   group by student_id) as totalpractical1 , (select sum(obtain_practical_marks)  from  exameresult where exame_type = 3  and exameresult.student_id = studentmaster.student_id  group by student_id) as totalpractical3,(select sum(obtain_theory_marks ) from  exameresult where exame_type = 3  and exameresult.student_id = studentmaster.student_id  group by student_id)  as totaltheory3  FROM  studentmaster JOIN exameresult  on studentmaster.student_id  = exameresult.student_id group by studentmaster.student_id   LIMIT ${startingLimit},${resultsPerPage}`;
+//     console.log(sql);
 
-    var [result] = await con.query(sql)
-    alldata = JSON.parse(JSON.stringify(result));
+//     var [result] = await con.query(sql)
+//     alldata = JSON.parse(JSON.stringify(result));
 
-    res.render('result1', { data: alldata, page, numberOfPages })
+//     res.render('result1', { data: alldata, page, numberOfPages })
 
-})
+// })
 
 
 
 
-app.get("/more", async (req, res) => {
-    var id = req.query.id;
-    var totalpractical = req.query.totalpractical
-    var totaltheory = req.query.totaltheory;
-    console.log(totaltheory)
-    console.log(id)
-    var sql = ` select studentmaster.student_name as name , exameresult.exame_type as typ ,subjectmaster.sub_name as sub  , exameresult.obtain_theory_marks as theory ,exameresult.obtain_practical_marks as prectical 
-    from exameresult join studentmaster on studentmaster.student_id  = exameresult.student_id join subjectmaster on 
-    subjectmaster.sub_id = exameresult.sub_id  where exameresult.student_id = '${id}'; `
+// app.get("/more", async (req, res) => {
+//     var id = req.query.id;
+//     var totalpractical = req.query.totalpractical
+//     var totaltheory = req.query.totaltheory;
+//     console.log(totaltheory)
+//     console.log(id)
+//     var sql = ` select studentmaster.student_name as name , exameresult.exame_type as typ ,subjectmaster.sub_name as sub  , exameresult.obtain_theory_marks as theory ,exameresult.obtain_practical_marks as prectical 
+//     from exameresult join studentmaster on studentmaster.student_id  = exameresult.student_id join subjectmaster on 
+//     subjectmaster.sub_id = exameresult.sub_id  where exameresult.student_id = '${id}'; `
 
 
-    var [result] = await con.query(sql)
-    alldata = JSON.parse(JSON.stringify(result));
-    console.log(alldata)
+//     var [result] = await con.query(sql)
+//     alldata = JSON.parse(JSON.stringify(result));
+//     console.log(alldata)
 
-    var sql = `select studentmaster.student_id ,studentmaster.student_name   , count(attendancemonth.attendance) as count   from   studentmaster join attendancemonth  on attendancemonth.id = studentmaster.student_id and  attendancemonth.attendance = 'yes' and attendancemonth.id = '${id}' group by studentmaster.student_id  ;`
+//     var sql = `select studentmaster.student_id ,studentmaster.student_name   , count(attendancemonth.attendance) as count   from   studentmaster join attendancemonth  on attendancemonth.id = studentmaster.student_id and  attendancemonth.attendance = 'yes' and attendancemonth.id = '${id}' group by studentmaster.student_id  ;`
 
 
-    var [result] = await con.query(sql)
-    resultdata = JSON.parse(JSON.stringify(result));
+//     var [result] = await con.query(sql)
+//     resultdata = JSON.parse(JSON.stringify(result));
 
-    var sql = `select count(attendancemonth.id) alldaycount from attendancemonth where attendancemonth.id='${id}'`
-    var [result] = await con.query(sql)
-    allday = JSON.parse(JSON.stringify(result));
-    res.render('moredetailsofstudent', { data: alldata, resultdata, allday, totalpractical, totaltheory })
+//     var sql = `select count(attendancemonth.id) alldaycount from attendancemonth where attendancemonth.id='${id}'`
+//     var [result] = await con.query(sql)
+//     allday = JSON.parse(JSON.stringify(result));
+//     res.render('moredetailsofstudent', { data: alldata, resultdata, allday, totalpractical, totaltheory })
 
-})
+// })
 
 
-app.get("/timeconvertor", async (req, res) => {
+// app.get("/timeconvertor", async (req, res) => {
 
-    let date = new Date();
-    var date1 = date.toLocaleTimeString();
-    console.log(date1);
-    res.render('homepagetimeconvertor', { date1 })
-})
+//     let date = new Date();
+//     var date1 = date.toLocaleTimeString();
+//     console.log(date1);
+//     res.render('homepagetimeconvertor', { date1 })
+// })
 
 
 
 
-app.get("/component", async (req, res) => {
-    res.status(200)
-    try {
+// app.get("/component", async (req, res) => {
+//     res.status(200)
+//     try {
 
-        var comboname = req.query.name;
-        console.log(comboname);
+//         var comboname = req.query.name;
+//         console.log(comboname);
 
-        alldata1 = 1;
-        if (req.query.name) {
-            var sql = `select  select_master.select_name ,select_master.inputtype,option_master.option_name ,option_master.option_value ,option_master.option_id ,option_master.selectedoption  from select_master inner JOIN option_master ON select_master.select_id  = option_master.select_id   where  select_master.select_name ='${comboname}' `
+//         alldata1 = 1;
+//         if (req.query.name) {
+//             var sql = `select  select_master.select_name ,select_master.inputtype,option_master.option_name ,option_master.option_value ,option_master.option_id ,option_master.selectedoption  from select_master inner JOIN option_master ON select_master.select_id  = option_master.select_id   where  select_master.select_name ='${comboname}' `
 
-        }
-        else {
-            alldata1 = 0
-        }
-        console.log(alldata1)
-        if (alldata1 == 0) {
-            res.render("component", { alldata1 });
-        } else {
-            var [result] = await con.query(sql)
-            console.log(alldata1)
-            console.log(result)
-            res.render("component", { alldata: result, alldata1, comboname });
-        }
+//         }
+//         else {
+//             alldata1 = 0
+//         }
+//         console.log(alldata1)
+//         if (alldata1 == 0) {
+//             res.render("component", { alldata1 });
+//         } else {
+//             var [result] = await con.query(sql)
+//             console.log(alldata1)
+//             console.log(result)
+//             res.render("component", { alldata: result, alldata1, comboname });
+//         }
 
-    }
-    catch (e) {
-        console.log("error in syntex")
-    }
-})
+//     }
+//     catch (e) {
+//         console.log("error in syntex")
+//     }
+// })
 
 
-app.get("/delimiterserch", async (req, res) => {
-    res.status(200)
+// app.get("/delimiterserch", async (req, res) => {
+//     res.status(200)
 
-    var symbolestring = "_ ^ $ } { :"
-    var sreching = req.query.serch || " "
-    console.log(sreching)
-    var a = sreching.split(/[_^$}{:}]/);
-    console.log(a);
-    var firstnamearray = [];
-    var lastnamearray = [];
-    var emailarray = [];
-    var mobilenumber = [];
-    var city = [];
-    var age = []
+//     var symbolestring = "_ ^ $ } { :"
+//     var sreching = req.query.serch || " "
+//     console.log(sreching)
+//     var a = sreching.split(/[_^$}{:}]/);
+//     console.log(a);
+//     var firstnamearray = [];
+//     var lastnamearray = [];
+//     var emailarray = [];
+//     var mobilenumber = [];
+//     var city = [];
+//     var age = []
 
-    for (let i = 1; i < a.length; i++) {
-        var index = sreching.indexOf(a[i])
-        var findingsymbolrindex = index - 1
-        var symbole = sreching.charAt(findingsymbolrindex)
+//     for (let i = 1; i < a.length; i++) {
+//         var index = sreching.indexOf(a[i])
+//         var findingsymbolrindex = index - 1
+//         var symbole = sreching.charAt(findingsymbolrindex)
 
-        if (symbole == "_") {
+//         if (symbole == "_") {
 
-            firstnamearray.push(`first_name like '${a[i]}%' `)
-            // console.log(firstnamearray)
+//             firstnamearray.push(`first_name like '${a[i]}%' `)
+//             // console.log(firstnamearray)
 
-        }
+//         }
 
 
 
-        else if (symbole == "^") {
+//         else if (symbole == "^") {
 
-            lastnamearray.push(`last_name like '${a[i]}%'`)
-            // console.log(lastnamearray)
-        }
-        else if (symbole == "$") {
+//             lastnamearray.push(`last_name like '${a[i]}%'`)
+//             // console.log(lastnamearray)
+//         }
+//         else if (symbole == "$") {
 
-            emailarray.push(`country like "${a[i]}%"`);
-            //  console.log(emailarray);
-        }
-        else if (symbole == "}") {
+//             emailarray.push(`country like "${a[i]}%"`);
+//             //  console.log(emailarray);
+//         }
+//         else if (symbole == "}") {
 
-            age.push(` years =  ${a[i]} `)
-        }
-        else if (symbole == "{") {
+//             age.push(` years =  ${a[i]} `)
+//         }
+//         else if (symbole == "{") {
 
-            mobilenumber.push(` phon_no  like '${a[i]}%' `)
-        }
-        else if (symbole == ":") {
+//             mobilenumber.push(` phon_no  like '${a[i]}%' `)
+//         }
+//         else if (symbole == ":") {
 
-            city.push(` city like "${a[i]}%" `)
-        }
-        else {
-            console.log("no serch");
-        }
+//             city.push(` city like "${a[i]}%" `)
+//         }
+//         else {
+//             console.log("no serch");
+//         }
 
-    }
-    var temp = []
-    if (firstnamearray.length > 0) {
-        var firstname = firstnamearray.join(" or ");
-        console.log(firstname);
-        temp.push(firstname);
-    }
-    if (lastnamearray.length > 0) {
-        var lastname = lastnamearray.join(" or ");
-        console.log(lastname);
-        temp.push(lastname);
-    }
-    if (emailarray.length > 0) {
-        var cuntry = emailarray.join(" or ");
-        console.log(cuntry);
-        temp.push(cuntry);
-    }
+//     }
+//     var temp = []
+//     if (firstnamearray.length > 0) {
+//         var firstname = firstnamearray.join(" or ");
+//         console.log(firstname);
+//         temp.push(firstname);
+//     }
+//     if (lastnamearray.length > 0) {
+//         var lastname = lastnamearray.join(" or ");
+//         console.log(lastname);
+//         temp.push(lastname);
+//     }
+//     if (emailarray.length > 0) {
+//         var cuntry = emailarray.join(" or ");
+//         console.log(cuntry);
+//         temp.push(cuntry);
+//     }
 
-    if (mobilenumber.length > 0) {
-        var mobilenumbers = mobilenumber.join(" or ");
-        console.log(mobilenumbers);
-        temp.push(mobilenumbers);
-    }
+//     if (mobilenumber.length > 0) {
+//         var mobilenumbers = mobilenumber.join(" or ");
+//         console.log(mobilenumbers);
+//         temp.push(mobilenumbers);
+//     }
 
 
-    if (city.length > 0) {
-        var citys = city.join(" or ");
-        console.log(citys);
-        temp.push(citys);
-    }
+//     if (city.length > 0) {
+//         var citys = city.join(" or ");
+//         console.log(citys);
+//         temp.push(citys);
+//     }
 
-    if (age.length > 0) {
-        var ages = age.join(" or ");
-        console.log(ages);
-        temp.push(ages);
-    }
-    if (temp.length > 0) {
-        var query = " where " + temp.join(" and ")
-    }
+//     if (age.length > 0) {
+//         var ages = age.join(" or ");
+//         console.log(ages);
+//         temp.push(ages);
+//     }
+//     if (temp.length > 0) {
+//         var query = " where " + temp.join(" and ")
+//     }
 
 
 
-    // con.connect(function (err) {
-    // if (err) {
-    //     console.log("eror")
-    // };
-    // console.log("Connected!");
-    if (!req.query.serch) {
-        var sql = `select * from student  limit 200 `
-    }
-    else if (temp.length != 0) {
-        sql = `select * from student ${query} limit 100 `
-    } else {
-        var nodisplay = 0
-        // sql = `select * from student ${query} limit 0 `
-    }
+//     // con.connect(function (err) {
+//     // if (err) {
+//     //     console.log("eror")
+//     // };
+//     // console.log("Connected!");
+//     if (!req.query.serch) {
+//         var sql = `select * from student  limit 200 `
+//     }
+//     else if (temp.length != 0) {
+//         sql = `select * from student ${query} limit 100 `
+//     } else {
+//         var nodisplay = 0
+//         // sql = `select * from student ${query} limit 0 `
+//     }
 
-    console.log(sql)
-    // con.query(sql, (err, result) => {
-    var [result] = await con.query(sql)
+//     console.log(sql)
+//     // con.query(sql, (err, result) => {
+//     var [result] = await con.query(sql)
 
-    // if(err) throw err;
-    // alldata =JSON.parse( JSON.stringify(result));
-    console.log(result)
-    res.render('delimiterserch', { alldata: result, sreching, nodisplay })
-    // })
+//     // if(err) throw err;
+//     // alldata =JSON.parse( JSON.stringify(result));
+//     console.log(result)
+//     res.render('delimiterserch', { alldata: result, sreching, nodisplay })
+//     // })
 
 
 
 
 
 
-    // })
+//     // })
 
-    // }
-    // catch(e){
-    //     res.send(e)
-    // }
-})
+//     // }
+//     // catch(e){
+//     //     res.send(e)
+//     // }
+// })
 
-app.get("/kucube", (req, res) => {
-    res.render("cube")
-})
+// app.get("/kucube", (req, res) => {
+//     res.render("cube")
+// })
 
 
 app.listen(port, (error) => {
