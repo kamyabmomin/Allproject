@@ -49,22 +49,22 @@
 
 
     <script>
-        var gameTable = document.getElementById("game-table");
-        var cells = [];
-        var counter = 2;
-        var score = 0;
+        let gameTable = document.getElementById("game-table");
+        let cells = [];
+        let counter = 2;
+        let score = 0;
 
 
 
         function startmain() {
 
-            var timeout = 10;
+            let timeout = 10;
             startGame();
 
-            var timer = setInterval(() => {
+            let timer = setInterval(() => {
 
 
-                console.log(timeout);
+                // console.log(timeout);
                 if (timeout <= 0) {
                     clearInterval(timer)
                     // alert(`times up  `);
@@ -86,8 +86,8 @@
             gameTable.innerHTML = "";
             cells = [];
 
-            var letters = "0123456789ABCDEF";
-            var color = "#";
+            let letters = "0123456789ABCDEF";
+            let color = "#";
 
             for (i = 0; i < 6; i++) {
                 color += letters[Math.floor(Math.random() * 16)];
@@ -95,9 +95,9 @@
 
 
             for (i = 0; i < counter; i++) {
-                var row = gameTable.insertRow()
+                let row = gameTable.insertRow()
                 for (j = 0; j < counter; j++) {
-                    var cell = row.insertCell();
+                    let cell = row.insertCell();
                     cell.addEventListener("click", cellclickeventHandler);
                     cells.push(cell);
                     cell.style.backgroundColor = color;
@@ -106,8 +106,8 @@
 
             }
 
-            var colnumber = document.querySelectorAll("td");
-            var index = Math.floor(Math.random() * colnumber.length);
+            let colnumber = document.querySelectorAll("td");
+            let index = Math.floor(Math.random() * colnumber.length);
             colnumber[index].style.opacity = 0.7;
             colnumber[index].isDifferent = true;
 
@@ -134,7 +134,7 @@
             counter = 2;
             gameTable.innerHTML = "";
 
-            var para = document.getElementById("endgame");
+            let para = document.getElementById("endgame");
             para.innerText = "your score is : " + score;
             // clearInterval(timer);
         }

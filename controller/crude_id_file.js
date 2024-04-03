@@ -1,41 +1,36 @@
 const fs = require('fs');
 
-exports.writeData= (req, res) => {
+exports.writeData = (req, res) => {
     res.status(200);
-
-    var oneuserdata = req.body;
+    let oneuserdata = req.body;
     oneuserdata.id = crypto.randomUUID();
-
-
-    var data = fs.readFileSync('database.json', "utf-8")
-    var parsdata = JSON.parse(data)
-
-
+    let data = fs.readFileSync('database.json', "utf-8")
+    let parsdata = JSON.parse(data)
     parsdata.push(oneuserdata)
 
+    try {
+        fs.writeFileSync('database.json', JSON.stringify(parsdata), function (err) {
+            if (err) throw err;
+            console.log('Saved!');
+        });
 
-    fs.writeFileSync('database.json', JSON.stringify(parsdata), function (err) {
-        if (err) throw err;
-        console.log('Saved!');
-    });
 
-
-    res.render("crude_in_file/details", { data: parsdata })
-
+        res.render("crude_in_file/details", { data: parsdata })
+    } catch (e) {
+        res.send(e)
+    }
 }
 exports.more = (req, res) => {
     res.status(200);
-
-
-    var fatchingdata = req.body;
+    let fatchingdata = req.body;
     //  console.log(JSON.stringify(req.body))
-    var val = Object.keys(fatchingdata).toString();
+    let val = Object.keys(fatchingdata).toString();
     //  console.log(val)
-    var OBJECT = Object.values(fatchingdata).toString();
+    let OBJECT = Object.values(fatchingdata).toString();
     // console.log(OBJECT);
-    var data = fs.readFileSync('database.json', "utf-8");
-    var data1 = JSON.parse(data)
-    var pass
+    let data = fs.readFileSync('database.json', "utf-8");
+    let data1 = JSON.parse(data)
+    let pass
 
 
     if (OBJECT == "update") {

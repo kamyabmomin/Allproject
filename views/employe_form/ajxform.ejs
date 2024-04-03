@@ -16,6 +16,7 @@ body {
     }
   </style>
   <meta charset="UTF-8" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Employe form 2</title>
 </head>
@@ -868,8 +869,14 @@ document.getElementById("next").style.display = "block"
 
 
     })
-
-    console.log(data)
+    if(data.status == 200){
+      Swal.fire({
+          title: "Good job!",
+          text: "data save successful!",
+          width: '60 px',
+          icon: "success"
+        });
+    }
   })
 
 
