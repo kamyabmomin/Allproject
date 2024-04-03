@@ -1,375 +1,335 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <style>
-    table,
-    th,
-    td {
-      border: 1px solid black;
-      color: rgb(0, 0, 0);
-      margin-left: auto;
-      margin-right: auto;
-
-      background-color: rgb(166, 224, 111);
-    }
-
-    body {
-      background-color: rgb(127, 208, 255);
-    }
-  </style>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>event table</title>
+    <meta charset="UTF-8" />
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            color: rgb(0, 0, 0);
+            margin-left: auto;
+            margin-right: auto;
+            background-color: rgb(166, 224, 111);
+        }
+        body {
+            background-color: rgb(127, 208, 255);
+        }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>event table</title>
 </head>
-
 <body>
-  <h2 style="text-align: center;">kamyab</h2>
-  <table>
-    <tr>
-      <td>
-        ON CLICK
-        <br />
-        <br />
-        <input type="button" value="on click event" onclick="onclickme()" />
-      </td>
-      <td>
-        ON DUBBLE CLICK
-        <br />
-        <br />
-        <input type="button" value="on duble click event" ondblclick="ondbclickme()" />
-      </td>
-      <td>
-        ON KEY PRESS
-        <br />
-        <br />
-        <input type="text" placeholder="pleace enter one key" onkeypress="onkeypresss()" />
-      </td>
-      <td>
-        ON KEY DWON
-        <br />
-        <br />
-        <input type="text" placeholder="pleace enter one key" onkeydown="onkeydowns()" />
-      </td>
-    </tr>
-    <tr>
-      <td>
-        ON SELECT EVENT
-        <br />
-
-        <input type="text" value="ENTER YPUR NAME" onselect="onselectevent()" />
-      </td>
-      <td>
-        ON CHANGE
-        <br />
-        <br />
-        <input type="text" placeholder="ENTER NAME" onchange="onCHANGE()" />
-       
-      </td>
-
-      <!-- <td>
-
-                ON  VAUE CHANGE
-                <BR>
-                <BR>
-                <input type="button" value="on key press event" on="onkeypress()">
-                 </td>
-
-                  -->
-      <td>
-        ON ERRORE EVENT
-        <br />
-        <br />
-        <img onerror="error()" src="NKND.IMG" />
-        <p>this event ocuure first whene page load </p>
-      </td>
-
-      <td>
-        ON FOCUSE EVENT
-        <br />
-        <br />
-        <input type="text" onfocus="focuse(this)" placeholder="enter name" />
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        ON BLUR EVENT
-        <br />
-        <br />
-
-        <input type="text" name="name" id="name" onblur="blurr(this)" placeholder="enter name" />
-      </td>
-
-      <td>
-        ON SUBMIT EVENT
-        <br />
-        <br />
-        <form>
-          <input type="text" id="myInput" />
-          <input type="submit" onsubmit="onsubmitt()" value="submit" />
-        </form>
-      </td>
-
-      <td>
-        ON input EVENT
-        <br />
-        <br />
-        <input type="text" id="myInput" oninput="INPUTVALUE(this.id)" />
-
-        <p id="demo"></p>
-      </td>
-
-      <td>
-        ON INVALID EVENT
-        <br />
-        <br />
-        <form>
-          <input type="text" id="myInput" oninvalid="alert('pleace fill the form')" required />
-          <input type="submit" value="submit" />
-          <p>this event ocuure when input text is empty</p>
-        </form>
-        <p id="demo"></p>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        ON CONTEXT MENU EVENT
-        <br />
-        <br />
-
-        <p name="name" id="name" oncontextmenu="contextmenuclick()">
-          CLICK RIGHT SIDE BUTTON
-        </p>
-      </td>
-      <td>
-        ON mouse dwon EVENT
-        <br />
-        <br />
-
-        <p onmousedown="onmousedwonevwent(this.id)" id="my">
-          somthing happen !!
-        </p>
-      </td>
-
-      <td>
-        ON mouse up EVENT
-        <br />
-        <br />
-
-        <p onmouseup="onmouseupevwent(this.id)" id="my1">
-          somthing happen !!
-        </p>
-      </td>
-      <td>
-        ON mouse enter & leave
-        <br />
-        <br />
-
-        <img onmouseenter="bigImg1(this)" onmouseleave="normalImg1(this)" src="smiley.gif" alt="Smiley" width="32" height="32" />
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        ON mouse up EVENT
-        <br />
-        <br />
-
-        <p onst="onmouseupevwent(this.id)" id="my1">somthing happen !!</p>
-      </td>
-
-      <td>
-        ON SCROLL EVENT
-        <br />
-
-        <p style="
+    <h2 style="text-align: center;">kamyab</h2>
+    <table>
+        <tr>
+            <td>ON CLICK
+                <br />
+                <br />
+                <input type="button" value="on click event"
+                    onclick="onclickme()" />
+            </td>
+            <td>
+                ON DUBBLE CLICK
+                <br />
+                <br />
+                <input type="button" value="on duble click event"
+                    ondblclick="ondbclickme()" />
+            </td>
+            <td>
+                ON KEY PRESS
+                <br />
+                <br />
+                <input type="text" placeholder="pleace enter one key"
+                    onkeypress="onkeypresss()" />
+            </td>
+            <td>
+                ON KEY DWON
+                <br />
+                <br />
+                <input type="text" placeholder="pleace enter one key"
+                    onkeydown="onkeydowns()" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                ON SELECT EVENT
+                <br />
+                <input type="text" value="ENTER YPUR NAME"
+                    onselect="onselectevent()" />
+            </td>
+            <td>
+                ON CHANGE
+                <br />
+                <br />
+                <input type="text" placeholder="ENTER NAME"
+                    onchange="onCHANGE()" />
+            </td>
+            <td>
+                ON ERRORE EVENT
+                <br />
+                <br />
+                <img onerror="error()" src="NKND.IMG" />
+                <p>this event ocuure first whene page load </p>
+            </td>
+            <td>
+                ON FOCUSE EVENT
+                <br />
+                <br />
+                <input type="text" onfocus="focuse(this)"
+                    placeholder="enter name" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                ON BLUR EVENT
+                <br />
+                <br />
+                <input type="text" name="name" id="name" onblur="blurr(this)"
+                    placeholder="enter name" />
+            </td>
+            <td>
+                ON SUBMIT EVENT
+                <br />
+                <br />
+                <form>
+                    <input type="text" id="myInput" />
+                    <input type="submit" onsubmit="onsubmitt()"
+                        value="submit" />
+                </form>
+            </td>
+            <td>
+                ON input EVENT
+                <br />
+                <br />
+                <input type="text" id="myInput" oninput="INPUTVALUE(this.id)" />
+                <p id="demo"></p>
+            </td>
+            <td>
+                ON INVALID EVENT
+                <br />
+                <br />
+                <form>
+                    <input type="text" id="myInput"
+                        oninvalid="alert('pleace fill the form')" required />
+                    <input type="submit" value="submit" />
+                    <p>this event ocuure when input text is empty</p>
+                </form>
+                <p id="demo"></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                ON CONTEXT MENU EVENT
+                <br />
+                <br />
+                <p name="name" id="name" oncontextmenu="contextmenuclick()">
+                    CLICK RIGHT SIDE BUTTON
+                </p>
+            </td>
+            <td>
+                ON mouse dwon EVENT
+                <br />
+                <br />
+                <p onmousedown="onmousedwonevwent(this.id)" id="my">
+                    somthing happen !!
+                </p>
+            </td>
+            <td>
+                ON mouse up EVENT
+                <br />
+                <br />
+                <p onmouseup="onmouseupevwent(this.id)" id="my1">
+                    somthing happen !!
+                </p>
+            </td>
+            <td>
+                ON mouse enter & leave
+                <br />
+                <br />
+                <img onmouseenter="bigImg1(this)"
+                    onmouseleave="normalImg1(this)" src="smiley.gif"
+                    alt="Smiley" width="32" height="32" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                ON mouse up EVENT
+                <br />
+                <br />
+                <p onst="onmouseupevwent(this.id)" id="my1">somthing happen !!
+                </p>
+            </td>
+            <td>
+                ON SCROLL EVENT
+                <br />
+                <p style="
               height: 20px;
               width: 150px;
               overflow: scroll;
               color:rgb(22, 22, 22);
             " onscroll="ONSCROOLEVENT()">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat vero
-          impedit, laboriosam illum consectetur temporibus quisquam? Debitis
-          mollitia error quod, impedit consectetur delectus fuga sequi
-          suscipit aut corporis quidem! Saepe doloribus quasi nobis assumenda,
-          repellat sequi ratione quia delectus et. Dignissimos voluptate
-          deserunt, exercitationem et aut distinctio vitae eaque doloremque
-          expedita veniam quae reiciendis asperiores laboriosam iste fugiat
-          illum blanditiis! Minima beatae pariatur expedita modi quod
-          repellendus obcaecati ipsam quidem eveniet exercitationem, odit
-          saepe provident fugiat, ad fuga veritatis, aspernatur excepturi rem
-          natus animi? Cupiditate quis deleniti beatae. Dolore beatae est
-          sequi nesciunt dolor, officia velit facere cum. Consectetur, quis.
-        </p>
-      </td>
-
-      <td>
-        ON MOUSE OVER& ON MOUSE OUT
-        <br />
-        <br />
-        <img onmouseover="bigImg(this)" onmouseout="normalImg(this)" src="smiley.gif" alt="Smiley" width="32" height="32" />
-      </td>
-      <td>
-        ON RESET EVENT
-        <br />
-
-        <form onreset="onresetevent()">
-          <input type="text" placeholder="ENTER YPUR NAME" />
-          <input type="reset" value="RESET" />
-        </form>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        ON TOGGLE EVENT
-        <br />
-        <details style="color: black" ontoggle="myFunctionTOGGLE()">
-          <summary>TOGGLE EVENT.</summary>
-
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum
-            fuga perferendis vitae, obcaecati ullam quasi alias iste explicabo
-            ex debitis sequi facere quam, quisquam exercitationem amet rerum
-            dicta culpa repellendus..
-          </p>
-        </details>
-      </td>
-
-      <td>
-        ON COPY EVENT
-        <br />
-
-        <br />
-        <input type="text" value="copy me" oncopy="copyevent()" />
-      </td>
-      <td>
-        ON CUT EVENT
-        <br />
-
-        <br />
-        <input type="text" value="CUT me" oncut="cutevent()" />
-      </td>
-
-      <td>
-        ON PAST EVENT
-        <br />
-
-        <br />
-        <input type="text" value="paste me" onpaste="pastevent()" />
-      </td>
-    </tr>
-  </table>
-
-  <script>
-    function myFunctionTOGGLE() {
-      alert("The ontoggle event occured");
-    }
-
-    function copyevent() {
-      alert("you copy the text ");
-    }
-
-    function pastevent() {
-      alert("you past the text ");
-    }
-
-    function cutevent() {
-      alert("you cut the text ");
-    }
-
-    function onresetevent() {
-      alert("rerset event triiger form is reset");
-    }
-
-    function ONendedEVENT() {
-      alert("scroll is end and ended event is trigger");
-    }
-
-    function onmousedwonevwent(x) {
-      document.getElementById(x).style.color = "red";
-    }
-
-    function onselectevent() {
-      alert("you select the text");
-    }
-
-    function onmouseupevwent(x) {
-      document.getElementById(x).style.color = "yellow";
-    }
-
-    function onclickme() {
-      alert("ON CLICK EVENT TRIGGER");
-    }
-
-    function ondbclickme() {
-      alert("DUBBLE CLICK EVVENT TRIGER");
-    }
-
-    function onkeypresss() {
-      alert("ON KEY PRESS EVENT TRIGGER");
-    }
-
-    function onkeydowns() {
-      alert("ON KEY DOWN EVENT TRIGGER");
-    }
-
-    function bigImg(x) {
-      x.style.height = "64px";
-      x.style.width = "64px";
-      alert("ON mouse over EVENT TRIGGER");
-    }
-
-    function normalImg(x) {
-      x.style.height = "32px";
-      x.style.width = "32px";
-      alert("ON MOUSE OUT EVENT TRIGGER");
-    }
-
-    function bigImg1(x) {
-      x.style.height = "64px";
-      x.style.width = "64px";
-    }
-
-    function normalImg1(x) {
-      x.style.height = "32px";
-      x.style.width = "32px";
-    }
-
-    function onCHANGE() {
-      alert("ON CHANGE EVENT TRIIGER");
-    }
-
-    function error() {
-      alert("image not found");
-    }
-
-    function focuse(x) {
-      x.style.background = "yellow";
-      alert("on focuse event trigger!!");
-    }
-
-    function blurr(x) {
-      x.value = x.value.toUpperCase();
-    }
-
-    function contextmenuclick() {
-      alert("you press right side button");
-    }
-
-    function INPUTVALUE(x) {
-      var text = document.getElementById(x).value;
-      document.getElementById("demo").innerText = text;
-    }
-
-    function onsubmitt() {
-      alert("submit the form");
-    }
-
-    function ONSCROOLEVENT() {
-      alert("scroll event trigger ");
-    }
-  </script>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Fugiat vero
+                    impedit, laboriosam illum consectetur temporibus quisquam?
+                    Debitis
+                    mollitia error quod, impedit consectetur delectus fuga sequi
+                    suscipit aut corporis quidem! Saepe doloribus quasi nobis
+                    assumenda,
+                    repellat sequi ratione quia delectus et. Dignissimos
+                    voluptate
+                    deserunt, exercitationem et aut distinctio vitae eaque
+                    doloremque
+                    expedita veniam quae reiciendis asperiores laboriosam iste
+                    fugiat
+                    illum blanditiis! Minima beatae pariatur expedita modi quod
+                    repellendus obcaecati ipsam quidem eveniet exercitationem,
+                    odit
+                    saepe provident fugiat, ad fuga veritatis, aspernatur
+                    excepturi rem
+                    natus animi? Cupiditate quis deleniti beatae. Dolore beatae
+                    est
+                    sequi nesciunt dolor, officia velit facere cum. Consectetur,
+                    quis.
+                </p>
+            </td>
+            <td>
+                ON MOUSE OVER& ON MOUSE OUT
+                <br />
+                <br />
+                <img onmouseover="bigImg(this)" onmouseout="normalImg(this)"
+                    src="smiley.gif" alt="Smiley" width="32" height="32" />
+            </td>
+            <td>
+                ON RESET EVENT
+                <br />
+                <form onreset="onresetevent()">
+                    <input type="text" placeholder="ENTER YPUR NAME" />
+                    <input type="reset" value="RESET" />
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                ON TOGGLE EVENT
+                <br />
+                <details style="color: black" ontoggle="myFunctionTOGGLE()">
+                    <summary>TOGGLE EVENT.</summary>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        Ipsum
+                        fuga perferendis vitae, obcaecati ullam quasi alias iste
+                        explicabo
+                        ex debitis sequi facere quam, quisquam exercitationem
+                        amet rerum
+                        dicta culpa repellendus..
+                    </p>
+                </details>
+            </td>
+            <td>
+                ON COPY EVENT
+                <br />
+                <br />
+                <input type="text" value="copy me" oncopy="copyevent()" />
+            </td>
+            <td>
+                ON CUT EVENT
+                <br />
+                <br />
+                <input type="text" value="CUT me" oncut="cutevent()" />
+            </td>
+            <td>
+                ON PAST EVENT
+                <br />
+                <br />
+                <input type="text" value="paste me" onpaste="pastevent()" />
+            </td>
+        </tr>
+    </table>
+    <script>
+        function myFunctionTOGGLE() {
+            alert("The ontoggle event occured");
+        }
+        function copyevent() {
+            alert("you copy the text ");
+        }
+        function pastevent() {
+            alert("you past the text ");
+        }
+        function cutevent() {
+            alert("you cut the text ");
+        }
+        function onresetevent() {
+            alert("rerset event triiger form is reset");
+        }
+        function ONendedEVENT() {
+            alert("scroll is end and ended event is trigger");
+        }
+        function onmousedwonevwent(x) {
+            document.getElementById(x).style.color = "red";
+        }
+        function onselectevent() {
+            alert("you select the text");
+        }
+        function onmouseupevwent(x) {
+            document.getElementById(x).style.color = "yellow";
+        }
+        function onclickme() {
+            alert("ON CLICK EVENT TRIGGER");
+        }
+        function ondbclickme() {
+            alert("DUBBLE CLICK EVVENT TRIGER");
+        }
+        function onkeypresss() {
+            alert("ON KEY PRESS EVENT TRIGGER");
+        }
+        function onkeydowns() {
+            alert("ON KEY DOWN EVENT TRIGGER");
+        }
+        function bigImg(x) {
+            x.style.height = "64px";
+            x.style.width = "64px";
+            alert("ON mouse over EVENT TRIGGER");
+        }
+        function normalImg(x) {
+            x.style.height = "32px";
+            x.style.width = "32px";
+            alert("ON MOUSE OUT EVENT TRIGGER");
+        }
+        function bigImg1(x) {
+            x.style.height = "64px";
+            x.style.width = "64px";
+        }
+        function normalImg1(x) {
+            x.style.height = "32px";
+            x.style.width = "32px";
+        }
+        function onCHANGE() {
+            alert("ON CHANGE EVENT TRIIGER");
+        }
+        function error() {
+            alert("image not found");
+        }
+        function focuse(x) {
+            x.style.background = "yellow";
+            alert("on focuse event trigger!!");
+        }
+        function blurr(x) {
+            x.value = x.value.toUpperCase();
+        }
+        function contextmenuclick() {
+            alert("you press right side button");
+        }
+        function INPUTVALUE(x) {
+            let text = document.getElementById(x).value;
+            document.getElementById("demo").innerText = text;
+        }
+        function onsubmitt() {
+            alert("submit the form");
+        }
+        function ONSCROOLEVENT() {
+            alert("scroll event trigger ");
+        }
+    </script>
 </body>
-
 </html>

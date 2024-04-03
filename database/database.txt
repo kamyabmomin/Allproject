@@ -1,0 +1,299 @@
+//basic details in form
+
+CREATE TABLE `basic_details` (
+    `employe_id` int NOT NULL AUTO_INCREMENT,
+    `first_name` varchar(20) DEFAULT NULL,
+    `last_name` varchar(20) DEFAULT NULL,
+    `designation` varchar(20) DEFAULT NULL,
+    `address_line1` varchar(20) DEFAULT NULL,
+    `adderess_line2` varchar(20) DEFAULT NULL,
+    `email` varchar(100) DEFAULT NULL,
+    `mobile_no` bigint DEFAULT NULL,
+    `city` varchar(20) DEFAULT NULL,
+    `zip_code` int DEFAULT NULL,
+    `bod` date DEFAULT NULL,
+    `state` varchar(30) DEFAULT NULL,
+    `gender` varchar(10) DEFAULT NULL,
+    `statues` varchar(20) DEFAULT NULL,
+    PRIMARY KEY (`employe_id`),
+    KEY `statues` (`statues`),
+    KEY `basic_details_ibfk_1` (`gender`),
+    CONSTRAINT `basic_details_ibfk_1` FOREIGN KEY (`gender`) REFERENCES `option_master` (`option_value`) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT `basic_details_ibfk_2` FOREIGN KEY (`statues`) REFERENCES `option_master` (`option_value`)
+  ) ENGINE=InnoDB AUTO_INCREMENT=211 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+  
+  //citirs
+  CREATE TABLE `cities` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `city` varchar(255) NOT NULL,
+  `state_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `state_id` (`state_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=604 DEFAULT CHARSET=utf8mb3
+
+//cuntries
+CREATE TABLE `countries` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `countryCode` char(2) NOT NULL DEFAULT '',
+  `name` varchar(45) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=251 DEFAULT CHARSET=utf8mb3
+
+//educatuion
+CREATE TABLE `education` (
+  `employe_id` int NOT NULL,
+  `education` varchar(20) DEFAULT NULL,
+  `passing_year` int DEFAULT NULL,
+  `persentage` int DEFAULT NULL,
+  `course_name` varchar(20) DEFAULT NULL,
+  `schoole_university` varchar(40) DEFAULT NULL,
+  `educationid` int NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`educationid`),
+  KEY `education` (`education`),
+  KEY `education_ibfk_1` (`employe_id`),
+  CONSTRAINT `education_ibfk_1` FOREIGN KEY (`employe_id`) REFERENCES `basic_details` (`employe_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `education_ibfk_2` FOREIGN KEY (`education`) REFERENCES `option_master` (`option_value`)
+) ENGINE=InnoDB AUTO_INCREMENT=332 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+//languge known
+CREATE TABLE `languageknown` (
+  `langugeid` int NOT NULL AUTO_INCREMENT,
+  `employe_id` int NOT NULL,
+  `languge` varchar(10) DEFAULT NULL,
+  `speak` varchar(3) DEFAULT NULL,
+  `reading` varchar(3) DEFAULT NULL,
+  `writing` varchar(3) DEFAULT NULL,
+  PRIMARY KEY (`langugeid`),
+  KEY `languge` (`languge`),
+  KEY `languageknown_ibfk_1` (`employe_id`),
+  CONSTRAINT `languageknown_ibfk_1` FOREIGN KEY (`employe_id`) REFERENCES `basic_details` (`employe_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `languageknown_ibfk_2` FOREIGN KEY (`languge`) REFERENCES `option_master` (`option_value`)
+) ENGINE=InnoDB AUTO_INCREMENT=229 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+//option masdter 
+CREATE TABLE `option_master` (
+  `select_id` int NOT NULL,
+  `option_name` varchar(30) DEFAULT NULL,
+  `option_value` varchar(20) NOT NULL,
+  `option_id` int DEFAULT NULL,
+  `inputtype` varchar(255) DEFAULT NULL,
+  `selectedoption` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`option_value`),
+  KEY `select_id` (`select_id`),
+  CONSTRAINT `option_master_ibfk_1` FOREIGN KEY (`select_id`) REFERENCES `select_master` (`select_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+//prefrence 
+CREATE TABLE `Preferens` (
+  `prefrenceid` int NOT NULL AUTO_INCREMENT,
+  `employe_id` int NOT NULL,
+  `prefered_location` varchar(20) DEFAULT NULL,
+  `Notice_period` varchar(20) DEFAULT NULL,
+  `Expacted_CTC` varchar(20) DEFAULT NULL,
+  `Current_CTc` varchar(20) DEFAULT NULL,
+  `department` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`prefrenceid`),
+  KEY `department` (`department`),
+  KEY `prefered_location` (`prefered_location`),
+  KEY `Preferens_ibfk_1` (`employe_id`),
+  CONSTRAINT `Preferens_ibfk_1` FOREIGN KEY (`employe_id`) REFERENCES `basic_details` (`employe_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `Preferens_ibfk_2` FOREIGN KEY (`department`) REFERENCES `option_master` (`option_value`),
+  CONSTRAINT `Preferens_ibfk_3` FOREIGN KEY (`prefered_location`) REFERENCES `option_master` (`option_value`)
+) ENGINE=InnoDB AUTO_INCREMENT=141 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+//refrance known
+
+CREATE TABLE `refrenceknown` (
+  `employe_id` int NOT NULL,
+  `reference_name` varchar(20) NOT NULL,
+  `reference_mobile_no` bigint DEFAULT NULL,
+  `relation` varchar(10) DEFAULT NULL,
+  `refrenceid` int NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`refrenceid`),
+  KEY `employe_id_idx` (`employe_id`),
+  CONSTRAINT `employe_id` FOREIGN KEY (`employe_id`) REFERENCES `basic_details` (`employe_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+
+//select master 
+CREATE TABLE `select_master` (
+  `select_id` int NOT NULL,
+  `select_name` varchar(20) DEFAULT NULL,
+  `selct_key` varchar(20) NOT NULL,
+  `inputtype` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`select_id`),
+  UNIQUE KEY `selct_key` (`selct_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+
+
+//state 
+
+CREATE TABLE `states` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `country_id` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=latin1
+
+
+//technology known
+CREATE TABLE `thecnologiknown` (
+  `technologyid` int NOT NULL AUTO_INCREMENT,
+  `employe_id` int NOT NULL,
+  `thecnologylanguge` varchar(10) DEFAULT NULL,
+  `levels` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`technologyid`),
+  KEY `thecnologylanguge` (`thecnologylanguge`),
+  KEY `thecnologiknown_ibfk_1` (`employe_id`),
+  CONSTRAINT `thecnologiknown_ibfk_1` FOREIGN KEY (`employe_id`) REFERENCES `basic_details` (`employe_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `thecnologiknown_ibfk_2` FOREIGN KEY (`thecnologylanguge`) REFERENCES `option_master` (`option_value`)
+) ENGINE=InnoDB AUTO_INCREMENT=253 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+//work experianc
+
+CREATE TABLE `workexperienc` (
+  `workexperiencid` int NOT NULL AUTO_INCREMENT,
+  `employe_id` int NOT NULL,
+  `compny_name` varchar(30) NOT NULL,
+  `designation` varchar(30) DEFAULT NULL,
+  `join_date` date DEFAULT NULL,
+  `end_date` date DEFAULT NULL,
+  PRIMARY KEY (`workexperiencid`,`compny_name`),
+  KEY `employe_id_idx` (`employe_id`),
+  CONSTRAINT `workexperienc_ibfk_1` FOREIGN KEY (`employe_id`) REFERENCES `basic_details` (`employe_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+//login register 
+
+CREATE TABLE `users` (
+  `user_id` int NOT NULL AUTO_INCREMENT,
+  `firstname` varchar(255) DEFAULT NULL,
+  `lastname` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `mobilenumber` varchar(255) DEFAULT NULL,
+  `userid` varchar(255) DEFAULT NULL,
+  `passwords` varchar(255) DEFAULT NULL,
+  `conformpassword` varchar(255) DEFAULT NULL,
+  `salt` varchar(255) DEFAULT NULL,
+  `user_keys` varchar(255) DEFAULT NULL,
+  `timestemp` varchar(45) DEFAULT NULL,
+  `timestemps` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+
+//student 
+
+CREATE TABLE `student` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `years` int DEFAULT NULL,
+  `last_name` varchar(100) DEFAULT NULL,
+  `first_name` varchar(100) DEFAULT NULL,
+  `city` varchar(100) DEFAULT NULL,
+  `phon_no` varchar(100) DEFAULT NULL,
+  `dob` date DEFAULT NULL,
+  `gender` varchar(10) DEFAULT NULL,
+  `country` varchar(100) DEFAULT NULL,
+  `CREATE_AT` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `student_master_index` (`CREATE_AT`)
+) ENGINE=InnoDB AUTO_INCREMENT=200001 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+//exame
+
+CREATE TABLE `exame` (
+  `exame_id` int NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL,
+  `exame_typ` int DEFAULT NULL,
+  `sub_id` int DEFAULT NULL,
+  `exame_date` date DEFAULT NULL,
+  `theory_total` int DEFAULT NULL,
+  `theory_marks` int DEFAULT NULL,
+  `practical_total` int DEFAULT NULL,
+  `practical_marks` int DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`exame_id`),
+  KEY `exame_master_index` (`created_at`,`exame_typ`,`sub_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=900001 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+
+// student master
+
+
+
+CREATE TABLE `studentmaster` (
+  `student_id` int NOT NULL,
+  `student_name` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`student_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+
+//attendance master 
+CREATE TABLE `attendance` (
+  `student_id` int NOT NULL,
+  `dates` date DEFAULT NULL,
+  `avlibility` varchar(10) DEFAULT NULL,
+  KEY `student_id` (`student_id`),
+  CONSTRAINT `attendance_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `studentmaster` (`student_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+//subject master
+
+
+CREATE TABLE `subjectmaster` (
+  `sub_id` int NOT NULL,
+  `sub_name` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`sub_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+//exame result 
+CREATE TABLE `exameresult` (
+  `exame_id` int NOT NULL,
+  `student_id` int NOT NULL,
+  `exame_date` date DEFAULT NULL,
+  `total_theorymarks` int DEFAULT NULL,
+  `obtain_theory_marks` int DEFAULT NULL,
+  `total_practical_marks` int DEFAULT NULL,
+  `obtain_practical_marks` int DEFAULT NULL,
+  `avlibility` varchar(10) DEFAULT NULL,
+  `sub_id` int NOT NULL,
+  `exame_type` int NOT NULL,
+  PRIMARY KEY (`student_id`,`sub_id`,`exame_type`),
+  KEY `sub_id` (`sub_id`),
+  CONSTRAINT `exameresult_ibfk_1` FOREIGN KEY (`sub_id`) REFERENCES `subjectmaster` (`sub_id`),
+  CONSTRAINT `exameresult_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `studentmaster` (`student_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+
+//
+CREATE TABLE `examemasterfinal1` (
+  `exame_id` int NOT NULL,
+  `student_id` int NOT NULL,
+  `exame_date` date DEFAULT NULL,
+  `total_theorymarks` int DEFAULT NULL,
+  `obtain_theory_marks` int DEFAULT NULL,
+  `total_practical_marks` int DEFAULT NULL,
+  `obtain_practical_marks` int DEFAULT NULL,
+  `avlibility` varchar(10) DEFAULT NULL,
+  `sub_id` int NOT NULL,
+  `exame_type` int NOT NULL,
+  PRIMARY KEY (`student_id`,`sub_id`,`exame_type`),
+  KEY `sub_id` (`sub_id`),
+  CONSTRAINT `examemasterfinal1_ibfk_1` FOREIGN KEY (`sub_id`) REFERENCES `subjectmaster` (`sub_id`),
+  CONSTRAINT `examemasterfinal1_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `studentmaster` (`student_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+
+//attendance by month
+CREATE TABLE `attendancemonth` (
+  `id` int NOT NULL,
+  `dates` date DEFAULT NULL,
+  `attendance` varchar(250) DEFAULT NULL,
+  `months` varchar(250) DEFAULT NULL,
+  KEY `id` (`id`),
+  CONSTRAINT `attendancemonth_ibfk_1` FOREIGN KEY (`id`) REFERENCES `studentmaster` (`student_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci

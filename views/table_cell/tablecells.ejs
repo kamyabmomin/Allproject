@@ -1,154 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <style>table, th, td {
-        border:1px solid black;
-        color: green;
-        margin-left: 150px;
-        align-items: center;
+  <style>
+    table,
+    th,
+    td {
+      border: 1px solid black;
+      color: green;
+      margin-left: 150px;
+      align-items: center;
+    }
+    td{
+        height: 40px;
+        width: 90px;
+    }
 
-      }
-      tr:nth-of-type(odd) td:nth-of-type(odd) ,tr:nth-of-type(even) td:nth-of-type(even){
-  background-color: #2f3f52;
-}
-      body{
-        background-color: rgb(127, 208, 255);
-      }
-      </style>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    tr:nth-of-type(odd) td:nth-of-type(odd),
+    tr:nth-of-type(even) td:nth-of-type(even) {
+      background-color: #2f3f52;
+    }
+
+    body {
+      background-color: rgb(127, 208, 255);
+    }
+  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 </head>
+
 <body>
-    <div>
-        <h2 style="text-align: center;"> kamyab husain 24DEV049 01/02/2024 </h2>
-
-
-        <br>
-        <br>
-        <br>
-        <input style="  margin-left:70%;
-margin-right: auto; height: 30px ; width: 30px;" onclick="incresscolume1()"  type="button" value="+">
-<br>
-<input type="button"   onclick="deletecoluman()" style="  margin-left:70%;
+  <div>
+    <h2 style="text-align: center;"> kamyab husain 24DEV049 01/02/2024 </h2>
+    <br>
+    <br>
+    <br>
+    <input style="  margin-left:70%;
+margin-right: auto; height: 30px ; width: 30px;" onclick="incresscolume1()" type="button" value="+">
+    <br>
+    <input type="button" onclick="deletecoluman()" style="  margin-left:70%;
 margin-right: auto;  height: 30px ; width: 30px;" value="-">
-    <table  id="table" style="  margin-left: auto;
+    <table id="table" style="  margin-left: auto;
     margin-right: auto;">
-       
-            <caption>EVENT</caption>
-<tr id="myRow">
-    <td>ON CLICK
-        <BR>
-        <BR>
-            <input type="button" value="on click event" onclick="onclickme()">
-    </td>
-
-    <td>
-
-        ON  DUBBLE CLICK
-        <BR>
-        <BR>
-        <input type="button" value="on duble click event" ondblclick="ondbclickme()">
-         </td>
-</tr>
-
-<tr id="myRow">
-    <td>
-
-        ON  KEY PRESS
-        <BR>
-        <BR>
-        <input type="button" value="on key press event" onkeypress="onkeypress()">
-         </td>
-         <td>
-    
-        ON  KEY DWON
-        <BR>
-        <BR>
-        <input type="button" value="on key dwon event" onkeydown="onkeydowns()">
-         </td>
-</tr>
-
+     
+      <tr id="myRow">
+        <td>  </td>
+        <td> </td>
+      </tr>
+      <tr id="myRow">
+        <td> </td>
+        <td></td>
+      </tr>
     </table>
-<input style="  margin-left:30%;
-margin-right: auto; height: 30px ; width: 30px;"  onclick="incressrow()" type="button" value="+">
-<br>
-<input type="button" onclick="deleterow()" style="  margin-left:30%;
+    <input style="  margin-left:30%;
+margin-right: auto; height: 30px ; width: 30px;" onclick="incressrow()" type="button" value="+">
+    <br>
+    <input type="button" onclick="deleterow()" style="  margin-left:30%;
 margin-right: auto;  height: 30px ; width: 30px;" value="-">
-<p id="pp"></p>
-    </div>
-    <script>
-         function onclickme(){
-            alert("ON CLICK EVENT TRIGGER");
-        }
-        function ondbclickme(){
-            alert("DUBBLE CLICK EVVENT TRIGER")
-        }
-        function onkeypress(){
-            alert("ON KEy PRESS EVENT TRIGGER");
-        }
-        function onkeydowns(){
-            alert("ON KEy DOWN EVENT TRIGGER");
-        }
-        function incresscolume1(){
-          
-
-const nodeList = document.querySelectorAll("#myRow");
-for (let i = 0; i < nodeList.length; i++) {
- var x=  nodeList[i].insertCell();
-  x.innerHTML = "New cell";
-
-        }
+    <p id="pp"></p>
+  </div>
+  <script>
+    function onclickme() {
+      alert("ON CLICK EVENT TRIGGER");
     }
 
-    function incressrow(){
+    function ondbclickme() {
+      alert("DUBBLE CLICK EVVENT TRIGER")
+    }
 
+    function onkeypress() {
+      alert("ON KEy PRESS EVENT TRIGGER");
+    }
 
-      var count=  document.getElementById('myRow').cells.length;
-       
-        //  var x = document.getElementById("table").rows.length;
-        // console.log(x);    
-       var table= document.getElementById("table");
-         var row = table.insertRow();
-       row.setAttribute('id','myRow');
-       for(i=0;i<count;i++){
+    function onkeydowns() {
+      alert("ON KEy DOWN EVENT TRIGGER");
+    }
+
+    function incresscolume1() {
+      const nodeList = document.querySelectorAll("#myRow");
+      for (let i = 0; i < nodeList.length; i++) {
+        const x = nodeList[i].insertCell();
+        x.innerHTML = "New cell";
+      }
+    }
+
+    function incressrow() {
+      var count = document.getElementById('myRow').cells.length;   
+      const table = document.getElementById("table");
+      const  row = table.insertRow();
+      row.setAttribute('id', 'myRow');
+      for (i = 0; i < count; i++) {
         row.insertCell().innerHTML = "New cell";
-       } 
+      }
     }
 
-    function deletecoluman(){
-
-
-
-        const nodeList = document.querySelectorAll("tr");
-        //document.getElementById("div").lastChild
-// for (let i = 0; i < nodeList.length; i++) {
-    var x =  document.getElementById('myRow').cells.length;
-       
-    if(x>2){
+    function deletecoluman() {
+      const nodeList = document.querySelectorAll("tr");
+      let x = document.getElementById('myRow').cells.length;
+      if (x > 2) {
         for (let i = 0; i < nodeList.length; i++) {
-  nodeList[i].lastChild.remove();}
-    }
-    else{
-    alert("you can not delete columan")
-}
+          nodeList[i].lastChild.remove();
+        }
+      } else {
+        alert("you can not delete columan")
+      }
 
-        //}
-        
     }
 
-
-    function deleterow(){
-        let x = document.getElementById("table");
-         console.log(x);  
-         const nodeList = document.querySelectorAll("tr");
-
-        if(nodeList.length>2){
-         table.deleteRow(nodeList.length-1);
+    function deleterow() {
+      let x = document.getElementById("table");
+      const nodeList = document.querySelectorAll("tr");
+      if (nodeList.length > 2) {
+        table.deleteRow(nodeList.length - 1);
+      } else {
+        alert("you can not delete row")
+      }
     }
-else{
-    alert("you can not delete row")
-}}
-    </script>
+  </script>
 </body>
+
 </html>
