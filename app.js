@@ -2,8 +2,9 @@ const express = require("express");
 const app = express();
 const port = 6800;
 const fs = require('fs');
-const jwt = require("jsonwebtoken")
+// const jwt = require("jsonwebtoken")
 const cookieParser = require('cookie-parser')
+const route = require("./router")
 var nodemailer = require('nodemailer');
 var bodyParser = require("body-parser");
 const Swal = require('sweetalert2')
@@ -16,281 +17,281 @@ app.use(express.static("views"));
 app.set("view engine", "ejs");
 app.use(cookieParser())
 const { validation1 } = require("./tokenvalidation")
-var mysql = require('mysql2');
+// var mysql = require('mysql2');
 const { Console, log } = require("console");
 const { strict } = require("assert");
-const md5 = require("md5");
+// const md5 = require("md5");
 
-var con = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password: "password",
-    database: "job_app_29"
-}).promise()
+// var con = mysql.createConnection({
+//     host: "localhost",
+//     user: "root",
+//     password: "password",
+//     database: "job_app_29"
+// }).promise()
 
+app.use(route)
 
+// app.get("/", async (req, res) => {
+//     id2 = ""
+//     registerkey = 1
+//     res.render('homepage', { id2, registerkey })
+// })
 
-app.get("/", async (req, res) => {
-    id2 = ""
-    registerkey = 1
-    res.render('homepage', { id2, registerkey })
-})
+// app.post("/", async (req, res) => {
+//     var data = req.body
+//     var email = req.body.email
+//     var sqlemail = `select * from users where email = "${email}"`
+//     var [emaildata] = await con.query(sqlemail)
 
-app.post("/", async (req, res) => {
-    var data = req.body
-    var email = req.body.email
-    var sqlemail = `select * from users where email = "${email}"`
-    var [emaildata] = await con.query(sqlemail)
+//     if (emaildata.length == 0) {
+//         var slat = makeid(4)
+//         var password = md5(req.body.passwords + slat);
+//         var conformpassword = md5(req.body.conformpassword + slat);
+//         var key = makeid(12)
+//         var sql = `insert into users (firstname  ,lastname , email  ,mobilenumber  ,userid  ,passwords  ,conformpassword  ,salt  ,user_keys ) values ("${data.firstname}" , "${data.lastname}" ,"${data.email}" ,"${data.mobilenumber}" , "${data.userid}" ,'${password}' ,'${conformpassword}' ,"${slat}" ,"${key}" ) `
+//         var [id] = await con.query(sql)
+//         var id2 = id.insertId;
+//         res.status(200).json({ key: key })
+//     }
+//     else {
 
-    if (emaildata.length == 0) {
-        var slat = makeid(4)
-        var password = md5(req.body.passwords + slat);
-        var conformpassword = md5(req.body.conformpassword + slat);
-        var key = makeid(12)
-        var sql = `insert into users (firstname  ,lastname , email  ,mobilenumber  ,userid  ,passwords  ,conformpassword  ,salt  ,user_keys ) values ("${data.firstname}" , "${data.lastname}" ,"${data.email}" ,"${data.mobilenumber}" , "${data.userid}" ,'${password}' ,'${conformpassword}' ,"${slat}" ,"${key}" ) `
-        var [id] = await con.query(sql)
-        var id2 = id.insertId;
-        res.status(200).json({ key: key })
-    }
-    else {
+//         res.status(400).json();
 
-        res.status(400).json();
+//     }
 
-    }
-
-    function makeid(length) {
-        let result = '';
-        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        const charactersLength = characters.length;
-        let counter = 0;
-        while (counter < length) {
-            result += characters.charAt(Math.floor(Math.random() * charactersLength));
-            counter += 1;
-        }
-        return result;
-    }
-
-
-
-})
-app.get("/keycompare", async (req, res) => {
-    var key = req.query.key;
-    sql = `select  user_keys ,timestemps from users where user_keys="${key}"`
-    var [data] = await con.query(sql)
-    var currantdate = new Date()
-    timediffrent = currantdate - data[0].timestemps
-    if (data[0].user_keys == key && timediffrent < 40000) {
-
-        var registerkey = 1
-        res.render("login", { registerkey })
-    }
-    else {
-        var sql = `delete from users where user_keys="${key}"`
-        var data = con.query(sql)
-        var registerkey = 0
-        res.render("homepage", { registerkey })
-    }
-
-})
-app.get("/login", (req, res) => {
-    var registerkey = 0
-    res.render("login", { registerkey })
-})
-
-app.post("/login", async (req, res) => {
-
-    let data = req.body;
-    console.log(data);
-    let sql = ` select *  from users where email = '${req.body.email}' `;
-    var [fetchdata] = await con.query(sql);
-    console.log(fetchdata);
-    if (fetchdata.length > 0) {
-        const salt = fetchdata[0].salt;
-        console.log(salt);
-        const password = md5(req.body.passwords + salt)
-        console.log(password);
-
-
-        if (password == fetchdata[0].passwords) {
-            console.log("password match");
-            const token = jwt.sign({ userId: req.body.email }, 'your-secret-key', {
-                expiresIn: '1h',
-            });
-            // authentication()
-            console.log(token);
-            res.cookie("token", token).status(200).json({ token: token })
-
-
-        } else {
-            console.log("password not match");
-            res.status(400)
-
-        }
-    }
-    else {
-        console.log(" password not match");
-        res.status(400)
-
-    }
-    // console.log(sql);
-    // console.log(fetchdata[0].salt, fetchdata[0].user_keys);
-
-    res.end()
-
-
-})
+//     function makeid(length) {
+//         let result = '';
+//         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+//         const charactersLength = characters.length;
+//         let counter = 0;
+//         while (counter < length) {
+//             result += characters.charAt(Math.floor(Math.random() * charactersLength));
+//             counter += 1;
+//         }
+//         return result;
+//     }
 
 
 
+// })
+// app.get("/keycompare", async (req, res) => {
+//     var key = req.query.key;
+//     sql = `select  user_keys ,timestemps from users where user_keys="${key}"`
+//     var [data] = await con.query(sql)
+//     var currantdate = new Date()
+//     timediffrent = currantdate - data[0].timestemps
+//     if (data[0].user_keys == key && timediffrent < 40000) {
 
-app.get("/forgetpassword", async (req, res) => {
-    try {
-        res.render("forget")
+//         var registerkey = 1
+//         res.render("login", { registerkey })
+//     }
+//     else {
+//         var sql = `delete from users where user_keys="${key}"`
+//         var data = con.query(sql)
+//         var registerkey = 0
+//         res.render("homepage", { registerkey })
+//     }
 
-    }
-    catch (err) {
-        res.send(err)
-    }
-})
+// })
+// app.get("/login", (req, res) => {
+//     var registerkey = 0
+//     res.render("login", { registerkey })
+// })
 
+// app.post("/login", async (req, res) => {
 
-app.post("/forgetpassword", async (req, res) => {
-    try {
-        console.log(req.body);
-        if (req.body.email && req.body.passwords == "" && req.body.conformpassword == "") {
-
-            console.log("fetch email");
-            console.log(req.body);
-            var sql = `select * from users where email = "${req.body.email}"`;
-            var [data] = await con.query(sql);
-            console.log(sql);
-            // console.log(data);
-
-            if (data.length > 0) {
-                res.status(200).json(data);
-            }
-            else {
-                res.status(400).json({ massage: "email is not register" })
-
-            }
-
-        }
-        else {
-
-            console.log("forget passwords");
-            console.log(req.body);
-            let email = req.body.email;
-            let sql = `select * from users where email = "${email}"`
-            var [emaildata] = await con.query(sql);
-            console.log(emaildata);
-            let salt = emaildata[0].salt;
-            console.log(salt);
-            pass = req.body.passwords
-            pass += salt
-            console.log(pass);
-            let password = md5(pass);
-            let conformpassword = md5(req.body.conformpassword + salt);
-            console.log(password + "and" + conformpassword);
-
-            let updatesql = `update users set passwords = '${password}' ,conformpassword = '${conformpassword}' where user_id = ${emaildata[0].user_id}`
-            console.log(updatesql);
-            try {
-                var [data] = await con.query(updatesql)
-                console.log("SFSF" + data.affectedRows);
-                res.status(200).json({ massage: "pasword set " })
-            }
-            catch (err) {
-                return res.json({ massage: err })
-            }
-
-        }
-    }
-    catch (err) {
-        res.send(err)
-    }
-})
+//     let data = req.body;
+//     console.log(data);
+//     let sql = ` select *  from users where email = '${req.body.email}' `;
+//     var [fetchdata] = await con.query(sql);
+//     console.log(fetchdata);
+//     if (fetchdata.length > 0) {
+//         const salt = fetchdata[0].salt;
+//         console.log(salt);
+//         const password = md5(req.body.passwords + salt)
+//         console.log(password);
 
 
+//         if (password == fetchdata[0].passwords) {
+//             console.log("password match");
+//             const token = jwt.sign({ userId: req.body.email }, 'your-secret-key', {
+//                 expiresIn: '1h',
+//             });
+//             // authentication()
+//             console.log(token);
+//             res.cookie("token", token).status(200).json({ token: token })
 
-app.get("/registerusingemail", async (req, res) => {
-    id2 = ""
-    registerkey = 1
-    res.render('registerusingemail', { id2, registerkey })
-})
 
-app.post("/registerusingemail", async (req, res) => {
-    // alert("axdacd")
-    var data = req.body
-    console.log(data);
-    var email = req.body.email
-    console.log(email);
-    var transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: 'kamyab.momin.2024@gmail.com',
-            pass: '8128744072k'
-        }
-    });
+//         } else {
+//             console.log("password not match");
+//             res.status(400)
 
-    var mailOptions = {
-        from: 'kamyab.momin.2024@gmail.com',
-        to: `${email}`,
-        subject: 'Sending Email using Node.js',
-        text: 'That was easy!'
-    };
-    var sqlemail = `select * from users where email = "${email}"`
-    var [emaildata] = await con.query(sqlemail)
+//         }
+//     }
+//     else {
+//         console.log(" password not match");
+//         res.status(400)
 
-    if (emaildata.length == 0) {
-        console.log("sdsdvgrd");
-        transporter.sendMail(mailOptions, function (error, info) {
-            if (error) {
-                console.log(error);
-            } else {
-                console.log('Email sent: ' + info.response);
-            }
-        });
-        var slat = makeid(4)
-        var password = md5(req.body.passwords + slat);
-        var conformpassword = md5(req.body.conformpassword + slat);
-        var key = makeid(12)
-        var sql = `insert into users (firstname  ,lastname , email  ,mobilenumber  ,userid  ,passwords  ,conformpassword  ,salt  ,user_keys ) values ("${data.firstname}" , "${data.lastname}" ,"${data.email}" ,"${data.mobilenumber}" , "${data.userid}" ,'${password}' ,'${conformpassword}' ,"${slat}" ,"${key}" ) `
-        var [id] = await con.query(sql)
-        var id2 = id.insertId;
-        res.status(200).json({ key: key })
-    }
-    else {
+//     }
+//     // console.log(sql);
+//     // console.log(fetchdata[0].salt, fetchdata[0].user_keys);
 
-        res.status(400).json();
+//     res.end()
 
-    }
 
-    function makeid(length) {
-        let result = '';
-        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        const charactersLength = characters.length;
-        let counter = 0;
-        while (counter < length) {
-            result += characters.charAt(Math.floor(Math.random() * charactersLength));
-            counter += 1;
-        }
-        return result;
-    }
+// })
 
 
 
-})
 
-//dashbord
-app.get("/dashbord", validation1, (req, res) => {
-    res.render("dashbord")
-})
+// app.get("/forgetpassword", async (req, res) => {
+//     try {
+//         res.render("forget")
+
+//     }
+//     catch (err) {
+//         res.send(err)
+//     }
+// })
+
+
+// app.post("/forgetpassword", async (req, res) => {
+//     try {
+//         console.log(req.body);
+//         if (req.body.email && req.body.passwords == "" && req.body.conformpassword == "") {
+
+//             console.log("fetch email");
+//             console.log(req.body);
+//             var sql = `select * from users where email = "${req.body.email}"`;
+//             var [data] = await con.query(sql);
+//             console.log(sql);
+//             // console.log(data);
+
+//             if (data.length > 0) {
+//                 res.status(200).json(data);
+//             }
+//             else {
+//                 res.status(400).json({ massage: "email is not register" })
+
+//             }
+
+//         }
+//         else {
+
+//             console.log("forget passwords");
+//             console.log(req.body);
+//             let email = req.body.email;
+//             let sql = `select * from users where email = "${email}"`
+//             var [emaildata] = await con.query(sql);
+//             console.log(emaildata);
+//             let salt = emaildata[0].salt;
+//             console.log(salt);
+//             pass = req.body.passwords
+//             pass += salt
+//             console.log(pass);
+//             let password = md5(pass);
+//             let conformpassword = md5(req.body.conformpassword + salt);
+//             console.log(password + "and" + conformpassword);
+
+//             let updatesql = `update users set passwords = '${password}' ,conformpassword = '${conformpassword}' where user_id = ${emaildata[0].user_id}`
+//             console.log(updatesql);
+//             try {
+//                 var [data] = await con.query(updatesql)
+//                 console.log("SFSF" + data.affectedRows);
+//                 res.status(200).json({ massage: "pasword set " })
+//             }
+//             catch (err) {
+//                 return res.json({ massage: err })
+//             }
+
+//         }
+//     }
+//     catch (err) {
+//         res.send(err)
+//     }
+// })
+
+
+
+// app.get("/registerusingemail", async (req, res) => {
+//     id2 = ""
+//     registerkey = 1
+//     res.render('registerusingemail', { id2, registerkey })
+// })
+
+// app.post("/registerusingemail", async (req, res) => {
+//     // alert("axdacd")
+//     var data = req.body
+//     console.log(data);
+//     var email = req.body.email
+//     console.log(email);
+//     var transporter = nodemailer.createTransport({
+//         service: 'gmail',
+//         auth: {
+//             user: 'kamyab.momin.2024@gmail.com',
+//             pass: '8128744072k'
+//         }
+//     });
+
+//     var mailOptions = {
+//         from: 'kamyab.momin.2024@gmail.com',
+//         to: `${email}`,
+//         subject: 'Sending Email using Node.js',
+//         text: 'That was easy!'
+//     };
+//     var sqlemail = `select * from users where email = "${email}"`
+//     var [emaildata] = await con.query(sqlemail)
+
+//     if (emaildata.length == 0) {
+//         console.log("sdsdvgrd");
+//         transporter.sendMail(mailOptions, function (error, info) {
+//             if (error) {
+//                 console.log(error);
+//             } else {
+//                 console.log('Email sent: ' + info.response);
+//             }
+//         });
+//         var slat = makeid(4)
+//         var password = md5(req.body.passwords + slat);
+//         var conformpassword = md5(req.body.conformpassword + slat);
+//         var key = makeid(12)
+//         var sql = `insert into users (firstname  ,lastname , email  ,mobilenumber  ,userid  ,passwords  ,conformpassword  ,salt  ,user_keys ) values ("${data.firstname}" , "${data.lastname}" ,"${data.email}" ,"${data.mobilenumber}" , "${data.userid}" ,'${password}' ,'${conformpassword}' ,"${slat}" ,"${key}" ) `
+//         var [id] = await con.query(sql)
+//         var id2 = id.insertId;
+//         res.status(200).json({ key: key })
+//     }
+//     else {
+
+//         res.status(400).json();
+
+//     }
+
+//     function makeid(length) {
+//         let result = '';
+//         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+//         const charactersLength = characters.length;
+//         let counter = 0;
+//         while (counter < length) {
+//             result += characters.charAt(Math.floor(Math.random() * charactersLength));
+//             counter += 1;
+//         }
+//         return result;
+//     }
+
+
+
+// })
+
+// //dashbord
+// app.get("/dashbord", validation1, (req, res) => {
+//     res.render("dashbord")
+// })
 
 
 //tic tak to 
-app.get("/tictacto", validation1, (req, res) => {
-    res.render("tictacto")
-})
+// app.get("/tictacto", validation1, (req, res) => {
+//     res.render("tictacto")
+// })
 
 
 //event table 
@@ -1247,20 +1248,23 @@ app.get("/result", async (req, res) => {
     const numOfResults = result.length;
     const numberOfPages = Math.ceil(numOfResults / resultsPerPage);
     let page = req.query.page ? Number(req.query.page) : 1;
+    console.log(page + "page numbner");
     if (page > numberOfPages) {
-        res.redirect('/?page=' + encodeURIComponent(numberOfPages));
+        res.redirect('/result/?page=' + encodeURIComponent(numberOfPages));
     } else if (page < 1) {
-        res.redirect('/?page=' + encodeURIComponent('1'));
+
+        res.redirect('/result/?page=' + encodeURIComponent('1'));
     }
 
     const startingLimit = (page - 1) * resultsPerPage;
+    console.log(startingLimit);
 
     var sql = `SELECT  exameresult.student_id ,studentmaster.student_name, (select sum(obtain_theory_marks )   from  exameresult where exame_type = 2 and  exameresult.student_id = studentmaster.student_id  group by student_id) as totaltheory2 ,(select sum(obtain_theory_marks )   from  exameresult where exame_type = 1 and exameresult.student_id = studentmaster.student_id   group by student_id) as totaltheory1 , (select sum(obtain_practical_marks)    from  exameresult where exame_type = 2 and  exameresult.student_id = studentmaster.student_id  group by student_id)  as totalpractical2 ,(select sum(obtain_practical_marks)   from  exameresult where exame_type = 1 and exameresult.student_id = studentmaster.student_id   group by student_id) as totalpractical1 , (select sum(obtain_practical_marks)  from  exameresult where exame_type = 3  and exameresult.student_id = studentmaster.student_id  group by student_id) as totalpractical3,(select sum(obtain_theory_marks ) from  exameresult where exame_type = 3  and exameresult.student_id = studentmaster.student_id  group by student_id)  as totaltheory3  FROM  studentmaster JOIN exameresult  on studentmaster.student_id  = exameresult.student_id group by studentmaster.student_id   LIMIT ${startingLimit},${resultsPerPage}`;
-
+    console.log(sql);
 
     var [result] = await con.query(sql)
     alldata = JSON.parse(JSON.stringify(result));
-    console.log(Number(alldata[1].totalpractical1) + Number(alldata[1].totalpractical1));
+
     res.render('result1', { data: alldata, page, numberOfPages })
 
 })
