@@ -940,46 +940,46 @@ app.use(route)
 
 
 
-app.get("/tablefetchapi", validation1, (req, res) => {
+// app.get("/tablefetchapi", validation1, (req, res) => {
 
-    res.render('tablefetchapi')
-})
+//     res.render('tablefetchapi')
+// })
 
-app.get("/details", validation1, (req, res) => {
+// app.get("/details", validation1, (req, res) => {
 
-    res.render('detailstablefetchapi')
-})
-
-
-
-
-app.get("/listing", async (req, res) => {
-    res.status(200);
-    console.log("SVFS");
-
-    // con.connect(function (err) {
-    //     if (err) {
-    //         console.log("eror")
-    //     };
-    //     console.log("Connected!");
+//     res.render('detailstablefetchapi')
+// })
 
 
 
-    var sql = "select * from student  LIMIT  50000 ";
-    var [result] = await con.query(sql)
-    // con.query(sql, function (error, result) {
-    //     if (error) throw error;
+
+// app.get("/listing", async (req, res) => {
+//     res.status(200);
+//     console.log("SVFS");
+
+//     // con.connect(function (err) {
+//     //     if (err) {
+//     //         console.log("eror")
+//     //     };
+//     //     console.log("Connected!");
 
 
 
-    alldata = JSON.parse(JSON.stringify(result));
+//     var sql = "select * from student  LIMIT  50000 ";
+//     var [result] = await con.query(sql)
+//     // con.query(sql, function (error, result) {
+//     //     if (error) throw error;
 
-    res.render('listing1', { data: alldata })
 
-    //         });
-    //     })
 
-})
+//     alldata = JSON.parse(JSON.stringify(result));
+
+//     res.render('listing1', { data: alldata })
+
+//     //         });
+//     //     })
+
+// })
 
 const resultsPerPage = 30;
 app.get('/pagindindex', async (req, res) => {

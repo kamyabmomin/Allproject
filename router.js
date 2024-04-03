@@ -3,6 +3,7 @@ const { homePage, registerData, keyCompare, login, loginData, forgetPassword, fo
 const { validation1 } = require("./tokenvalidation");
 const { writeData, more } = require("./controller/crude_id_file");
 const { save, allList, deleteId, updateId, updateIdPost, city } = require("./controller/employe_form");
+const { listing_student } = require("./controller/listing_student");
 const router = express.Router()
 
 
@@ -75,6 +76,9 @@ router.route("/tablefetchapi").get(validation1, (req, res) => {
 router.route("/details").get( validation1, (req, res) => {
     res.render('fetch_api/detailstablefetchapi')
 })
+
+//listing_student
+router.route("/listing").get(validation1 ,listing_student)
 
 
 module.exports = router;
