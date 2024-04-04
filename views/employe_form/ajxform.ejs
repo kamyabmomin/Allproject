@@ -63,7 +63,8 @@ body {
       </select>
       <label for="state">STATE :</label>
       <select style="margin-right: 140px" id="state" name="state" onchange="myFunction()">
-        <option value="5" selected>GUJRAT</option>
+        <option value="non" disabled selected>Select Your state:</option>
+        <option value="5" >GUJRAT</option>
         <option value="1">MP</option>
         <option value="2">UP</option>
       </select>
@@ -929,9 +930,14 @@ document.getElementById("next").style.display = "block"
 
   function incress() {
     var divelement = document.getElementById("refreance")
+    var newdiv = document.createElement("div")
+     newdiv.setAttribute("id" ,"refreance");
+     newdiv.innerHTML='\n\n            <label for="name1">name:</label>\n            <input style="margin-right: 50px" type="text" id="name1" name="name1" value="" placeholder="ENTER NAME">\n\n            <label for="contactnumber1">contactnumber :</label>\n            <input style="margin-right: 50px" type="text" name="contactnumber1" value="" placeholder="ENTER content number" id="contactnumber1"><span id="numbererror1"></span>\n\n            <label for="relation1">relation:</label>\n            <input style="margin-right: 50px" name="relation1" value="" placeholder="ENTER relation" type="text" id="relation1">\n          '
     var maindiv = document.getElementById("main");
+
     let clondiv = divelement.cloneNode(true)
-    maindiv.appendChild(clondiv)
+    // console.log(clondiv);
+    maindiv.appendChild(newdiv)
   }
 
   function decress() {
@@ -946,9 +952,16 @@ document.getElementById("next").style.display = "block"
 
   function incresswork() {
     var divelement = document.getElementById("copmny1")
+     var newdiv = document.createElement("div")
+     newdiv.setAttribute("id" ,"copmny1");
+     newdiv.innerHTML= '\n            <lable for="compnyname">COMPNY NAME</lable>\n            <input type="text" name="compnyname1" value="" id="compnyname1" placeholder="ENTER COMPNY NAME">\n\n            <label for="designation">DESIGNATION</label>\n            <input type="text" id="designation1" name="designation1" value="" placeholder="DESIGNATION">\n\n            <label for="fromdate">FROM</label>\n            <input type="text" id="fromdate1" name="fromdate1" value="" placeholder="DATE">\n\n            <label for="todate">TO</label>\n            <input type="text" id="todate1" name="todate1" value="" placeholder="DATE">\n            <span id="exp1"></span>\n            <br>\n        '
+     console.log(newdiv);
     var maindiv = document.getElementById("workexperiance");
     let clondiv = divelement.cloneNode(true)
-    maindiv.appendChild(clondiv)
+    // console.log("workexperiance");
+      // console.log(clondiv);
+    
+    maindiv.appendChild(newdiv)
   }
 
   function decresswork() {
@@ -962,9 +975,13 @@ document.getElementById("next").style.display = "block"
 
   function incresseducation() {
     var divelement = document.getElementById("ed1")
+    var newdiv = document.createElement("div")
+     newdiv.setAttribute("id" ,"ed1");
+     newdiv.innerHTML='\n            <label for="nameofboard">NAME OF BOARD</label>\n            <input style="margin-right: 70px;" type="text" name="nameofboard1" value="" id="nameofboard" placeholder=" PLEACE ENTER YOUR BORD NAME">\n            <span id="nameofboard1error"></span>\n            <lable for="paSSINGYEAR">PASSING YEAR</lable>\n            <input style="margin-right: 70px;" type="text" name="passingyear1" value="" id="passingyear" placeholder="ENTER PASSING YEAR">\n            <span id="passingyearsscerror"></span>\n\n            <label for="persentage">persentage</label>\n            <input type="text" id="persentage" name="persentage1" value="" placeholder="ENTER persentage">\n            <span id="persentagesscerror"></span>\n\n          '
     var maindiv = document.getElementById("educations");
     let clondiv = divelement.cloneNode(true)
-    maindiv.appendChild(clondiv)
+    // console.log(clondiv);
+    maindiv.appendChild(newdiv)
   }
 
   function decresseducation() {

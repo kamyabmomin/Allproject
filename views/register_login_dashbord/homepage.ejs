@@ -217,9 +217,12 @@
       if (data.status == 200) {
         let data1 = await data.json();
         statuse = data.status;
-        console.log(statuse);
+        // console.log(statuse);
         var key = data1
+        // console.log(key);
         var passwordkey = key.key
+        var id = key.id;
+        // console.log("this is last inserted id " +id);
         console.log(passwordkey);
         const node = document.createElement("a");
         if (statuse == 200) {
@@ -231,7 +234,7 @@
 
           title: "Good job!",
           text: "copy this url and active registration ",
-          text: `http://localhost:6800/keycompare?key=${passwordkey}`,
+          text: `http://localhost:6800/keycompare?key=${passwordkey}&id=${id}`,
 
           showConfirmButton: false,
 

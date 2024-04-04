@@ -12,7 +12,7 @@ exports.paging = async (req, res) => {
         res.redirect(`/pagindindex?page=${numberOfPages}`);
         return
     } else if (page < 1) {
-        res.redirect('/pagindindex?page=' + encodeURIComponent('1'));
+        res.redirect('/pagindindex?page=1');
         return
     }
     const startingLimit = (page - 1) * resultsPerPage;

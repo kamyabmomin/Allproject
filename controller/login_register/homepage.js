@@ -20,8 +20,10 @@ exports.registerData = async (req, res) => {
         var key = makeid(12)
         var sql = `insert into users (firstname  ,lastname , email  ,mobilenumber  ,userid  ,passwords  ,conformpassword  ,salt  ,user_keys ) values ("${data.firstname}" , "${data.lastname}" ,"${data.email}" ,"${data.mobilenumber}" , "${data.userid}" ,'${password}' ,'${conformpassword}' ,"${slat}" ,"${key}" ) `
         var [id] = await con.query(sql)
+
         var id2 = id.insertId;
-        res.status(200).json({ key: key })
+        // console.log(id2);
+        res.status(200).json({ key: key, id: id2 })
     }
     else {
 
@@ -44,6 +46,7 @@ exports.registerData = async (req, res) => {
 }
 exports.keyCompare = async (req, res) => {
     var key = req.query.key;
+    var id = req.query.id
     sql = `select  user_keys ,timestemps from users where user_keys="${key}"`
     var [data] = await con.query(sql)
     var currantdate = new Date()
@@ -51,6 +54,9 @@ exports.keyCompare = async (req, res) => {
     if (data[0].user_keys == key && timediffrent < 40000) {
 
         var registerkey = 1
+        var sql = `UPDATE users SET timestemp = 'yes' WHERE user_id = ${id};`
+        // var sql = `insert into users (timestemp) values ("yes") where user_id = ${id}`;
+        var [data] = await con.query(sql);
         res.render("register_login_dashbord/login", { registerkey })
     }
     else {
@@ -68,24 +74,24 @@ exports.login = (req, res) => {
 exports.loginData = async (req, res) => {
 
     let data = req.body;
-    console.log(data);
+    // console.log(data);
     let sql = ` select *  from users where email = '${req.body.email}' `;
     var [fetchdata] = await con.query(sql);
-    console.log(fetchdata);
+    // console.log(fetchdata);
     if (fetchdata.length > 0) {
         const salt = fetchdata[0].salt;
-        console.log(salt);
+        // console.log(salt);
         const password = md5(req.body.passwords + salt)
-        console.log(password);
+        // console.log(password);
 
 
-        if (password == fetchdata[0].passwords) {
+        if (password == fetchdata[0].passwords && fetchdata[0].timestemp == "yes") {
             console.log("password match");
             const token = jwt.sign({ userId: req.body.email }, 'your-secret-key', {
                 expiresIn: '1h',
             });
             // authentication()
-            console.log(token);
+            // console.log(token);
             res.cookie("token", token).status(200).json({ token: token })
 
 
