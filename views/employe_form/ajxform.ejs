@@ -12,7 +12,7 @@ body {
       color: red;
     }
     .card{
-      background-color: rgb(105, 241, 196);
+      background-color: rgb(127, 208, 255);
     }
   </style>
   <meta charset="UTF-8" />
@@ -343,9 +343,15 @@ body {
   var count = 1
 
   function nextpage() {
+    // if(count = 6){
+    //   count = 7
+    // }
 
 
     cardnone = `card${count}`
+    // console.log(count + "first");
+    // console.log(cardnone);
+
     validate()
 
     if (validate() == true) {
@@ -360,25 +366,32 @@ body {
 
   function validate() {
     if (count == 1) {
+      // console.log(count);
       return card1()
 
     }
     if (count == 2) {
+      console.log(count);
       return card2()
     }
     if (count == 3) {
+      // console.log(count);
       return card3()
     }
     if (count == 4) {
+      // console.log(count);
       return card4()
     }
     if (count == 5) {
+      // console.log(count);
       return card5()
     }
     if (count == 6) {
+      // console.log(count);
       return card6()
     }
     if (count == 7) {
+      // console.log(count);
       return card7()
     }
   }
@@ -806,13 +819,14 @@ document.getElementById("next").style.display = "block"
 
 
   function card7() {
-
+ 
     var span = document.querySelectorAll("span")
     span.forEach(element => {
       element.innerHTML = ""
     });
 
     let Preferdlocation = document.forms["myForm"]["Preferdlocation"].value;
+    console.log(Preferdlocation);
     let Noticeperiod = document.forms["myForm"]["Noticeperiod"].value;
     let ectc = document.forms["myForm"]["ectc"].value;
     let cctc = document.forms["myForm"]["cctc"].value;
@@ -848,6 +862,10 @@ document.getElementById("next").style.display = "block"
   }
 
   document.getElementById("employeform22").addEventListener("click", async (e) => {
+
+      let card77 = card7()
+      // console.log(card77);
+      if(card77 == true){
     var form = document.getElementById("employeform2")
     let basic_detailss = new FormData(form);
 
@@ -877,6 +895,7 @@ document.getElementById("next").style.display = "block"
           icon: "success"
         });
     }
+  }
   })
 
 
