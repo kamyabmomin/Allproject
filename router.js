@@ -97,14 +97,14 @@ router.route("/result").get(validation1, result)
 router.route("/more").get(validation1, moreDetails)
 
 //time_convertor 
-router.route("/timeconvertor").get(validation1 , timeConvertor)
+router.route("/timeconvertor").get(validation1, timeConvertor)
 //component
-router.route("/component").get(validation1 ,component )
+router.route("/component").get(validation1, component)
 
 //delimiterserch
-router.route("/delimiterserch").get(validation1 ,delimiterSarch );
+router.route("/delimiterserch").get(validation1, delimiterSarch);
 //cube 
-router.route("/kucube").get(validation1 ,(req, res) => {
+router.route("/kucube").get(validation1, (req, res) => {
     res.render("cube/cube")
 });
 module.exports = router;
