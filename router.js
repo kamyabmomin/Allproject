@@ -10,14 +10,15 @@ const { result, moreDetails } = require("./controller/student_result");
 const { timeConvertor } = require("./controller/time_convertor");
 const { component } = require("./controller/component");
 const { delimiterSarch } = require("./controller/delimiterserch");
+const { loginRegisterRoute } = require("./register_login_route");
 const router = express.Router()
 
 
 //login_register_dashbord
-router.route("/").get(homePage).post(registerData);
-router.route("/keycompare").get(keyCompare);
-router.route("/login").get(login).post(loginData);
-router.route("/forgetpassword").get(forgetPassword).post(forgetPasswordData);
+router.route("/").get(loginRegisterRoute, homePage).post(registerData);
+router.route("/keycompare").get(loginRegisterRoute, keyCompare);
+router.route("/login").get(loginRegisterRoute, login).post(loginData);
+router.route("/forgetpassword").get(loginRegisterRoute, forgetPassword).post(forgetPasswordData);
 router.route("/dashbord").get(validation1, (req, res) => {
     res.render("register_login_dashbord/dashbord")
 })
