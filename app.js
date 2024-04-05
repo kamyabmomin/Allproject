@@ -4,7 +4,6 @@ const port = 6800;
 const cookieParser = require('cookie-parser')
 const route = require("./router")
 const bodyParser = require("body-parser");
-const Swal = require('sweetalert2')
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.json())
