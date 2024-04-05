@@ -13,7 +13,7 @@ exports.validation1 = async (req, res, next) => {
             if (err) {
                 // console.log("token not match ");
                 var registerkey = 0
-                res.render("login", { registerkey })
+                res.render("register_login_dashbord/login", { registerkey })
             }
             else {
                 console.log("cookies found");

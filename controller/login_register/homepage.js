@@ -8,20 +8,20 @@ exports.homePage = async (req, res) => {
     res.render('register_login_dashbord/homepage', { id2, registerkey })
 }
 exports.registerData = async (req, res) => {
-    var data = req.body
-    var email = req.body.email
-    var sqlemail = `select * from users where email = "${email}"`
-    var [emaildata] = await con.query(sqlemail)
+    let data = req.body
+    let email = req.body.email
+    let sqlemail = `select * from users where email = "${email}"`
+    let [emaildata] = await con.query(sqlemail)
 
     if (emaildata.length == 0) {
-        var slat = makeid(4)
-        var password = md5(req.body.passwords + slat);
-        var conformpassword = md5(req.body.conformpassword + slat);
-        var key = makeid(12)
-        var sql = `insert into users (firstname  ,lastname , email  ,mobilenumber  ,userid  ,passwords  ,conformpassword  ,salt  ,user_keys ) values ("${data.firstname}" , "${data.lastname}" ,"${data.email}" ,"${data.mobilenumber}" , "${data.userid}" ,'${password}' ,'${conformpassword}' ,"${slat}" ,"${key}" ) `
-        var [id] = await con.query(sql)
+        let slat = makeid(4)
+        let password = md5(req.body.passwords + slat);
+        let conformpassword = md5(req.body.conformpassword + slat);
+        let key = makeid(12)
+        let sql = `insert into users (firstname  ,lastname , email  ,mobilenumber  ,userid  ,passwords  ,conformpassword  ,salt  ,user_keys ) values ("${data.firstname}" , "${data.lastname}" ,"${data.email}" ,"${data.mobilenumber}" , "${data.userid}" ,'${password}' ,'${conformpassword}' ,"${slat}" ,"${key}" ) `
+        let [id] = await con.query(sql)
 
-        var id2 = id.insertId;
+        let id2 = id.insertId;
         // console.log(id2);
         res.status(200).json({ key: key, id: id2 })
     }
@@ -45,30 +45,30 @@ exports.registerData = async (req, res) => {
 
 }
 exports.keyCompare = async (req, res) => {
-    var key = req.query.key;
-    var id = req.query.id
+    let key = req.query.key;
+    let id = req.query.id
     sql = `select  user_keys ,timestemps from users where user_keys="${key}"`
-    var [data] = await con.query(sql)
-    var currantdate = new Date()
+    let [data] = await con.query(sql)
+    let currantdate = new Date()
     timediffrent = currantdate - data[0].timestemps
     if (data[0].user_keys == key && timediffrent < 40000) {
 
-        var registerkey = 1
-        var sql = `UPDATE users SET timestemp = 'yes' WHERE user_id = ${id};`
-        // var sql = `insert into users (timestemp) values ("yes") where user_id = ${id}`;
-        var [data] = await con.query(sql);
+        let registerkey = 1
+        let sql = `UPDATE users SET timestemp = 'yes' WHERE user_id = ${id};`
+        // let sql = `insert into users (timestemp) values ("yes") where user_id = ${id}`;
+        let [data] = await con.query(sql);
         res.render("register_login_dashbord/login", { registerkey })
     }
     else {
-        var sql = `delete from users where user_keys="${key}"`
-        var data = con.query(sql)
-        var registerkey = 0
+        let sql = `delete from users where user_keys="${key}"`
+        let data = con.query(sql)
+        let registerkey = 0
         res.render("register_login_dashbord/homepage", { registerkey })
     }
 
 }
 exports.login = (req, res) => {
-    var registerkey = 0
+    let registerkey = 0
     res.render("register_login_dashbord/login", { registerkey })
 }
 exports.loginData = async (req, res) => {
@@ -76,7 +76,7 @@ exports.loginData = async (req, res) => {
     let data = req.body;
     // console.log(data);
     let sql = ` select *  from users where email = '${req.body.email}' `;
-    var [fetchdata] = await con.query(sql);
+    let [fetchdata] = await con.query(sql);
     // console.log(fetchdata);
     if (fetchdata.length > 0) {
         const salt = fetchdata[0].salt;
@@ -86,7 +86,7 @@ exports.loginData = async (req, res) => {
 
 
         if (password == fetchdata[0].passwords && fetchdata[0].timestemp == "yes") {
-            console.log("password match");
+            // console.log("password match");
             const token = jwt.sign({ userId: req.body.email }, 'your-secret-key', {
                 expiresIn: '1h',
             });
@@ -96,13 +96,13 @@ exports.loginData = async (req, res) => {
 
 
         } else {
-            console.log("password not match");
+            // console.log("password not match");
             res.status(400)
 
         }
     }
     else {
-        console.log(" password not match");
+        // console.log(" password not match");
         res.status(400)
 
     }
@@ -129,8 +129,8 @@ exports.forgetPasswordData = async (req, res) => {
 
             console.log("fetch email");
             console.log(req.body);
-            var sql = `select * from users where email = "${req.body.email}"`;
-            var [data] = await con.query(sql);
+            let sql = `select * from users where email = "${req.body.email}"`;
+            let [data] = await con.query(sql);
             console.log(sql);
             // console.log(data);
 
@@ -145,26 +145,26 @@ exports.forgetPasswordData = async (req, res) => {
         }
         else {
 
-            console.log("forget passwords");
-            console.log(req.body);
+            // console.log("forget passwords");
+            // console.log(req.body);
             let email = req.body.email;
             let sql = `select * from users where email = "${email}"`
-            var [emaildata] = await con.query(sql);
-            console.log(emaildata);
+            let [emaildata] = await con.query(sql);
+            // console.log(emaildata);
             let salt = emaildata[0].salt;
-            console.log(salt);
+            // console.log(salt);
             pass = req.body.passwords
             pass += salt
-            console.log(pass);
+            // console.log(pass);
             let password = md5(pass);
             let conformpassword = md5(req.body.conformpassword + salt);
-            console.log(password + "and" + conformpassword);
+            // console.log(password + "and" + conformpassword);
 
             let updatesql = `update users set passwords = '${password}' ,conformpassword = '${conformpassword}' where user_id = ${emaildata[0].user_id}`
-            console.log(updatesql);
+            // console.log(updatesql);
             try {
-                var [data] = await con.query(updatesql)
-                console.log("SFSF" + data.affectedRows);
+                let [data] = await con.query(updatesql)
+                // console.log("SFSF" + data.affectedRows);
                 res.status(200).json({ massage: "pasword set " })
             }
             catch (err) {

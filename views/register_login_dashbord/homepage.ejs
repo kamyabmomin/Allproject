@@ -76,7 +76,7 @@
         <br>
 
         <div>
-          <label for="mobilrno">monile no</label>
+          <label for="mobilenumber">Mobile no</label>
           <input type="text" name="mobilenumber" id="mobilenumber">
           <span id="numbererror"></span>
         </div>
@@ -122,27 +122,27 @@
 </body>
 <script>
   document.getElementById("register").addEventListener("click", async () => {
-    var span = document.querySelectorAll("span")
-    console.log(span);
+    let span = document.querySelectorAll("span")
+    // console.log(span);
     span.forEach(element => {
       element.innerHTML = ""
     });
 
     function valid() {
-      var firstname = document.getElementById("firstname")
+      let firstname = document.getElementById("firstname")
         .value;
-      var lastname = document.getElementById("lastname")
+      let lastname = document.getElementById("lastname")
         .value;
-      var email = document.getElementById("email").value;
-      var mobilenumber = document.getElementById(
+      let email = document.getElementById("email").value;
+      let mobilenumber = document.getElementById(
         "mobilenumber").value;
-      var userid = document.getElementById("userid").value;
-      var passwords = document.getElementById("passwords")
+      let userid = document.getElementById("userid").value;
+      let passwords = document.getElementById("passwords")
         .value;
-      var conformpassword = document.getElementById(
+      let conformpassword = document.getElementById(
         "conformpassword").value;
-      console.log(firstname, lastname, email, mobilenumber,
-        userid, passwords, conformpassword);
+      // console.log(firstname, lastname, email, mobilenumber,
+        // userid, passwords, conformpassword);
       if (firstname == "") {
         document.getElementById("firstnameerror")
           .innerHTML =
@@ -200,12 +200,12 @@
     }
     let validation = valid()
     if (validation == true) {
-      var form = document.getElementById("registerform")
+      let form = document.getElementById("registerform")
       let basic_detailss = new FormData(form);
       const params = new URLSearchParams(basic_detailss);
       const response = await new Response(params).text();
-      console.log(response);
-      console.log(typeof(response))
+      // console.log(response);
+      // console.log(typeof(response))
       let data = await fetch("http://localhost:6800/", {
         method: "post",
         headers: {
@@ -218,12 +218,12 @@
         let data1 = await data.json();
         statuse = data.status;
         // console.log(statuse);
-        var key = data1
+        let key = data1
         // console.log(key);
-        var passwordkey = key.key
-        var id = key.id;
+        let passwordkey = key.key
+        let id = key.id;
         // console.log("this is last inserted id " +id);
-        console.log(passwordkey);
+        // console.log(passwordkey);
         const node = document.createElement("a");
         if (statuse == 200) {
           document.getElementById("msg").innerHTML =
@@ -243,7 +243,7 @@
 
 
       } else {
-        console.log("email exist");
+        // console.log("email exist");
         document.getElementById("emailerror").innerHTML =
           "email is exist enter new email !! "
 

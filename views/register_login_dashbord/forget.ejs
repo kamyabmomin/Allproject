@@ -72,16 +72,16 @@
     document.getElementById("forget").addEventListener("click" , async(req , res)=>{
         document.getElementById("setpassword").style.display ="none"
         document.getElementById("emailerror").innerHTML = ""
-        var email = document.getElementById("email").value;
+        let email = document.getElementById("email").value;
 
         if(email != ""){
 
-        var form = document.getElementById("registerform")
+        let form = document.getElementById("registerform")
       let basic_detailss = new FormData(form);
       const params = new URLSearchParams(basic_detailss);
       const response = await new Response(params).text();
-      console.log(response);
-      console.log(typeof(response))
+      // console.log(response);
+      // console.log(typeof(response))
       let data = await fetch("http://localhost:6800/forgetpassword", {
         method: "post",
         headers: {
@@ -89,7 +89,7 @@
         },
         body: response
       })
-      var alldata = await data.json()
+      let alldata = await data.json()
 
  if(data.status == 200 ){
     document.getElementById("setpassword").style.display ="block"
@@ -98,7 +98,7 @@
  }
  else{
     document.getElementById("emailerror").innerHTML = "email is not register"
-    console.log( data);
+    // console.log( data);
  }}
  else{
     document.getElementById("emailerror").innerHTML = "email is emapty"
@@ -131,7 +131,7 @@
         body: response
       })
       var alldata = await data.json()
-    console.log(alldata.massage);
+    // console.log(alldata.massage);
     Swal.fire({
 
 title: "Good job!",
@@ -143,9 +143,9 @@ icon: "success"
     })
 
     function valid() {
-      var passwords = document.getElementById("passwords")
+      let passwords = document.getElementById("passwords")
         .value;
-      var conformpassword = document.getElementById(
+      let conformpassword = document.getElementById(
         "conformpassword").value;
 
  
@@ -185,7 +185,7 @@ icon: "success"
 
     function emailvalidate(){
 
-        var email = document.getElementById("email").value;
+        let email = document.getElementById("email").value;
               emailPattern =
         /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
       if (emailPattern.test(email) == false || email == "") {

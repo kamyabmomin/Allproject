@@ -61,16 +61,16 @@
 
 <script>
   document.getElementById("login").addEventListener("click", async () => {
-    var validations = validation()
-    console.log(validations);
+    let validations = validation()
+    // console.log(validations);
     if (validations == true) {
 
-      var form = document.getElementById("registerform")
+      let form = document.getElementById("registerform")
       let basic_detailss = new FormData(form);
       const params = new URLSearchParams(basic_detailss);
       const response = await new Response(params).text();
-      console.log(response);
-      console.log(typeof(response))
+      // console.log(response);
+      // console.log(typeof(response))
       let data = await fetch("http://localhost:6800/login", {
         method: "post",
         headers: {
@@ -104,8 +104,8 @@
 
   function validation() {
 
-    var email = document.getElementById("email").value;
-    var passwords = document.getElementById("passwords")
+    let email = document.getElementById("email").value;
+    let passwords = document.getElementById("passwords")
       .value;
     emailPattern =
       /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
