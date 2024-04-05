@@ -3,9 +3,12 @@ const resultsPerPage = 30;
 exports.paging = async (req, res) => {
     let data = req.body;
     // console.log(Object.keys(data))
-    let sql = 'SELECT * FROM student';
+    let sql = 'select count(id) as totalstudent from student';
     let [result] = await con.query(sql)
-    const numOfResults = result.length;
+    // console.log(result[0].totalstudent);
+    // let totalstudent = result[0].totalstudent
+    const numOfResults = result[0].totalstudent;
+    // console.log(numOfResults);
     const numberOfPages = Math.ceil(numOfResults / resultsPerPage);
     let page = req.query.page ? Number(req.query.page) : 1;
     if (page > numberOfPages) {
