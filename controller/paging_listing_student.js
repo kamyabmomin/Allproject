@@ -39,8 +39,8 @@ exports.pagingPost = async (req, res) => {
     let key1 = key[2];
     if (key1 == "submit") {
         let sql = `SELECT * FROM student ORDER BY ${colamname} ${order}`;
-        var [result] = await con.query(sql)
-        const numOfResults = result.length;
+        let [result1] = await con.query(sql)
+        const numOfResults = result1.length;
         const numberOfPages = Math.ceil(numOfResults / resultsPerPage);
         let page = req.query.page ? Number(req.query.page) : 1;
         if (page > numberOfPages) {
@@ -50,7 +50,7 @@ exports.pagingPost = async (req, res) => {
         }
         const startingLimit = (page - 1) * resultsPerPage;
         sql = `SELECT * FROM student ORDER BY ${colamname}  ${order} LIMIT ${startingLimit},${resultsPerPage}`;
-        var [result] = await con.query(sql)
+        let [result] = await con.query(sql)
         res.render('paging_student_listing/index1', { data: result, page, numberOfPages });
     }
 }

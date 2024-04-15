@@ -86,17 +86,19 @@ exports.delimiterSarch = async (req, res) => {
             console.log(ages);
             temp.push(ages);
         }
+        let query;
         if (temp.length > 0) {
-            var query = " where " + temp.join(" and ")
+            query = " where " + temp.join(" and ")
         }
-
+        let sql;
+        let nodisplay
         if (!req.query.serch) {
-            var sql = `select * from student  limit 200 `
+            sql = `select * from student  limit 200 `
         }
         else if (temp.length != 0) {
             sql = `select * from student ${query} limit 100 `
         } else {
-            var nodisplay = 0
+            nodisplay = 0
         }
         let [result] = await con.query(sql)
         console.log(result)

@@ -101,10 +101,10 @@
     }
 
     function fetchJSONData() {
-      var age = document.getElementById("bob").value;
-      var mobilenumber = document.getElementById("number").value;
-      var phoneno = /^\d{10}$/;
-      var email = document.getElementById("email").value;
+      let age = document.getElementById("bob").value;
+      let mobilenumber = document.getElementById("number").value;
+      let phoneno = /^\d{10}$/;
+      let email = document.getElementById("email").value;
       const re =
         /^(([^<>()[].,;:\s@\"]+(.[^<>()[].,;:\s@\"]+)*)|(\".+\"))@(([^<>()[].,;:\s@\"]+.)+[^<>()[].,;:\s@\"]{2,})$/i;
       if (isNaN(age) || age < 1 || age > 100) {

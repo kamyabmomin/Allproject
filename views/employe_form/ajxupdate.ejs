@@ -547,13 +547,13 @@
 </body>
 <script>
 
-  var ed1 =  document.querySelectorAll("#ed1");
-  console.log(ed1);
-  var allcard = document.querySelectorAll(".card");
+  let ed1 =  document.querySelectorAll("#ed1");
+  // console.log(ed1);
+  let allcard = document.querySelectorAll(".card");
   allcard.forEach(element => {
     element.style.display = "none"
   });
-  var count = 1
+  let count = 1
 
   function nextpage() {
 
@@ -571,7 +571,7 @@
   }
   function displaynone(i) {
     console.log(i);
-    var card = document.getElementById(i).style.display = "none"
+    let card = document.getElementById(i).style.display = "none"
 
   }
   function validate() {
@@ -626,11 +626,11 @@
       document.getElementById("pre").style.display = "block"
     }
 
-    var card = document.getElementById(i).style.display = "inline"
+    let card = document.getElementById(i).style.display = "inline"
   }
 
   function card1() {
-    var span = document.querySelectorAll("span")
+    let span = document.querySelectorAll("span")
     span.forEach(element => {
       element.innerHTML = ""
     });
@@ -641,7 +641,7 @@
     let addressline1 = document.forms["myForm"]["addressline1"].value;
     let addressline2 = document.forms["myForm"]["addressline2"].value;
     let dateReg = /([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/;
-    var bob = document.forms["myForm"]["bob"].value;
+    let bob = document.forms["myForm"]["bob"].value;
     let email = document.forms["myForm"]["email"].value;
     let number = document.forms["myForm"]["number"].value;
     let zip = document.forms["myForm"]["zip"].value;
@@ -727,7 +727,7 @@
   }
 
   function card2() {
-    var span = document.querySelectorAll("span")
+    let span = document.querySelectorAll("span")
     span.forEach(element => {
       element.innerHTML = ""
     });
@@ -754,7 +754,7 @@
   }
 
   function card3() {
-    var span = document.querySelectorAll("span")
+    let span = document.querySelectorAll("span")
     span.forEach(element => {
       element.innerHTML = ""
     });
@@ -805,7 +805,7 @@
   }
 
   function card4() {
-    var span = document.querySelectorAll("span")
+    let span = document.querySelectorAll("span")
     span.forEach(element => {
       element.innerHTML = ""
     });
@@ -878,7 +878,7 @@
 
   function card5() {
 
-    var span = document.querySelectorAll("span")
+    let span = document.querySelectorAll("span")
     span.forEach(element => {
       element.innerHTML = ""
     });
@@ -976,7 +976,7 @@
 
   function card6() {
 
-    var span = document.querySelectorAll("span")
+    let span = document.querySelectorAll("span")
     span.forEach(element => {
       element.innerHTML = ""
     });
@@ -1014,7 +1014,7 @@
 
   function card7() {
 
-    var span = document.querySelectorAll("span")
+    let span = document.querySelectorAll("span")
     span.forEach(element => {
       element.innerHTML = ""
     });
@@ -1040,7 +1040,7 @@
       return false;
     }
 
-    var ctc = /^\d{6}$/;
+    let ctc = /^\d{6}$/;
     if (ctc.test(ectc) == false || ectc == "") {
       document.getElementById("ectcerror").innerHTML =
         "pleace enter valid expected ctc";
@@ -1056,10 +1056,10 @@
 
   document.getElementById("employeform22").addEventListener("click", async (e) => {
 
-     var card77 = card7()
+     let card77 = card7()
      console.log(card77);
      if(card77 == true){
-    var form = document.getElementById("employeform2");
+    let form = document.getElementById("employeform2");
     let basic_detailss = new FormData(form);
 
 
@@ -1089,9 +1089,9 @@
 
 
   function namechaking(name) {
-    var language = document.forms["myForm"][name].value;
+    let language = document.forms["myForm"][name].value;
 
-    var regName = /^[a-zA-Z\s]*$/;
+    let regName = /^[a-zA-Z\s]*$/;
     if (regName.test(language) == false || language == "") {
       document.getElementById(name + "error").innerHTML =
         "please enter correct name";
@@ -1102,7 +1102,7 @@
   }
 
   function radiovalidation(radioname) {
-    var language = document.forms["myForm"][radioname].value;
+    let language = document.forms["myForm"][radioname].value;
 
     console.log(language.length);
     if (language.length == 0) {
@@ -1116,8 +1116,8 @@
 
 
   function incress() {
-    var divelement = document.getElementById("refreance")
-    var maindiv = document.getElementById("main");
+    let divelement = document.getElementById("refreance")
+    let maindiv = document.getElementById("main");
     let clondiv = divelement.cloneNode(true)
     let divfinal =  clondiv.removeChild(clondiv.lastElementChild);
     console.log(divfinal);
@@ -1125,8 +1125,8 @@
   }
 
   function decress() {
-    var maindiv = document.getElementById("main");
-    var a = maindiv.querySelectorAll("div").length;
+    let maindiv = document.getElementById("main");
+    let a = maindiv.querySelectorAll("div").length;
     if (a > 1) {
       maindiv.removeChild(maindiv.lastElementChild)
     }
@@ -1135,8 +1135,8 @@
 
 
   function incresswork() {
-    var divelement = document.getElementById("copmny1")
-    var maindiv = document.getElementById("workexperiance");
+    let divelement = document.getElementById("copmny1")
+    let maindiv = document.getElementById("workexperiance");
     
     let clondiv = divelement.cloneNode(true)
     let divfinal =  clondiv.removeChild(clondiv.lastElementChild)
@@ -1145,8 +1145,8 @@
   }
 
   function decresswork() {
-    var maindiv = document.getElementById("workexperiance");
-    var a = maindiv.querySelectorAll("div").length;
+    let maindiv = document.getElementById("workexperiance");
+    let a = maindiv.querySelectorAll("div").length;
     if (a > 2) {
       maindiv.removeChild(maindiv.lastElementChild)
     }
@@ -1154,8 +1154,8 @@
   }
 
  async function incresseducation() {
-    var divelement = document.getElementById("ed1")
-    var maindiv = document.getElementById("educations");
+    let divelement = document.getElementById("ed1")
+    let maindiv = document.getElementById("educations");
     let clondiv = divelement.cloneNode(true)
     let divfinal =  await clondiv.removeChild(clondiv.lastElementChild)
     
@@ -1165,8 +1165,8 @@
   }
 
   function decresseducation() {
-    var maindiv = document.getElementById("educations");
-    var a = maindiv.querySelectorAll("div").length;
+    let maindiv = document.getElementById("educations");
+    let a = maindiv.querySelectorAll("div").length;
     if (a > 2) {
       maindiv.removeChild(maindiv.lastElementChild)
     }
@@ -1176,13 +1176,13 @@
   async function myFunction() {
     console.log("scfms");
   document.getElementById("city").innerHTML =""
-  var x = document.getElementById("state").value;
+  let x = document.getElementById("state").value;
   console.log(x);
   
   // x= {
   //   city:"mp"
   // }
-  var state =await  fetch("http://localhost:6800/city/city/city", {
+  let state =await  fetch("http://localhost:6800/city/city/city", {
       method: "post",
       headers: {
         'Content-Type': 'application/json;charset=utf-8'},

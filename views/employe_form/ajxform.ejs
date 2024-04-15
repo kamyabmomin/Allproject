@@ -337,11 +337,11 @@ body {
 </body>
 
 <script>
-  var allcard = document.querySelectorAll(".card");
+  let allcard = document.querySelectorAll(".card");
   allcard.forEach(element => {
     element.style.display = "none"
   });
-  var count = 1
+  let count = 1
 
   function nextpage() {
     // if(count = 6){
@@ -427,17 +427,17 @@ document.getElementById("next").style.display = "block"
       document.getElementById("pre").style.display = "block"
     }
    
-    var card = document.getElementById(i).style.display = "inline"
+    let card = document.getElementById(i).style.display = "inline"
   }
 
   function displaynone(i) {
     console.log(i);
-    var card = document.getElementById(i).style.display = "none"
+    let card = document.getElementById(i).style.display = "none"
 
   }
 
   function card1() {
-    var span = document.querySelectorAll("span")
+    let span = document.querySelectorAll("span")
     span.forEach(element => {
       element.innerHTML = ""
     });
@@ -448,7 +448,7 @@ document.getElementById("next").style.display = "block"
     let addressline1 = document.forms["myForm"]["addressline1"].value;
     let addressline2 = document.forms["myForm"]["addressline2"].value;
     let dateReg = /([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/;
-    var bob = document.forms["myForm"]["bob"].value;
+    let bob = document.forms["myForm"]["bob"].value;
     let email = document.forms["myForm"]["email"].value;
     let number = document.forms["myForm"]["number"].value;
     let zip = document.forms["myForm"]["zip"].value;
@@ -534,7 +534,7 @@ document.getElementById("next").style.display = "block"
   }
 
   function card2() {
-    var span = document.querySelectorAll("span")
+    let span = document.querySelectorAll("span")
     span.forEach(element => {
       element.innerHTML = ""
     });
@@ -561,7 +561,7 @@ document.getElementById("next").style.display = "block"
   }
 
   function card3() {
-    var span = document.querySelectorAll("span")
+    let span = document.querySelectorAll("span")
     span.forEach(element => {
       element.innerHTML = ""
     });
@@ -612,7 +612,7 @@ document.getElementById("next").style.display = "block"
   }
 
   function card4() {
-    var span = document.querySelectorAll("span")
+    let span = document.querySelectorAll("span")
     span.forEach(element => {
       element.innerHTML = ""
     });
@@ -685,7 +685,7 @@ document.getElementById("next").style.display = "block"
 
   function card5() {
 
-    var span = document.querySelectorAll("span")
+    let span = document.querySelectorAll("span")
     span.forEach(element => {
       element.innerHTML = ""
     });
@@ -783,7 +783,7 @@ document.getElementById("next").style.display = "block"
 
   function card6() {
 
-    var span = document.querySelectorAll("span")
+    let span = document.querySelectorAll("span")
     span.forEach(element => {
       element.innerHTML = ""
     });
@@ -821,7 +821,7 @@ document.getElementById("next").style.display = "block"
 
   function card7() {
  
-    var span = document.querySelectorAll("span")
+    let span = document.querySelectorAll("span")
     span.forEach(element => {
       element.innerHTML = ""
     });
@@ -848,7 +848,7 @@ document.getElementById("next").style.display = "block"
       return false;
     }
 
-    var ctc = /^\d{6}$/;
+    let ctc = /^\d{6}$/;
     if (ctc.test(ectc) == false || ectc == "") {
       document.getElementById("ectcerror").innerHTML =
         "pleace enter valid expected ctc";
@@ -867,7 +867,7 @@ document.getElementById("next").style.display = "block"
       let card77 = card7()
       // console.log(card77);
       if(card77 == true){
-    var form = document.getElementById("employeform2")
+    let form = document.getElementById("employeform2")
     let basic_detailss = new FormData(form);
 
 
@@ -902,9 +902,9 @@ document.getElementById("next").style.display = "block"
 
 
   function namechaking(name) {
-    var language = document.forms["myForm"][name].value;
+    let language = document.forms["myForm"][name].value;
 
-    var regName = /^[a-zA-Z\s]*$/;
+    let regName = /^[a-zA-Z\s]*$/;
     if (regName.test(language) == false || language == "") {
       document.getElementById(name + "error").innerHTML =
         "please enter correct name";
@@ -915,7 +915,7 @@ document.getElementById("next").style.display = "block"
   }
 
   function radiovalidation(radioname) {
-    var language = document.forms["myForm"][radioname].value;
+    let language = document.forms["myForm"][radioname].value;
 
     console.log(language.length);
     if (language.length == 0) {
@@ -929,11 +929,11 @@ document.getElementById("next").style.display = "block"
 
 
   function incress() {
-    var divelement = document.getElementById("refreance")
-    var newdiv = document.createElement("div")
+    let divelement = document.getElementById("refreance")
+    let newdiv = document.createElement("div")
      newdiv.setAttribute("id" ,"refreance");
      newdiv.innerHTML='\n\n            <label for="name1">name:</label>\n            <input style="margin-right: 50px" type="text" id="name1" name="name1" value="" placeholder="ENTER NAME">\n\n            <label for="contactnumber1">contactnumber :</label>\n            <input style="margin-right: 50px" type="text" name="contactnumber1" value="" placeholder="ENTER content number" id="contactnumber1"><span id="numbererror1"></span>\n\n            <label for="relation1">relation:</label>\n            <input style="margin-right: 50px" name="relation1" value="" placeholder="ENTER relation" type="text" id="relation1">\n          '
-    var maindiv = document.getElementById("main");
+    let maindiv = document.getElementById("main");
 
     let clondiv = divelement.cloneNode(true)
     // console.log(clondiv);
@@ -941,8 +941,8 @@ document.getElementById("next").style.display = "block"
   }
 
   function decress() {
-    var maindiv = document.getElementById("main");
-    var a = maindiv.querySelectorAll("div").length;
+    let maindiv = document.getElementById("main");
+    let a = maindiv.querySelectorAll("div").length;
     if (a > 1) {
       maindiv.removeChild(maindiv.lastElementChild)
     }
@@ -951,12 +951,12 @@ document.getElementById("next").style.display = "block"
 
 
   function incresswork() {
-    var divelement = document.getElementById("copmny1")
-     var newdiv = document.createElement("div")
+    let divelement = document.getElementById("copmny1")
+     let newdiv = document.createElement("div")
      newdiv.setAttribute("id" ,"copmny1");
      newdiv.innerHTML= '\n            <lable for="compnyname">COMPNY NAME</lable>\n            <input type="text" name="compnyname1" value="" id="compnyname1" placeholder="ENTER COMPNY NAME">\n\n            <label for="designation">DESIGNATION</label>\n            <input type="text" id="designation1" name="designation1" value="" placeholder="DESIGNATION">\n\n            <label for="fromdate">FROM</label>\n            <input type="text" id="fromdate1" name="fromdate1" value="" placeholder="DATE">\n\n            <label for="todate">TO</label>\n            <input type="text" id="todate1" name="todate1" value="" placeholder="DATE">\n            <span id="exp1"></span>\n            <br>\n        '
      console.log(newdiv);
-    var maindiv = document.getElementById("workexperiance");
+    let maindiv = document.getElementById("workexperiance");
     let clondiv = divelement.cloneNode(true)
     // console.log("workexperiance");
       // console.log(clondiv);
@@ -965,8 +965,8 @@ document.getElementById("next").style.display = "block"
   }
 
   function decresswork() {
-    var maindiv = document.getElementById("workexperiance");
-    var a = maindiv.querySelectorAll("div").length;
+    let maindiv = document.getElementById("workexperiance");
+    let a = maindiv.querySelectorAll("div").length;
     if (a > 2) {
       maindiv.removeChild(maindiv.lastElementChild)
     }
@@ -974,19 +974,19 @@ document.getElementById("next").style.display = "block"
   }
 
   function incresseducation() {
-    var divelement = document.getElementById("ed1")
-    var newdiv = document.createElement("div")
+    let divelement = document.getElementById("ed1")
+    let newdiv = document.createElement("div")
      newdiv.setAttribute("id" ,"ed1");
      newdiv.innerHTML='\n            <label for="nameofboard">NAME OF BOARD</label>\n            <input style="margin-right: 70px;" type="text" name="nameofboard1" value="" id="nameofboard" placeholder=" PLEACE ENTER YOUR BORD NAME">\n            <span id="nameofboard1error"></span>\n            <lable for="paSSINGYEAR">PASSING YEAR</lable>\n            <input style="margin-right: 70px;" type="text" name="passingyear1" value="" id="passingyear" placeholder="ENTER PASSING YEAR">\n            <span id="passingyearsscerror"></span>\n\n            <label for="persentage">persentage</label>\n            <input type="text" id="persentage" name="persentage1" value="" placeholder="ENTER persentage">\n            <span id="persentagesscerror"></span>\n\n          '
-    var maindiv = document.getElementById("educations");
+    let maindiv = document.getElementById("educations");
     let clondiv = divelement.cloneNode(true)
     // console.log(clondiv);
     maindiv.appendChild(newdiv)
   }
 
   function decresseducation() {
-    var maindiv = document.getElementById("educations");
-    var a = maindiv.querySelectorAll("div").length;
+    let maindiv = document.getElementById("educations");
+    let a = maindiv.querySelectorAll("div").length;
     if (a > 2) {
       maindiv.removeChild(maindiv.lastElementChild)
     }
@@ -995,12 +995,12 @@ document.getElementById("next").style.display = "block"
 
  async function myFunction() {
   document.getElementById("city").innerHTML =""
-  var x = document.getElementById("state").value;
+  let x = document.getElementById("state").value;
   
   // x= {
   //   city:"mp"
   // }
-  var state =await  fetch("http://localhost:6800/city/city/city", {
+  let state =await  fetch("http://localhost:6800/city/city/city", {
       method: "post",
       headers: {
         'Content-Type': 'application/json;charset=utf-8'},

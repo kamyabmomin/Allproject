@@ -46,19 +46,19 @@ exports.moreDetails = async (req, res) => {
     subjectmaster.sub_id = exameresult.sub_id  where exameresult.student_id = '${id}'; `
 
 
-    var [result] = await con.query(sql)
-    alldata = JSON.parse(JSON.stringify(result));
+    let [result1] = await con.query(sql)
+    alldata = JSON.parse(JSON.stringify(result1));
     // console.log(alldata)
 
     let sql2 = `select studentmaster.student_id ,studentmaster.student_name   , count(attendancemonth.attendance) as count   from   studentmaster join attendancemonth  on attendancemonth.id = studentmaster.student_id and  attendancemonth.attendance = 'yes' and attendancemonth.id = '${id}' group by studentmaster.student_id  ;`
 
 
-    var [result] = await con.query(sql2)
-    resultdata = JSON.parse(JSON.stringify(result));
+    let [result2] = await con.query(sql2)
+    resultdata = JSON.parse(JSON.stringify(result2));
 
     let sql3 = `select count(attendancemonth.id) alldaycount from attendancemonth where attendancemonth.id='${id}'`
-    var [result] = await con.query(sql3)
-    allday = JSON.parse(JSON.stringify(result));
+    let [result3] = await con.query(sql3)
+    allday = JSON.parse(JSON.stringify(result3));
     res.render('student_result/moredetailsofstudent', { data: alldata, resultdata, allday, totalpractical, totaltheory })
 
 }
