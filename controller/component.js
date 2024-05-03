@@ -1,11 +1,11 @@
 const { con } = require("../database/database");
 
 exports.component = async (req, res) => {
-    res.status(200)
+   
     try {
 
         let comboname = req.query.name;
-        // console.log(comboname);
+     
         let sql
         alldata1 = 1;
         if (req.query.name) {
@@ -15,13 +15,14 @@ exports.component = async (req, res) => {
         else {
             alldata1 = 0
         }
-        console.log(alldata1)
+  
         if (alldata1 == 0) {
+            res.status(200)
             res.render("component/component", { alldata1 });
         } else {
             let [result] = await con.query(sql)
-            // console.log(alldata1)
-            // console.log(result)
+           
+            res.status(200)
             res.render("component/component", { alldata: result, alldata1, comboname });
         }
 

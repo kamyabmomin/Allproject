@@ -1,7 +1,7 @@
 const { con } = require("../database/database")
 
 exports.delimiterSarch = async (req, res) => {
-    res.status(200)
+    
     try {
         let symbolestring = "_ ^ $ } { :"
         let sreching = req.query.serch || " "
@@ -54,36 +54,36 @@ exports.delimiterSarch = async (req, res) => {
         let temp = []
         if (firstnamearray.length > 0) {
             let firstname = firstnamearray.join(" or ");
-            console.log(firstname);
+          
             temp.push(firstname);
         }
         if (lastnamearray.length > 0) {
             let lastname = lastnamearray.join(" or ");
-            console.log(lastname);
+         
             temp.push(lastname);
         }
         if (emailarray.length > 0) {
             let cuntry = emailarray.join(" or ");
-            console.log(cuntry);
+           
             temp.push(cuntry);
         }
 
         if (mobilenumber.length > 0) {
             let mobilenumbers = mobilenumber.join(" or ");
-            console.log(mobilenumbers);
+          
             temp.push(mobilenumbers);
         }
 
 
         if (city.length > 0) {
             let citys = city.join(" or ");
-            console.log(citys);
+      
             temp.push(citys);
         }
 
         if (age.length > 0) {
             let ages = age.join(" or ");
-            console.log(ages);
+         
             temp.push(ages);
         }
         let query;
@@ -101,7 +101,7 @@ exports.delimiterSarch = async (req, res) => {
             nodisplay = 0
         }
         let [result] = await con.query(sql)
-        console.log(result)
+ 
         res.render('delimiterserch/delimiterserch', { alldata: result, sreching, nodisplay })
 
 

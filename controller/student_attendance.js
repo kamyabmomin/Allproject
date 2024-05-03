@@ -43,13 +43,13 @@ exports.attandance = async (req, res) => {
 
     let datas = req.query.month;
     let month = datas || 12;
-    // console.log(month)
+
     let year = req.query.year || 2023;
-    // console.log(year);
+ 
     let days = 30
-    // console.log("connected")
+
     let sql = `select studentmaster.student_id ,studentmaster.student_name   , count(attendancemonth.attendance) as count ,count(attendancemonth.attendance) * 100 / ( 30) as persentage from studentmaster  join attendancemonth  on attendancemonth.id = studentmaster.student_id and attendancemonth.attendance = 'yes' AND month(attendancemonth.dates)= '${month}' and year(attendancemonth.dates)='${year}'   ${ids} ${firstname}    group by studentmaster.student_id ${persentage1};`
-    // console.log(sql)
+
 
     let [result] = await con.query(sql)
 
@@ -58,11 +58,11 @@ exports.attandance = async (req, res) => {
     }
     else {
         const numOfResults = result.length;
-        // console.log("this is length " + numOfResults)
+    
         const numberOfPages = Math.ceil(numOfResults / resultsPerPage);
         let page = req.query.page ? Number(req.query.page) : 1;
         if (page > numberOfPages) {
-            console.log(page);
+            
             res.redirect("?page=10")
             return
             // res.redirect('/mainpageinsorting/?page=10');
@@ -78,10 +78,10 @@ exports.attandance = async (req, res) => {
         else {
 
             const startingLimit = (page - 1) * resultsPerPage;
-            console.log(startingLimit);
+          
             let sql2 = `select studentmaster.student_id ,studentmaster.student_name   , count(attendancemonth.attendance) as count ,count(attendancemonth.attendance) * 100 / ( 30) as persentage from studentmaster  join attendancemonth  on attendancemonth.id = studentmaster.student_id and attendancemonth.attendance = 'yes' AND month(attendancemonth.dates)= '${month}' and year(attendancemonth.dates)='${year}'  ${ids} ${firstname}   group by studentmaster.student_id   ${persentage1} LIMIT ${startingLimit},${resultsPerPage}`;
             let [result] = await con.query(sql2)
-            // console.log(result);
+           
             if (result.length == 0) {
                 res.send('invalid data')
             }
@@ -92,25 +92,19 @@ exports.attandance = async (req, res) => {
 
             }
 
-            // });
-            //  })
         }
     }
-    // });
-    // }
-    // catch (e) {
-    //     res.send(e)
-    // }
+    
+ 
 }
 
 
 exports.update = (req, res) => {
-    res.status(200)
+    
     try {
         let id = req.query.id;
         let name = req.query.student_name
-        // console.log(name)
-        // console.log(id)
+   
 
 
         res.render("student_attendance/update1", { data: name, id })
@@ -127,10 +121,10 @@ exports.updateComplate = async (req, res) => {
         let sql = `UPDATE studentmaster SET student_name = '${updatename}' WHERE student_id= ${id}`;
         let [result] = await con.query(sql)
 
-        console.log(result.affectedRows + " record(s) updated");
+     
 
         let affectedrows = result.affectedRows;
-        // console.log(affectedrows)
+   
 
         res.render("student_attendance/UPDATECOMPLATE1")
 

@@ -22,7 +22,7 @@ exports.registerData = async (req, res) => {
         let [id] = await con.query(sql)
 
         let id2 = id.insertId;
-        // console.log(id2);
+        
         res.status(200).json({ key: key, id: id2 })
     }
     else {
@@ -74,40 +74,38 @@ exports.login = (req, res) => {
 exports.loginData = async (req, res) => {
 
     let data = req.body;
-    // console.log(data);
+   
     let sql = ` select *  from users where email = '${req.body.email}' `;
     let [fetchdata] = await con.query(sql);
-    // console.log(fetchdata);
+  
     if (fetchdata.length > 0) {
         const salt = fetchdata[0].salt;
-        // console.log(salt);
+        
         const password = md5(req.body.passwords + salt)
-        // console.log(password);
+      
 
 
         if (password == fetchdata[0].passwords && fetchdata[0].timestemp == "yes") {
-            // console.log("password match");
+           
             const token = jwt.sign({ userId: req.body.email }, 'your-secret-key', {
                 expiresIn: '1h',
             });
-            // authentication()
-            // console.log(token);
+          
             res.cookie("token", token).status(200).json({ token: token })
 
 
         } else {
-            // console.log("password not match");
+          
             res.status(400)
 
         }
     }
     else {
-        // console.log(" password not match");
+       
         res.status(400)
 
     }
-    // console.log(sql);
-    // console.log(fetchdata[0].salt, fetchdata[0].user_keys);
+
 
     res.end()
 
@@ -124,15 +122,13 @@ exports.forgetPassword = async (req, res) => {
 }
 exports.forgetPasswordData = async (req, res) => {
     try {
-        console.log(req.body);
+     
         if (req.body.email && req.body.passwords == "" && req.body.conformpassword == "") {
 
-            console.log("fetch email");
-            console.log(req.body);
+         
             let sql = `select * from users where email = "${req.body.email}"`;
             let [data] = await con.query(sql);
-            console.log(sql);
-            // console.log(data);
+           
 
             if (data.length > 0) {
                 res.status(200).json(data);
@@ -145,26 +141,24 @@ exports.forgetPasswordData = async (req, res) => {
         }
         else {
 
-            // console.log("forget passwords");
-            // console.log(req.body);
+           
             let email = req.body.email;
             let sql = `select * from users where email = "${email}"`
             let [emaildata] = await con.query(sql);
-            // console.log(emaildata);
+            
             let salt = emaildata[0].salt;
-            // console.log(salt);
+ 
             pass = req.body.passwords
             pass += salt
-            // console.log(pass);
+       
             let password = md5(pass);
             let conformpassword = md5(req.body.conformpassword + salt);
-            // console.log(password + "and" + conformpassword);
-
+            
             let updatesql = `update users set passwords = '${password}' ,conformpassword = '${conformpassword}' where user_id = ${emaildata[0].user_id}`
-            // console.log(updatesql);
+     
             try {
                 let [data] = await con.query(updatesql)
-                // console.log("SFSF" + data.affectedRows);
+           
                 res.status(200).json({ massage: "pasword set " })
             }
             catch (err) {
@@ -177,4 +171,4 @@ exports.forgetPasswordData = async (req, res) => {
         res.send(err)
     }
 }
-// exports.
+
